@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="number" class="total" value="" />
+    <input type="number" class="num_ppl" value="" />
+    <button class="as" type="button">計算する</button>
+    <input class="sum" name="price" value="0"> 一人当たり </input>
+
+    <script>
+      let total_inp = document.querySelector(".total").value;
+      let num_ppl_inp = document.querySelector(".num_ppl").value;
+      let price = document.querySelector(".sum");
+      let as = document.querySelector(".as");
+
+      as.addEventListener("click", () => {
+        let fin = total_inp + num_ppl_inp;
+        price.value = fin;
+      });
+
+      // as.onclick = () => {
+      //   let fin = total_inp / num_ppl_inp;aaaa
+      //   price.value = fin;
+      //   console.log("aaa");
+      // };
+    </script>
+  </body>
+</html>
