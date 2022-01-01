@@ -23,7 +23,7 @@ let as = document.querySelector(".as");
 // console.addEventListener("click", () => {
 //   let fin = total_inp / num_ppl_inp;
 //   price.value = fin;
-// });
+// });ooo
 
 as.onclick = () => {
   let fin = total_inp / num_ppl_inp;
