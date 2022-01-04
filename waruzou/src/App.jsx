@@ -1,34 +1,42 @@
-import "./App.css";
+import { useEffect, useState } from "react";
 
 function App() {
+  const [total, setTotal] = useState("");
+  const [ppl, setPpl] = useState("");
+  const [fin, setFin] = useState("");
+
+  useEffect(() => {
+    console.log(total);
+  }, [total]);
+  useEffect(() => {
+    console.log(ppl);
+  }, [ppl]);
+
+  const handleChange = (e) => {
+    setTotal(() => e.target.value);
+  };
+  const handleChange2 = (e) => {
+    setPpl(() => e.target.value);
+  };
+  const cal = () => {
+    let fin = total / ppl;
+    fin = Math.trunc(fin);
+    setFin(fin);
+    console.log(Math.trunc(fin));
+  };
+
   return (
     <div className="App">
-      <input type="number" className="total" value="0" />
-      <input type="number" className="num_ppl" value="0" />
-      <button className="as" type="button">
+      <input type="number" className="total" onChange={handleChange} />
+      <input type="number" className="ppl" onChange={handleChange2} />
+      <button className="as" type="button" onClick={cal}>
         計算する
       </button>
       <output className="sum" name="price">
-        一人当たり
+        一人当たり:{fin}
       </output>
     </div>
   );
 }
-
-let total_inp = document.querySelector(".total");
-let num_ppl_inp = document.querySelector(".num_ppl");
-let price = document.querySelector(".sum");
-let as = document.querySelector(".as");
-
-// console.addEventListener("click", () => {
-//   let fin = total_inp / num_ppl_inp;
-//   price.value = fin;
-// });ooo
-
-as.onclick = () => {
-  let fin = total_inp / num_ppl_inp;
-  price.value = fin;
-  console.log("aaa");
-};
 
 export default App;
