@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import "./App.css";
 
 function App() {
   const [total, setTotal] = useState("");
@@ -25,16 +26,40 @@ function App() {
     console.log(Math.trunc(fin));
   };
 
+  const aaa = 12345;
+  const asas = Math.floor(aaa) % 100;
+  console.log(asas);
+
+  if (asas !== 0o0) {
+  }
+
+  let person = [];
+  let roop = () => {
+    for (let i = 0; i < 3; i++) {
+      person.push();
+    }
+  };
+
+  roop();
+
+  console.log(person);
   return (
     <div className="App">
       <input type="number" className="total" onChange={handleChange} />
       <input type="number" className="ppl" onChange={handleChange2} />
-      <button className="as" type="button" onClick={cal}>
+      <button className="as" type="button" onClick={(cal, roop)}>
         計算する
       </button>
-      <output className="sum" name="price">
+      {/* <output className="sum" name="price">
         一人当たり:{fin}
-      </output>
+      </output> */}
+      {person.map((p) => {
+        return (
+          <output className="sum" name="price" key={}>
+            一人当たり:{fin}
+          </output>
+        );
+      })}
     </div>
   );
 }
