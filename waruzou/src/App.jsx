@@ -4,7 +4,7 @@ import "./App.css";
 function App() {
   const [total, setTotal] = useState(""); //合計金額
   const [ppl, setPpl] = useState(""); //人数
-  const [perPerson, setperPerson] = useState(""); //一人分の金額
+  const [perPerson, setPerPerson] = useState(""); //一人分の金額
 
   //合計金額入力欄
   const getValueFromTotal = (e) => {
@@ -19,7 +19,7 @@ function App() {
   const cal = () => {
     let perPerson = total / ppl;
     perPerson = Math.trunc(perPerson);
-    setperPerson(perPerson);
+    setPerPerson(perPerson);
     console.log(Math.trunc(perPerson));
   };
 
@@ -34,7 +34,7 @@ function App() {
   let person = [];
   const roop = () => {
     for (let i = 0; i < 4; i++) {
-      person.push(<li key={i}>aaa</li>);
+      person.push(<li key={i}>ss</li>);
     }
   };
   roop();
