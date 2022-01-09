@@ -16,29 +16,39 @@ function App() {
   };
 
   //計算をするボタン押した際に一人当たりの計算
+  let person = [];
   const cal = () => {
     let perPerson = total / ppl;
     perPerson = Math.trunc(perPerson);
     setPerPerson(perPerson);
-    console.log(Math.trunc(perPerson));
+    console.log(perPerson);
+    let person = [];
+    for (let i = 0; i < ppl; i++) {
+      person.push(perPerson);
+      console.log(person);
+      return person;
+    }
   };
+  console.log(person);
 
   //下二桁を取得、百えん単位で割り勘する際に使う
   const aaa = 12345;
   const asas = Math.floor(aaa) % 100;
-  console.log(asas);
+  // console.log(asas);
   if (asas !== 0o0) {
   }
 
   //人数に応じて表示するリストを生成
-  let person = [];
-  const roop = () => {
-    for (let i = 0; i < 4; i++) {
-      person.push(<li key={i}>ss</li>);
-    }
-  };
-  roop();
-  console.log(person);
+  // let person = [];
+  // const roop = () => {
+  //   for (let i = 0; i < ppl; i++) {
+  //     person.push(<li key={i}>{perPerson}</li>);
+  //   }
+  // };
+  // roop();
+  // console.log(person);
+
+  const members = ["Araki", "Ibata", "Fukutome", "Woods", "Alex", "Tatsunami"];
 
   return (
     <div className="App">
@@ -50,12 +60,19 @@ function App() {
       {/* <output className="sum" name="price">
         一人当たり:{perPerson}
       </output> */}
-      {person}
+      {/* {person} */}
+      {person &&
+        person.map((p, index) => {
+          return <li key={index}>{p}fff</li>;
+          // return `${index + 1}番目は${person}`;
+        })}
+      {/* {members.map((output, index) => {
+        return `${index + 1}番目は${output}`;
+      })}
+      ; */}
     </div>
   );
 }
-
-aaa;
 
 export default App;
 
