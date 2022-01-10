@@ -1,3 +1,49 @@
+import { useState } from "react";
+import "./App.css";
+
+function App() {
+  const [total, setTotal] = useState(""); //合計金額
+  const [ppl, setPpl] = useState(""); //人数
+  const [person, setPerson] = useState([]);
+
+  //合計金額入力欄
+  const getValueFromTotal = (e) => {
+    setTotal(() => e.target.value);
+  };
+  //人数入力欄
+  const getValueFromPpl = (e) => {
+    setPpl(() => e.target.value);
+  };
+
+  //計算をするボタン押した際に一人当たりの計算
+  const cal = () => {
+    let perPerson = total / ppl;
+
+    for (let i = 0; i < perPerson; i++) {
+      person.push(ppl);
+    }
+    setPerson([...person]); // 追加
+  };
+  console.log(person);
+
+  return (
+    <div className="App">
+      <input type="number" className="total" onChange={getValueFromTotal} />
+      <input type="number" className="ppl" onChange={getValueFromPpl} />
+      <button type="button" onClick={cal}>
+        計算する
+      </button>
+      {person &&
+        person.map((p, index) => {
+          return <li key={index}>{p}</li>;
+        })}
+    </div>
+  );
+}
+
+export default App;
+
+
 import { useEffect, useState } from "react";
 import "./App.css";
 
@@ -27,10 +73,12 @@ function App() {
       let person2 = total % ppl;
       console.log("下二桁が00ではありません");
 
-      let kirisute = Math.floor(person / 100) * 100;
-      let amari = simo * ppl + person2;
-      setKirisute(kirisute);
-      setAmari(amari);
+      for (let i = 0; i < ppl; i++) {
+        let kirisute = Math.floor(person / 100) * 100;
+        let amari = simo * ppl + person2;
+        setKirisute(kirisute);
+        setAmari(amari);
+      }
       // for (let i = 0; i < ppl; i++) {
       //   let kirisute = Math.floor(person / 100) * 100;
       //   let amari = simo * ppl + 1;
