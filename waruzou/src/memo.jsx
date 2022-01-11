@@ -4,7 +4,7 @@ import "./App.css";
 function App() {
   const [total, setTotal] = useState(""); //合計金額
   const [ppl, setPpl] = useState(""); //人数
-  let [perPerson, setPerPerson] = useState([]); //一人分の金額
+  const [perPerson, setPerPerson] = useState([]); //一人分の金額
   const [kirisute, setKirisute] = useState("");
   const [amari, setAmari] = useState("");
 
@@ -19,25 +19,18 @@ function App() {
 
   //計算をするボタン押した際に一人当たりの計算
   const cal = () => {
-    let person = total / (ppl * 100);
-    person = Math.trunc(person); //400 / 300 = 1
+    let person = total / ppl;
+    person = Math.trunc(person);
+    const simo = Math.floor(person) % 100;
+    console.log(simo);
+    if (simo !== 0o0) {
+      let person2 = total % ppl;
+      console.log("下二桁が00ではありません");
 
-    let amari = total % (ppl * 100); //400 % 100 = あまり100
-    if (amari) {
-      let hyaku = Math.floor(amari / 100); //百の桁取得
-      let simo = amari % 100; //十以下の桁取得
-      console.log(hyaku);
-      for (let i = 0; i < ppl; i++) {
-        perPerson.push(person);
-      }
-      for (let i = 0; i < hyaku; i++) {
-        perPerson += perPerson + 100;
-      }
-      console.log(perPerson);
-      // let kirisute = Math.floor(person / 100) * 100;
-      // let amari = simo * ppl + person2;
-      // setKirisute(kirisute);
-      // setAmari(amari);
+      let kirisute = Math.floor(person / 100) * 100;
+      let amari = simo * ppl + person2;
+      setKirisute(kirisute);
+      setAmari(amari);
       // for (let i = 0; i < ppl; i++) {
       //   let kirisute = Math.floor(person / 100) * 100;
       //   let amari = simo * ppl + 1;
@@ -45,8 +38,24 @@ function App() {
       //   console.log(kirisute);
       //   perPerson.push(person);
       // }
+
+      console.log(kirisute);
+      console.log(amari / 100);
     }
+    // for (let i = 0; i < ppl; i++) {
+    //   perPerson.push(person);
+    // }
+    setPerPerson([...perPerson]);
   };
+  // console.log(perPerson);
+  console.log(530 % 300);
+
+  //下二桁を取得、百えん単位で割り勘する際に使う
+  const aaa = 12345;
+  const asas = Math.floor(aaa) % 100;
+  // console.log(asas);
+  if (asas !== 0o0) {
+  }
 
   return (
     <div className="App">
