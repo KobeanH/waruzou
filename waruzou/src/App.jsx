@@ -26,26 +26,29 @@ function App() {
     if (amari) {
       let hyaku = Math.floor(amari / 100); //百の桁取得
       let simo = amari % 100; //十以下の桁取得
-      console.log(hyaku);
-      let per = [];
+      console.log(simo);
       for (let i = 0; i < ppl; i++) {
         perPerson.push(person);
       }
       for (let i = 0; i < hyaku; i++) {
         perPerson[i] += 1;
       }
+      for (let i = 0; i < ppl; i++) {
+        perPerson[i] *= 100;
+      }
+      let syou = perPerson.reduce((a, b) => (a < b ? a : b));
+      let index = perPerson.indexOf(syou);
+      perPerson[index] += simo;
       console.log(perPerson);
-      // let kirisute = Math.floor(person / 100) * 100;
-      // let amari = simo * ppl + person2;
-      // setKirisute(kirisute);
-      // setAmari(amari);
-      // for (let i = 0; i < ppl; i++) {
-      //   let kirisute = Math.floor(person / 100) * 100;
-      //   let amari = simo * ppl + 1;
-      //   console.log(amari);
-      //   console.log(kirisute);
-      //   perPerson.push(person);
-      // }
+
+      var count = [];
+
+      for (var i = 0; i < perPerson.length; i++) {
+        var elm = perPerson[i];
+        count[elm] = (count[elm] || 0) + 1;
+      }
+
+      console.log(count);
     }
   };
 
