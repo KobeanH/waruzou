@@ -31,13 +31,13 @@ function App() {
       let amari = simo * ppl + person2;
       setKirisute(kirisute);
       setAmari(amari);
-      // for (let i = 0; i < ppl; i++) {
-      //   let kirisute = Math.floor(person / 100) * 100;
-      //   let amari = simo * ppl + 1;
-      //   console.log(amari);
-      //   console.log(kirisute);
-      //   perPerson.push(person);
-      // }
+      for (let i = 0; i < ppl; i++) {
+        let kirisute = Math.floor(person / 100) * 100;
+        let amari = simo * ppl + 1;
+        console.log(amari);
+        console.log(kirisute);
+        perPerson.push(person);
+      }
 
       console.log(kirisute);
       console.log(amari / 100);

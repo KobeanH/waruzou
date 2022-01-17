@@ -7,6 +7,7 @@ function App() {
   let [perPerson, setPerPerson] = useState([]); //一人分の金額
   const [kirisute, setKirisute] = useState("");
   const [amari, setAmari] = useState("");
+  const [aaa, setAaa] = useState({});
 
   //合計金額入力欄
   const getValueFromTotal = (e) => {
@@ -41,18 +42,31 @@ function App() {
       perPerson[index] += simo;
       console.log(perPerson);
 
-      var count = [];
-
+      var count = {};
       for (var i = 0; i < perPerson.length; i++) {
         var elm = perPerson[i];
         count[elm] = (count[elm] || 0) + 1;
+        // console.log(count[elm]);
       }
+      for (let k in count) {
+        console.log("<span>" + k + "×" + count[k] + "</span>");
+      }
+      // console.log(count.key);
+      // const array1 = [100, 200, 200, 300, 300, 400, 400, 400];
+      // let result = [];
+      // for (let v of array1) {
+      //   if (!(v in result)) result[v] = 0;
+      //   result[v]++;
+      // }
+      // console.log(result);
 
-      console.log(count);
-      sss;
+      // for (let k in result) {
+      //   console.log("<span>" + k + "×" + result[k] + "</span>");
+      // }
+      setAaa(count);
     }
   };
-
+  console.log(aaa);
   return (
     <div className="App">
       <input type="number" className="total" onChange={getValueFromTotal} />
@@ -63,10 +77,23 @@ function App() {
       {/* <output className="sum" name="price">
         一人当たり:{perPerson}
       </output> */}
-      {perPerson &&
+      {/* {perPerson &&
         perPerson.map((p, index) => {
           return <li key={index}>{p}</li>;
-        })}
+        })} */}
+      {/* {aaa &&
+        aaa.map((p, index) => {
+          return (
+            <li key={index}>
+              {p} + {aaa}
+            </li>
+          );
+        })} */}
+      {Object.keys(aaa).map((key, value) => (
+        <li key={key}>
+          {Object.keys(aaa)[value]} + {aaa[key]}
+        </li>
+      ))}
     </div>
   );
 }
