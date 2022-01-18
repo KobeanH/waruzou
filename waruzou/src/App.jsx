@@ -5,9 +5,8 @@ function App() {
   const [total, setTotal] = useState(""); //合計金額
   const [ppl, setPpl] = useState(""); //人数
   let [perPerson, setPerPerson] = useState([]); //一人分の金額
-  const [kirisute, setKirisute] = useState("");
-  const [amari, setAmari] = useState("");
-  const [aaa, setAaa] = useState({});
+  const [remainder, setRemainder] = useState("");
+  const [calculatedObj, setCalculatedObj] = useState({});
 
   //合計金額入力欄
   const getValueFromTotal = (e) => {
@@ -21,52 +20,44 @@ function App() {
   //計算をするボタン押した際に一人当たりの計算
   const cal = () => {
     let person = total / (ppl * 100);
-    person = Math.trunc(person); //400 / 300 = 1
+    person = Math.trunc(person); //小数点以下切り捨て
 
-    let amari = total % (ppl * 100); //400 % 100 = あまり100
-    if (amari) {
-      let hyaku = Math.floor(amari / 100); //百の桁取得
-      let simo = amari % 100; //十以下の桁取得
-      console.log(simo);
+    let remainder = total % (ppl * 100); //400 % 100 = あまり100
+
+    //下二桁が"00"ではない時の処理
+    if (remainder) {
+      let hundred = Math.floor(remainder / 100); //百の桁取得(割り切れなかった百の順番に足すため)
+      let twoDigits = remainder % 100; //下二桁取得
+
+      //百の値をperPersonに格納
       for (let i = 0; i < ppl; i++) {
         perPerson.push(person);
       }
-      for (let i = 0; i < hyaku; i++) {
+
+      //割り切れなかった余った百の値を順に足す処理
+      for (let i = 0; i < hundred; i++) {
         perPerson[i] += 1;
       }
+
+      //下二桁をもとに戻す
       for (let i = 0; i < ppl; i++) {
         perPerson[i] *= 100;
       }
-      let syou = perPerson.reduce((a, b) => (a < b ? a : b));
-      let index = perPerson.indexOf(syou);
-      perPerson[index] += simo;
-      console.log(perPerson);
 
-      var count = {};
-      for (var i = 0; i < perPerson.length; i++) {
-        var elm = perPerson[i];
+      //下二桁を数字の低いものに足す処理
+      let lowNumber = perPerson.reduce((a, b) => (a < b ? a : b)); //perPersonにある一番低い値取得
+      let lowNumberFirst = perPerson.indexOf(lowNumber); //一番低い値の先頭を取得
+      perPerson[lowNumberFirst] += twoDigits;
+
+      //重複する金額を数え、CalculatedObjに格納
+      let count = {};
+      for (let i = 0; i < perPerson.length; i++) {
+        let elm = perPerson[i];
         count[elm] = (count[elm] || 0) + 1;
-        // console.log(count[elm]);
       }
-      for (let k in count) {
-        console.log("<span>" + k + "×" + count[k] + "</span>");
-      }
-      // console.log(count.key);
-      // const array1 = [100, 200, 200, 300, 300, 400, 400, 400];
-      // let result = [];
-      // for (let v of array1) {
-      //   if (!(v in result)) result[v] = 0;
-      //   result[v]++;
-      // }
-      // console.log(result);
-
-      // for (let k in result) {
-      //   console.log("<span>" + k + "×" + result[k] + "</span>");
-      // }
-      setAaa(count);
+      setCalculatedObj(count);
     }
   };
-  console.log(aaa);
   return (
     <div className="App">
       <input type="number" className="total" onChange={getValueFromTotal} />
@@ -77,21 +68,9 @@ function App() {
       {/* <output className="sum" name="price">
         一人当たり:{perPerson}
       </output> */}
-      {/* {perPerson &&
-        perPerson.map((p, index) => {
-          return <li key={index}>{p}</li>;
-        })} */}
-      {/* {aaa &&
-        aaa.map((p, index) => {
-          return (
-            <li key={index}>
-              {p} + {aaa}
-            </li>
-          );
-        })} */}
-      {Object.keys(aaa).map((key, value) => (
+      {Object.keys(calculatedObj).map((key, value) => (
         <li key={key}>
-          {Object.keys(aaa)[value]} + {aaa[key]}
+          {Object.keys(calculatedObj)[value]} + {calculatedObj[key]}
         </li>
       ))}
     </div>
