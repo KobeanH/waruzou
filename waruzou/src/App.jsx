@@ -5,7 +5,6 @@ function App() {
   const [total, setTotal] = useState(""); //合計金額
   const [ppl, setPpl] = useState(""); //人数
   let [perPerson, setPerPerson] = useState([]); //一人分の金額
-  const [remainder, setRemainder] = useState("");
   const [calculatedObj, setCalculatedObj] = useState({});
 
   //合計金額入力欄
@@ -56,8 +55,25 @@ function App() {
         count[elm] = (count[elm] || 0) + 1;
       }
       setCalculatedObj(count);
+    } else {
+      //百の値をperPersonに格納
+      for (let i = 0; i < ppl; i++) {
+        perPerson.push(person);
+      }
+      //下二桁をもとに戻す
+      for (let i = 0; i < ppl; i++) {
+        perPerson[i] *= 100;
+      }
+      //重複する金額を数え、CalculatedObjに格納
+      let count = {};
+      for (let i = 0; i < perPerson.length; i++) {
+        let elm = perPerson[i];
+        count[elm] = (count[elm] || 0) + 1;
+      }
+      setCalculatedObj(count);
     }
   };
+
   return (
     <div className="App">
       <input type="number" className="total" onChange={getValueFromTotal} />
