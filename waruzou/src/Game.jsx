@@ -13,7 +13,15 @@ export const Game = () => {
 
   const createInput = () => {
     let moneyInput = document.createElement("input");
+    moneyInput.setAttribute("type", "number");
+    moneyInput.setAttribute("placeholder", "金額を入力してください");
     let pplNumInput = document.createElement("input");
+    pplNumInput.setAttribute("type", "number");
+    pplNumInput.setAttribute(
+      "placeholder",
+      "追加するハズレの数を入力してください"
+    );
+
     document.querySelector(".game").appendChild(moneyInput);
     document.querySelector(".game").appendChild(pplNumInput);
   };
