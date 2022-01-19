@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
+import { Link, BrowserRouter, Route, Switch } from "react-router-dom";
 import "./App.css";
+import { Game } from "./Game";
 
 function App() {
   const [total, setTotal] = useState(""); //合計金額
@@ -76,21 +78,38 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <input type="number" className="total" onChange={getValueFromTotal} />
-      <input type="number" className="ppl" onChange={getValueFromPpl} />
-      <button type="button" onClick={() => cal()}>
-        計算する
-      </button>
-      {/* <output className="sum" name="price">
+    <BrowserRouter>
+      <Link exact to="/">
+        ホームに戻る
+      </Link>
+      <Link to="/Game">ゲームをする</Link>
+      <Switch>
+        <Route exact path="/">
+          <div className="App">
+            <input
+              type="number"
+              className="total"
+              onChange={getValueFromTotal}
+            />
+            <input type="number" className="ppl" onChange={getValueFromPpl} />
+            <button type="button" onClick={() => cal()}>
+              計算する
+            </button>
+            {/* <output className="sum" name="price">
         一人当たり:{perPerson}
       </output> */}
-      {Object.keys(calculatedObj).map((key, value) => (
-        <li key={key}>
-          {Object.keys(calculatedObj)[value]} + {calculatedObj[key]}
-        </li>
-      ))}
-    </div>
+            {Object.keys(calculatedObj).map((key, value) => (
+              <li key={key}>
+                {Object.keys(calculatedObj)[value]} + {calculatedObj[key]}
+              </li>
+            ))}
+          </div>
+        </Route>
+        <Route exact path="/Game">
+          <Game></Game>
+        </Route>
+      </Switch>
+    </BrowserRouter>
   );
 }
 
