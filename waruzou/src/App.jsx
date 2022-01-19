@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link, BrowserRouter, Route, Switch } from "react-router-dom";
 import "./App.css";
 import { Game } from "./Game";
@@ -79,9 +79,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Link exact to="/">
-        ホームに戻る
-      </Link>
+      <Link to="/">ホームに戻る</Link>
       <Link to="/Game">ゲームをする</Link>
       <Switch>
         <Route exact path="/">
