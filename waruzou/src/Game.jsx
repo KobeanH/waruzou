@@ -10,21 +10,33 @@ export const Game = () => {
   const getPplNum = (e) => {
     setPplNum(() => e.target.value);
   };
+   const getMoneyInput = (e) => {
+    setPplNum(() => e.target.value);
+  };
+   const getPplNumInput = (e) => {
+    setPplNum(() => e.target.value);
+  };
 
   const createInput = () => {
     let moneyInput = document.createElement("input");
     moneyInput.setAttribute("type", "number");
     moneyInput.setAttribute("placeholder", "金額を入力してください");
+    moneyInput.setAttribute("class", "moneyInput");
     let pplNumInput = document.createElement("input");
     pplNumInput.setAttribute("type", "number");
     pplNumInput.setAttribute(
       "placeholder",
       "追加するハズレの数を入力してください"
     );
+    pplNumInput.setAttribute("class", "pplNumInput");
 
     document.querySelector(".game").appendChild(moneyInput);
     document.querySelector(".game").appendChild(pplNumInput);
   };
+if()
+  const makemoneyList = () => {
+
+  }
 
   return (
     <div className="game">
