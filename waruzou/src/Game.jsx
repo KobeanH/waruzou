@@ -16,7 +16,7 @@ export const Game = () => {
    const getPplNumInput = (e) => {
     setPplNum(() => e.target.value);
   };
-
+aa
   const createInput = () => {
     let moneyInput = document.createElement("input");
     moneyInput.setAttribute("type", "number");
