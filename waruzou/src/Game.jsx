@@ -2,27 +2,30 @@ import { useState } from "react";
 import styles from "./style.module.css";
 
 export const Game = () => {
-  const [items, setItems] = useState([]);
-  const [arr1, setArr1] = useState([]);
-  const [none, setNone] = useState([]);
-  const [count, setCount] = useState(0);
+  const [items, setItems] = useState([]); //人数分、金額を格納する配列
+  const [amountLists, setAmountLists] = useState([]); //
+  const [none, setNone] = useState([]); //クラスを付与するstate
+  const [count, setCount] = useState(0); //ゲーム終了するカウンター
 
   const createInput = () => {
     setItems([...items, { amount: "", people: "" }]);
   };
 
+  //入力された金額をitemsへ格納
   const updateAmount = (index, value) => {
     const newItems = [...items];
     newItems[index] = { ...items[index], amount: value };
     setItems(newItems);
   };
 
+  //入力された人数をitemsへ格納
   const updatePeople = (index, value) => {
     const newItems = [...items];
     newItems[index] = { ...items[index], people: value };
     setItems(newItems);
   };
 
+  //入力された金額を人数分itemsへ格納
   const array1 = [];
   items.forEach((item) => {
     const amount = parseInt(item.amount) || 0;
@@ -34,37 +37,38 @@ export const Game = () => {
 
   //ゲームを開始する処理
   const startGame = () => {
+    //16個のliタグを生成する処理
     if (array1.length < 16) {
       const sixteen = 16 - array1.length;
       for (let i = 0; i < sixteen; i++) {
         array1.push(0);
       }
-      setArr1(array1);
-      // console.log(array1);
-      const aaa = [];
-      for (let i = 0; i < 16; i++) {
-        aaa.push(false);
-      }
-      setNone(aaa);
+      setAmountLists(array1);
     } else {
-      setArr1(array1);
+      setAmountLists(array1);
     }
+    //クラスを付与するために16個のfalseを作成し、格納
+    const aaa = [];
+    for (let i = 0; i < 16; i++) {
+      aaa.push(false);
+    }
+    setNone(aaa);
     array1.sort(() => Math.random() - 0.5); //配列の中身をシャッフルする
   };
-  // console.log(none);
 
   //アイテムを選択し、開くか開かないかを決める処理
-
-  const orclick = (arr, i) => {
-    setNone(none.map((nnn, index) => (index === i ? true : nnn)));
-    if (arr !== 0) {
+  const orclick = (amountList, index) => {
+    setNone(none.map((none, index2) => (index2 === index ? true : none)));
+    if (amountList !== 0) {
       setCount(count + 1);
     }
   };
-  if (array1.length == count) {
-    alert();
-  }
-  // console.log(array1.length);
+
+  //金額が入力されたものが全部引かれたらゲーム終了
+  // if (array1.length == count) {
+  //   alert();
+  // }
+
   return (
     <div className="game">
       <button type="button" onClick={createInput}>
@@ -93,9 +97,12 @@ export const Game = () => {
         ゲームを開始する
       </button>
 
-      {arr1.map((arr, i) => (
-        <li key={i} onClick={() => orclick(arr, i)}>
-          ？<span className={none[i] === true ? "" : styles.none}>{arr}</span>
+      {amountLists.map((amountList, index) => (
+        <li key={index} onClick={() => orclick(amountList, index)}>
+          ？
+          <span className={none[index] === true ? "" : styles.none}>
+            {amountList}
+          </span>
         </li>
       ))}
     </div>
