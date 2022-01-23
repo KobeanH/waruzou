@@ -5,6 +5,7 @@ export const Game = () => {
   const [items, setItems] = useState([]);
   const [arr1, setArr1] = useState([]);
   const [none, setNone] = useState([]);
+  const [count, setCount] = useState(0);
 
   const createInput = () => {
     setItems([...items, { amount: "", people: "" }]);
@@ -50,13 +51,20 @@ export const Game = () => {
     }
     array1.sort(() => Math.random() - 0.5); //配列の中身をシャッフルする
   };
-  console.log(none);
+  // console.log(none);
 
   //アイテムを選択し、開くか開かないかを決める処理
-  const orclick = (i) => {
+
+  const orclick = (arr, i) => {
     setNone(none.map((nnn, index) => (index === i ? true : nnn)));
+    if (arr !== 0) {
+      setCount(count + 1);
+    }
   };
-  console.log(none.true.length);
+  if (array1.length == count) {
+    alert();
+  }
+  // console.log(array1.length);
   return (
     <div className="game">
       <button type="button" onClick={createInput}>
@@ -86,7 +94,7 @@ export const Game = () => {
       </button>
 
       {arr1.map((arr, i) => (
-        <li key={i} onClick={() => orclick(i)}>
+        <li key={i} onClick={() => orclick(arr, i)}>
           ？<span className={none[i] === true ? "" : styles.none}>{arr}</span>
         </li>
       ))}
