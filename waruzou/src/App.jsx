@@ -76,8 +76,7 @@ function App() {
       setCalculatedObj(count);
     }
   };
-  // const arr = [1, 22, 11];
-  // const aaa = ["1", "1", "1", "2"];
+
   return (
     <BrowserRouter>
       <Link to="/">ホームに戻る</Link>
@@ -94,9 +93,6 @@ function App() {
             <button type="button" onClick={() => cal()}>
               計算する
             </button>
-            {/* <output className="sum" name="price">
-        一人当たり:{perPerson}
-      </output> */}
             {Object.keys(calculatedObj).map((key, value) => (
               <li key={key}>
                 {Object.keys(calculatedObj)[value]} + {calculatedObj[key]}
@@ -108,14 +104,6 @@ function App() {
           <Game></Game>
         </Route>
       </Switch>
-
-      {/* {aaa.map((as, index) => {
-        <div key={index}>{as}</div>;
-        console.log(as * 2);
-      })}
-      {aaa.map((fruit, i) => (
-        <li key={i}>{fruit}</li>
-      ))} */}
     </BrowserRouter>
   );
 }
