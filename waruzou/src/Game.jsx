@@ -11,7 +11,7 @@ export const Game = () => {
   const [amountLists, setAmountLists] = useState([]); //
   const [none, setNone] = useState([]); //クラスを付与するstate
   const [count, setCount] = useState(0); //ゲーム終了するカウンター
-  const [modalIsOpen, setIsOpen] = useState(false); //モーダル管理
+  const [modalIsOpen, setIsOpen] = useState([]); //モーダル管理
 
   const createInput = () => {
     setItems([...items, { amount: "", people: "" }]);
@@ -54,11 +54,14 @@ export const Game = () => {
       setAmountLists(array1);
     }
     //クラスを付与するために16個のfalseを作成し、格納
-    const aaa = [];
+    const nonearray = [];
+    const modalArray = [];
     for (let i = 0; i < 16; i++) {
-      aaa.push(false);
+      nonearray.push(false);
+      modalArray.push(false);
     }
-    setNone(aaa);
+    setNone(nonearray);
+    setIsOpen(modalArray);
     array1.sort(() => Math.random() - 0.5); //配列の中身をシャッフルする
   };
 
@@ -68,6 +71,21 @@ export const Game = () => {
     if (amountList !== 0) {
       setCount(count + 1);
     }
+    console.log(none);
+  };
+
+  //modalを開く
+  const modalOpen = (amountList, index) => {
+    setIsOpen(
+      modalIsOpen.map((modal, index3) => (index3 === index ? true : modal))
+    );
+  };
+
+  //モーダルを閉じる
+  const closeModal = (amountList, index) => {
+    setIsOpen(
+      modalIsOpen.map((modal, index4) => (index4 === index ? false : modal))
+    );
   };
 
   //金額が入力されたものが全部引かれたらゲーム終了
@@ -102,23 +120,15 @@ export const Game = () => {
       <button type="button" onClick={startGame}>
         ゲームを開始する
       </button>
-
-      {/* {amountLists.map((amountList, index) => (
-        <li key={index} onClick={() => orclick(amountList, index)}>
-          ？
-          <span className={none[index] === true ? "" : styles.none}>
-            {amountList}
-          </span>
-        </li> */}
       {amountLists.map((amountList, index) => (
-        <li key={index} onClick={() => orclick(amountList, index)}>
+        <li key={index} onClick={() => modalOpen(amountList, index)}>
           ？
           <span className={none[index] === true ? "" : styles.none}>
             {amountList}
           </span>
           <Modal
-            isOpen={none[index] === true ? true : false}
-            onRequestClose={() => setIsOpen(false)}
+            isOpen={modalIsOpen[index] === true ? true : false}
+            onRequestClose={() => closeModal(amountList, index)}
             overlayClassName={{
               base: "overlay-base",
               afterOpen: "overlay-after",
@@ -130,12 +140,79 @@ export const Game = () => {
               beforeClose: "content-before",
             }}
             closeTimeoutMS={500}
+            portalClassName={css`
+              .overlay-base {
+                padding: 1rem;
+                position: fixed;
+                top: 0;
+                bottom: 0;
+                right: 0;
+                left: 0;
+                background-color: rgba(0, 0, 0, 0);
+                opacity: 0;
+                transition-property: background-color, opacity;
+                transition-duration: 500ms;
+                transition-timing-function: ease-in-out;
+                outline: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              }
+
+              .overlay-after {
+                background-color: rgba(0, 0, 0, 0.8);
+                opacity: 1;
+              }
+
+              .overlay-before {
+                background-color: rgba(0, 0, 0, 0);
+                opacity: 0;
+              }
+
+              .content-base {
+                position: relative;
+                top: auto;
+                left: auto;
+                right: auto;
+                bottom: auto;
+                margin: 0 auto;
+                border: 0;
+                outline: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 0%;
+                width: 0%;
+                background-color: transparent;
+                transition-property: background-color, width, height;
+                transition-duration: 500ms;
+                transition-timing-function: ease-in-out;
+              }
+
+              .content-after {
+                width: 70%;
+                height: 40%;
+                background-color: rgba(250, 190, 190, 0.8);
+              }
+
+              .content-before {
+                width: 0%;
+                height: 0%;
+                background-color: transparent;
+              }
+            `}
           >
-            {amountList}
+            <span className={none[index] === true ? "" : styles.none}>
+              {amountList}
+            </span>
+            <button type="button" onClick={() => orclick(amountList, index)}>
+              Yes
+            </button>
+
             <button
               onClick={(e) => {
                 e.stopPropagation();
-                setIsOpen(false);
+                closeModal(amountList, index);
               }}
             >
               Close Modal
@@ -143,8 +220,6 @@ export const Game = () => {
           </Modal>
         </li>
       ))}
-
-      {/* <button onClick={() => setIsOpen(true)}>Open Modal</button> */}
     </div>
   );
 };
