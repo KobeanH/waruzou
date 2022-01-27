@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./style.module.css";
 import Modal from "react-modal";
 
@@ -10,8 +10,9 @@ export const Game = () => {
   const [items, setItems] = useState([]); //人数分、金額を格納する配列
   const [amountLists, setAmountLists] = useState([]); //
   const [none, setNone] = useState([]); //クラスを付与するstate
-  const [count, setCount] = useState(0); //ゲーム終了するカウンター
+  const [count, setCount] = useState(1); //ゲーム終了するカウンター
   const [modalIsOpen, setIsOpen] = useState([]); //モーダル管理
+  const [gameEnd, setGameEnd] = useState(false); //ゲーム終了を表示
 
   const createInput = () => {
     setItems([...items, { amount: "", people: "" }]);
@@ -62,6 +63,7 @@ export const Game = () => {
     }
     setNone(nonearray);
     setIsOpen(modalArray);
+    setCount(0);
     array1.sort(() => Math.random() - 0.5); //配列の中身をシャッフルする
   };
 
@@ -89,9 +91,12 @@ export const Game = () => {
   };
 
   //金額が入力されたものが全部引かれたらゲーム終了
-  if (array1.length == count) {
-    console.log("ゲームが終了しました");
-  }
+  useEffect(() => {
+    if (array1.length == count) {
+      console.log("ゲームが終了しました");
+      setGameEnd(true);
+    }
+  }, [count]);
 
   return (
     <div className="game">
@@ -220,6 +225,9 @@ export const Game = () => {
           </Modal>
         </li>
       ))}
+
+      {gameEnd && <span>ゲームが終了しました</span>}
+      {gameEnd && <span>ゲームが終了しました</span>}
     </div>
   );
 };
