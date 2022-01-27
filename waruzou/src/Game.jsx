@@ -14,9 +14,19 @@ export const Game = () => {
   const [modalIsOpen, setIsOpen] = useState([]); //モーダル管理
   const [gameEnd, setGameEnd] = useState(false); //ゲーム終了を表示
 
+  //inputタグを生成
   const createInput = () => {
     setItems([...items, { amount: "", people: "" }]);
   };
+
+  //inputタグを削除
+  const deleteInput = (index) => {
+    const newItems = [...items];
+    const aaa = newItems.splice(index, 1);
+    console.log(aaa);
+    setItems(newItems);
+  };
+  console.log(items);
 
   //入力された金額をitemsへ格納
   const updateAmount = (index, value) => {
@@ -73,7 +83,6 @@ export const Game = () => {
     if (amountList !== 0) {
       setCount(count + 1);
     }
-    console.log(none);
   };
 
   //modalを開く
@@ -93,7 +102,6 @@ export const Game = () => {
   //金額が入力されたものが全部引かれたらゲーム終了
   useEffect(() => {
     if (array1.length == count) {
-      console.log("ゲームが終了しました");
       setGameEnd(true);
     }
   }, [count]);
@@ -124,6 +132,9 @@ export const Game = () => {
             onChange={(e) => updatePeople(i, e.target.value)}
           />{" "}
           人
+          <button type="button" onClick={() => deleteInput(i)}>
+            削除
+          </button>
         </div>
       ))}
       <p>array1 = {JSON.stringify(array1)}</p>
