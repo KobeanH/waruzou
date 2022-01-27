@@ -10,7 +10,7 @@ export const Game = () => {
   const [items, setItems] = useState([]); //人数分、金額を格納する配列
   const [amountLists, setAmountLists] = useState([]); //
   const [none, setNone] = useState([]); //クラスを付与するstate
-  const [count, setCount] = useState(1); //ゲーム終了するカウンター
+  const [count, setCount] = useState(null); //ゲーム終了するカウンター
   const [modalIsOpen, setIsOpen] = useState([]); //モーダル管理
   const [gameEnd, setGameEnd] = useState(false); //ゲーム終了を表示
 
@@ -97,6 +97,12 @@ export const Game = () => {
       setGameEnd(true);
     }
   }, [count]);
+
+  //ゲームをリセットする
+  const gameReset = () => {
+    setAmountLists([]);
+    setGameEnd(false);
+  };
 
   return (
     <div className="game">
@@ -227,7 +233,9 @@ export const Game = () => {
       ))}
 
       {gameEnd && <span>ゲームが終了しました</span>}
-      {gameEnd && <span>ゲームが終了しました</span>}
+      <button type="button" onClick={() => gameReset()}>
+        リセットする
+      </button>
     </div>
   );
 };
