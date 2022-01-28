@@ -394,3 +394,23 @@ export const Game = () => {
     </div>
   );
 };
+
+
+
+    const newItems = [...items];
+    for (let i = 0; i < newItems.length; i++) {
+      const findex = items.findIndex((v) => v.amount || v.people == 0);
+      console.log(findex);
+      // const aaa = newItems.splice(i, 1);
+    }
+    setItems(newItems);
+    // const newItems = [...items];
+    // console.log(newItems);
+    // for (let i = 0; i < newItems.length; i++) {
+    //   const id = 0;
+    //   if (newItems.find((v) => v.amount == id)) {
+    //     const aaa = newItems.splice(i, 1);
+    //     console.log(aaa);
+    //   }
+    //   setItems(newItems);
+    // }

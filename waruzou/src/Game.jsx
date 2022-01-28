@@ -7,17 +7,52 @@ import { css } from "@emotion/css";
 Modal.setAppElement("#root");
 
 export const Game = () => {
-  const [items, setItems] = useState([]); //人数分、金額を格納する配列
+  const [items, setItems] = useState([{ amount: "", people: "" }]); //人数分、金額を格納する配列
   const [amountLists, setAmountLists] = useState([]); //
   const [none, setNone] = useState([]); //クラスを付与するstate
   const [count, setCount] = useState(null); //ゲーム終了するカウンター
   const [modalIsOpen, setIsOpen] = useState([]); //モーダル管理
   const [gameEnd, setGameEnd] = useState(false); //ゲーム終了を表示
+  const [cantStart, setCantStart] = useState(false); //ゲーム終了を表示
+  const [showDelete, setShowDelete] = useState(false); //削除ボタン表示切り替え
+  const [showAdd, setShowAdd] = useState(true); //追加するボタン切り替え
+  const [showInput, setShowInput] = useState(true); //追加するボタン切り替え
+  const [showlist, setShowlist] = useState(false); //追加するボタン切り替え
 
   //inputタグを生成
   const createInput = () => {
-    setItems([...items, { amount: "", people: "" }]);
+    const newItems = [...items];
+    // if (
+    //   newItems[newItems.length - 1].amount &&
+    //   newItems[newItems.length - 1].people
+    // ) {
+    //   // console.log("nice");
+    //   setItems([...items, { amount: "", people: "" }]);
+    // } else {
+    //   alert("金額と人数を入力してください");
+    // }
+    let www = 0;
+    for (let i = 0; i < newItems.length; i++) {
+      if (!(newItems[i].amount && newItems[i].people)) {
+        www += 1;
+      }
+    }
+    console.log(www);
+    if (www > 0) {
+      alert("金額と人数を入力してください");
+    } else {
+      setItems([...items, { amount: "", people: "" }]);
+    }
   };
+
+  //inputが一つしかない時に削除ボタンを非表示
+  useEffect(() => {
+    if (items.length == 1) {
+      setShowDelete(false);
+    } else {
+      setShowDelete(true);
+    }
+  }, [items]);
 
   //inputタグを削除
   const deleteInput = (index) => {
@@ -26,7 +61,7 @@ export const Game = () => {
     console.log(aaa);
     setItems(newItems);
   };
-  console.log(items);
+  // console.log(items);
 
   //入力された金額をitemsへ格納
   const updateAmount = (index, value) => {
@@ -53,17 +88,65 @@ export const Game = () => {
   });
 
   //ゲームを開始する処理
+  // const startGame = () => {
+  //   //16個のliタグを生成する処理
+  //   if (array1.length < 16) {
+  //     const sixteen = 16 - array1.length;
+  //     for (let i = 0; i < sixteen; i++) {
+  //       array1.push(0);
+  //     }
+  //     if (array1.find((el) => el > 0)) {
+  //       setAmountLists(array1);
+  //       setCantStart(false);
+  //       // console.log("aaa");
+  //     } else {
+  //       setCantStart(true);
+  //       console.log("sss");
+  //     }
+  //   } else {
+  //     setAmountLists(array1);
+  //   }
+  //   const newItems = [...items];
+  //   for (let i = 0; i < newItems.length; i++) {
+  //     if (newItems[i].amount && newItems[i].people) {
+  //     } else {
+  //       alert("金額と人数を入力してください");
+  //     }
+  //   }
+
+  //ゲームを開始する処理
   const startGame = () => {
-    //16個のliタグを生成する処理
-    if (array1.length < 16) {
-      const sixteen = 16 - array1.length;
-      for (let i = 0; i < sixteen; i++) {
-        array1.push(0);
+    const newItems = [...items];
+    let www = 0;
+    for (let i = 0; i < newItems.length; i++) {
+      if (!(newItems[i].amount && newItems[i].people)) {
+        www += 1;
       }
-      setAmountLists(array1);
-    } else {
-      setAmountLists(array1);
     }
+    if (www > 0) {
+      alert("金額と人数を入力してください");
+      setCantStart(true);
+    } else {
+      //16個のliタグを生成する処理
+      if (array1.length < 16) {
+        const sixteen = 16 - array1.length;
+        for (let i = 0; i < sixteen; i++) {
+          array1.push(0);
+        }
+        setAmountLists(array1);
+        setShowAdd(false);
+        setShowInput(false);
+        setShowlist(true);
+      } else if (array1.length > 16) {
+        alert("16人以下に設定してください");
+      } else {
+        setAmountLists(array1);
+        setShowAdd(false);
+        setShowInput(false);
+        setShowlist(true);
+      }
+    }
+
     //クラスを付与するために16個のfalseを作成し、格納
     const nonearray = [];
     const modalArray = [];
@@ -101,47 +184,68 @@ export const Game = () => {
 
   //金額が入力されたものが全部引かれたらゲーム終了
   useEffect(() => {
-    if (array1.length == count) {
+    if (!cantStart && array1.length == count) {
       setGameEnd(true);
     }
   }, [count]);
 
   //ゲームをリセットする
   const gameReset = () => {
+    setItems([{ amount: "", people: "" }]);
     setAmountLists([]);
     setGameEnd(false);
+    setShowAdd(true);
+    setShowInput(true);
+    setShowlist(false);
   };
 
   return (
     <div className="game">
-      <button type="button" onClick={createInput}>
-        追加する
-      </button>
-      {items.map((item, i) => (
-        <div key={i}>
-          金額:{" "}
-          <input
-            type="number"
-            value={item.amount}
-            onChange={(e) => updateAmount(i, e.target.value)}
-          />{" "}
-          円、 人数:{" "}
-          <input
-            type="number"
-            value={item.people}
-            onChange={(e) => updatePeople(i, e.target.value)}
-          />{" "}
-          人
-          <button type="button" onClick={() => deleteInput(i)}>
-            削除
-          </button>
-        </div>
-      ))}
-      <p>array1 = {JSON.stringify(array1)}</p>
+      {showAdd && (
+        <button type="button" onClick={() => createInput()}>
+          追加する
+        </button>
+      )}
 
-      <button type="button" onClick={startGame}>
-        ゲームを開始する
-      </button>
+      {showInput &&
+        items.map((item, i) => (
+          <div key={i}>
+            金額:{" "}
+            <input
+              type="number"
+              value={item.amount}
+              onChange={(e) => updateAmount(i, e.target.value)}
+            />{" "}
+            円、 人数:{" "}
+            <input
+              type="number"
+              value={item.people}
+              onChange={(e) => updatePeople(i, e.target.value)}
+            />{" "}
+            人
+            {showDelete && (
+              <button type="button" onClick={() => deleteInput(i)}>
+                削除
+              </button>
+            )}
+          </div>
+        ))}
+
+      {showlist &&
+        items.map((item, i) => (
+          <div key={i}>
+            金額:<span>{item.amount}</span> 円、 人数:{" "}
+            <span>{item.people}</span>{" "}
+          </div>
+        ))}
+
+      <p>array1 = {JSON.stringify(amountLists)}</p>
+
+      {showAdd && (
+        <button type="button" onClick={startGame}>
+          ゲームを開始する
+        </button>
+      )}
       {amountLists.map((amountList, index) => (
         <li key={index} onClick={() => modalOpen(amountList, index)}>
           ？
@@ -247,6 +351,7 @@ export const Game = () => {
       <button type="button" onClick={() => gameReset()}>
         リセットする
       </button>
+      {cantStart && <span>金額と人数を入力してください</span>}
     </div>
   );
 };
