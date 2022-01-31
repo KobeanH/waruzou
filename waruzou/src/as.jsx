@@ -414,3 +414,89 @@ export const Game = () => {
     //   }
     //   setItems(newItems);
     // }
+
+
+
+
+
+  //ゲームを開始する処理
+  const startGame = () => {
+    const newItems = [...items];
+    let www = 0;
+    for (let i = 0; i < newItems.length; i++) {
+      if (!(newItems[i].amount && newItems[i].people)) {
+        www += 1;
+      }
+    }
+    if (www > 0) {
+      alert("金額と人数を入力してください");
+    } else {
+      //16個のliタグを生成する処理
+      if (array1.length < 16) {
+        const sixteen = 16 - array1.length;
+        for (let i = 0; i < sixteen; i++) {
+          array1.push(0);
+        }
+        if (array1.find((el) => el > 0)) {
+          setAmountLists(array1);
+          setCantStart(false);
+          // console.log("aaa");
+        } else {
+          setCantStart(true);
+          // console.log("sss");
+        }
+      } else {
+        setAmountLists(array1);
+      }
+      // const newItems = [...items];
+      // for (let i = 0; i < newItems.length; i++) {
+      //   if (newItems[i].amount && newItems[i].people) {
+      //   } else {
+      //     alert("金額と人数を入力してください");
+      //   }
+      // }
+    }
+
+
+
+
+
+      //ゲームを開始する処理
+  const startGame = () => {
+    const newItems = [...items];
+    let www = 0;
+    for (let i = 0; i < newItems.length; i++) {
+      if (!(newItems[i].amount && newItems[i].people)) {
+        www += 1;
+      }
+    }
+    if (www > 0) {
+      alert("金額と人数を入力してください");
+      setCantStart(true);
+    } else {
+      //16個のliタグを生成する処理
+      if (array1.length < 16) {
+        const sixteen = 16 - array1.length;
+        for (let i = 0; i < sixteen; i++) {
+          array1.push(0);
+        }
+        setAmountLists(array1);
+        // if (array1.find((el) => el > 0)) {
+        //   setAmountLists(array1);
+        //   setCantStart(false);
+        //   // console.log("aaa");
+        // } else {
+        //   setCantStart(true);
+        //   // console.log("sss");
+        // }
+      } else {
+        setAmountLists(array1);
+      }
+      const newItems = [...items];
+      for (let i = 0; i < newItems.length; i++) {
+        if (newItems[i].amount && newItems[i].people) {
+        } else {
+          alert("金額と人数を入力してください");
+        }
+      }
+    }
