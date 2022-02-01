@@ -76,7 +76,6 @@ function App() {
       setCalculatedObj(count);
     }
   };
-  ff;
   return (
     <BrowserRouter>
       <Link to="/">ホームに戻る</Link>
