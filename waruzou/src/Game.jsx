@@ -19,7 +19,9 @@ export const Game = () => {
   const [showInput, setShowInput] = useState(true); //追加するボタン切り替え
   const [showlist, setShowlist] = useState(false); //追加するボタン切り替え
   const [reset, setReset] = useState(false); //リセットモーダル
-
+  const red = css`
+    color: red;
+  `;
   //inputタグを生成
   const createInput = () => {
     const newItems = [...items];
@@ -247,7 +249,7 @@ export const Game = () => {
           </div>
         ))}
 
-      <p>array1 = {JSON.stringify(amountLists)}</p>
+      <p className={red}>array1 = {JSON.stringify(amountLists)}</p>
 
       {showAdd && (
         <button type="button" onClick={startGame}>

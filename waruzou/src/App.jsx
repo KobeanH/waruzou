@@ -2,6 +2,9 @@ import { useState } from "react";
 import { Link, BrowserRouter, Route, Switch } from "react-router-dom";
 import "./App.css";
 import { Game } from "./Game";
+import { jsx, css } from "@emotion/css";
+import yen from "./img/yen.svg";
+import person from "./img/user.svg";
 
 function App() {
   const [total, setTotal] = useState(""); //合計金額
@@ -76,35 +79,71 @@ function App() {
       setCalculatedObj(count);
     }
   };
+
   return (
     <BrowserRouter>
-      <Link to="/">ホームに戻る</Link>
-      <Link to="/Game">ゲームをする</Link>
       <Switch>
         <Route exact path="/">
           <div className="App">
-            <input
-              type="number"
-              className="total"
-              onChange={getValueFromTotal}
-            />
-            <input type="number" className="ppl" onChange={getValueFromPpl} />
+            <div>
+              <h2>わりcan</h2>
+            </div>
+            <div>
+              <div>
+                <span className={amountSpan}>
+                  <img className={amountImg} src={yen} alt="yen" />
+                </span>
+                <input
+                  placeholder="金額を入力してください"
+                  type="number"
+                  className="total"
+                  onChange={getValueFromTotal}
+                />
+              </div>
+              <div>
+                <img className={amountImg} src={person} alt="person" />
+                <input
+                  placeholder="人数を入力してください"
+                  type="number"
+                  className="ppl"
+                  onChange={getValueFromPpl}
+                />
+              </div>
+            </div>
+            <div>
+              <span>計算結果</span>
+              <div>
+                <span>Suggest</span>
+                {Object.keys(calculatedObj).map((key, value) => (
+                  <li key={key}>
+                    {Object.keys(calculatedObj)[value]} + {calculatedObj[key]}
+                  </li>
+                ))}
+              </div>
+            </div>
             <button type="button" onClick={() => cal()}>
               計算する
             </button>
-            {Object.keys(calculatedObj).map((key, value) => (
-              <li key={key}>
-                {Object.keys(calculatedObj)[value]} + {calculatedObj[key]}
-              </li>
-            ))}
           </div>
         </Route>
         <Route exact path="/Game">
           <Game></Game>
         </Route>
       </Switch>
+      <Link to="/">ホームに戻る</Link>
+      <Link to="/Game">ゲームをする</Link>
     </BrowserRouter>
   );
 }
 
+const amountImg = css`
+  max-width: 32px;
+  margin: 10px;
+`;
+const amountSpan = css`
+  display: inline-block;
+  background-color: #fff;
+  border-radius: 100%;
+  box-shadow: 0px 2px 4px #808080;
+`;
 export default App;
