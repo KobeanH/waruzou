@@ -1,8 +1,11 @@
 .App {
-  text-align: center;
+  /* text-align: center; */
+  background-color: #f8f9ff;
+  height: 100vh;
+  list-style: none;
+  border-bottom: 1px #808080 dotted;
 }
-
-.App-logo {
+.s:nth-child() .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
