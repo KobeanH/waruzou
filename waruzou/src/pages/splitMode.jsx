@@ -103,32 +103,7 @@ export const SplitMode = () => {
       <div className={mainWrap}>
         <Switch>
           <Route exact path="/">
-            <div className={inputWrapper}>
-              <div className={inputWrap}>
-                <span className={total == true ? amountSpanOn : amountSpan}>
-                  <img className={amountImg} src={yen} alt="yen" />
-                </span>
-                <input
-                  className={amountInput}
-                  placeholder="金額"
-                  type="tel"
-                  onChange={getValueFromTotal}
-                  maxLength="8"
-                />
-              </div>
-              <div className={inputWrap}>
-                <span className={ppl == true ? amountSpanOn : amountSpan}>
-                  <img className={personImg} src={person} alt="person" />
-                </span>
-                <input
-                  placeholder="人数"
-                  type="tel"
-                  className={amountInput}
-                  onChange={getValueFromPpl}
-                  maxLength="3"
-                />
-              </div>
-            </div>
+            <InputWrapper setTotal={setTotal} setPpl={setPpl} />
             <div className={result}>
               <span className={calcResult}>計算結果</span>
               <div className={resultWrap}>
