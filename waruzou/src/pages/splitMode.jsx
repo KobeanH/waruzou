@@ -2,6 +2,7 @@ import { useState } from "react";
 import { css } from "@emotion/css";
 import { InputWrapper } from "../organism/InputWrapper";
 import { Result } from "../organism/Result";
+import { MainBtn } from "../atoms/btn/Mainbtn";
 
 export const SplitMode = () => {
   const [total, setTotal] = useState(""); //合計金額
@@ -85,9 +86,7 @@ export const SplitMode = () => {
         calculatedObj={calculatedObj}
         aboutAmounr={aboutAmounr}
       />
-      <button className={mainBtn} type="button" onClick={() => cal()}>
-        計算する
-      </button>
+      <MainBtn onClick={cal}>計算する</MainBtn>
     </>
   );
 };
@@ -108,30 +107,5 @@ const calcResult = css`
   font-size: 12px;
   @media (max-height: 740px) {
     margin-bottom: 1.5vh;
-  }
-`;
-
-const mainBtn = css`
-  display: block;
-  max-width: 200px;
-  width: 100%;
-  background-color: #6f86d6;
-  color: #fff;
-  padding: 12px;
-  margin: 0 auto 3.5vh;
-  border-radius: 100px;
-  border: none;
-  box-shadow: 0px 4px 4px #808080;
-  transition: all 0.3s;
-  font-family: "Noto Sans JP", sans-serif;
-  font-weight: bold;
-  &:hover {
-    cursor: pointer;
-    opacity: 0.7;
-    transition: all 0.3s;
-  }
-  &:hover resultItem {
-    color: red;
-    margin-bottom: 3vh;
   }
 `;
