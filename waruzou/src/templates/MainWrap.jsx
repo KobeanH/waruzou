@@ -1,8 +1,7 @@
 import { Route, Switch } from "react-router-dom";
-import { Game } from "../Game";
+import { Game } from "../pages/Game";
 import { css } from "@emotion/css";
 import { SplitMode } from "../pages/splitMode";
-import { ChangeMode } from "../templates/ChangeMode";
 
 export const MainWrap = () => {
   return (
@@ -15,7 +14,6 @@ export const MainWrap = () => {
           <Game></Game>
         </Route>
       </Switch>
-      <ChangeMode />
     </div>
   );
 };

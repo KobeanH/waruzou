@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
-import styles from "./style.module.css";
+import styles from "../style.module.css";
 import Modal from "react-modal";
 
 import { css } from "@emotion/css";
+import { MainBtn } from "../atoms/btn/Mainbtn";
+import { SplitModeInput } from "../atoms/input/SplitModeInput";
 
 Modal.setAppElement("#root");
 
@@ -19,9 +21,7 @@ export const Game = () => {
   const [showInput, setShowInput] = useState(true); //追加するボタン切り替え
   const [showlist, setShowlist] = useState(false); //追加するボタン切り替え
   const [reset, setReset] = useState(false); //リセットモーダル
-  const red = css`
-    color: red;
-  `;
+
   //inputタグを生成
   const createInput = () => {
     const newItems = [...items];
@@ -177,28 +177,28 @@ export const Game = () => {
 
   return (
     <div className="game">
-      {showAdd && (
-        <button type="button" onClick={() => createInput()}>
-          追加する
-        </button>
-      )}
-
+      {showAdd && <MainBtn onClick={() => createInput()}>追加する</MainBtn>}
       {showInput &&
         items.map((item, i) => (
           <div key={i}>
-            金額:{" "}
-            <input
+            {/* <input
               type="number"
               value={item.amount}
               onChange={(e) => updateAmount(i, e.target.value)}
-            />{" "}
-            円、 人数:{" "}
-            <input
+            /> */}
+            <SplitModeInput
+              value={item.amount}
+              onChange={(e) => updateAmount(i, e.target.value)}
+            />
+            <SplitModeInput
+              value={item.people}
+              onChange={(e) => updatePeople(i, e.target.value)}
+            />
+            {/* <input
               type="number"
               value={item.people}
               onChange={(e) => updatePeople(i, e.target.value)}
-            />{" "}
-            人
+            /> */}
             {showDelete && (
               <button type="button" onClick={() => deleteInput(i)}>
                 削除
@@ -215,13 +215,9 @@ export const Game = () => {
           </div>
         ))}
 
-      <p className={red}>array1 = {JSON.stringify(amountLists)}</p>
+      <p>array1 = {JSON.stringify(amountLists)}</p>
 
-      {showAdd && (
-        <button type="button" onClick={startGame}>
-          ゲームを開始する
-        </button>
-      )}
+      {showAdd && <MainBtn onClick={startGame}>ゲームを開始する</MainBtn>}
       {amountLists.map((amountList, index) => (
         <li key={index} onClick={() => modalOpen(amountList, index)}>
           ？
