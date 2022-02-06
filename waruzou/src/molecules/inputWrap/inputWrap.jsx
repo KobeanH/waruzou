@@ -9,7 +9,8 @@ export const InputWrap = () => {
 
   //合計金額入力欄
   const getValueFromTotal = (e) => {
-    setTotal(() => e.target.value);
+    const value = e.target.value.replace(/\D/g, ""); //数字以外は入力できないように
+    setTotal(value);
   };
 
   return (
@@ -35,6 +36,7 @@ export const InputWrap = () => {
         type={"tel"}
         onChange={getValueFromTotal}
         maxLength={"8"}
+        value={total}
       ></SplitModeInput>
     </div>
   );

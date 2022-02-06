@@ -8,7 +8,8 @@ export const PersonInputWrap = () => {
   const [ppl, setPpl] = useRecoilState(PplState); //人数
 
   const getValueFromPpl = (e) => {
-    setPpl(() => e.target.value);
+    const value = e.target.value.replace(/\D/g, ""); //数字以外は入力できないように
+    setPpl(value);
   };
 
   return (
@@ -34,7 +35,8 @@ export const PersonInputWrap = () => {
         placeholder={"人数"}
         type={"tel"}
         onChange={getValueFromPpl}
-        maxLength={"8"}
+        maxLength={"3"}
+        value={ppl}
       ></SplitModeInput>
     </div>
   );

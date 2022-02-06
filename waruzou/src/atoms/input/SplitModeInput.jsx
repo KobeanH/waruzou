@@ -1,7 +1,7 @@
 import { css } from "@emotion/css";
 
 export const SplitModeInput = (props) => {
-  const { placeholder, type, onChange, maxLength } = props;
+  const { placeholder, type, onChange, maxLength, value } = props;
 
   return (
     <input
@@ -10,6 +10,8 @@ export const SplitModeInput = (props) => {
       type={type}
       onChange={onChange}
       maxLength={maxLength}
+      required="required"
+      value={value}
     />
   );
 };
