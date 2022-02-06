@@ -1,12 +1,11 @@
-// import { useState } from "react";
 import { css } from "@emotion/css";
-import yen from "../../img/yen.svg";
 import { useRecoilState } from "recoil";
 import { TotalState } from "../../store/totalState";
+import { SplitModeInput } from "../../atoms/input/SplitModeInput";
+import { Icon } from "../../atoms/icon/icon";
 
-export const InputWrap = (props) => {
+export const InputWrap = () => {
   const [total, setTotal] = useRecoilState(TotalState);
-  // const [total, setTotal] = useState(""); //合計金額
 
   //合計金額入力欄
   const getValueFromTotal = (e) => {
@@ -15,16 +14,28 @@ export const InputWrap = (props) => {
 
   return (
     <div className={inputWrap}>
-      <span className={total == true ? amountSpanOn : amountSpan}>
-        <img className={amountImg} src={yen} alt="yen" />
-      </span>
-      <input
-        className={amountInput}
-        placeholder="金額"
-        type="tel"
+      <Icon ppl={total}>
+        <svg
+          id="Layer_1"
+          height="26"
+          viewBox="0 0 24 24"
+          width="26"
+          xmlns="http://www.w3.org/2000/svg"
+          data-name="Layer 1"
+          className={amountImg}
+        >
+          <path
+            fill="#808080"
+            d="m22.61.208a1 1 0 0 0 -1.4.182l-9.21 11.97-9.208-11.97a1 1 0 0 0 -1.584 1.22l9.53 12.39h-4.738a1 1 0 0 0 0 2h5v2h-5a1 1 0 0 0 0 2h5v3a1 1 0 0 0 2 0v-3h5a1 1 0 0 0 0-2h-5v-2h5a1 1 0 0 0 0-2h-4.738l9.53-12.39a1 1 0 0 0 -.182-1.402z"
+          />
+        </svg>
+      </Icon>
+      <SplitModeInput
+        placeholder={"金額"}
+        type={"tel"}
         onChange={getValueFromTotal}
-        maxLength="8"
-      />
+        maxLength={"8"}
+      ></SplitModeInput>
     </div>
   );
 };
@@ -48,41 +59,5 @@ const inputWrap = css`
     margin-bottom: 1vh;
     width: 100%;
     gap: 4px;
-  }
-`;
-const amountSpan = css`
-  display: inline-block;
-  background-color: #fff;
-  border-radius: 100%;
-  box-shadow: 0px 2px 4px rgba(128, 128, 128, 0.25);
-  transition: all 1s;
-`;
-const amountSpanOn = css`
-  display: inline-block;
-  background-color: #e5eaf6;
-  border-radius: 100%;
-  box-shadow: 0px 2px 4px rgba(128, 128, 128, 0.25);
-  transition: all 1s;
-`;
-const amountInput = css`
-  font-size: 16px;
-  width: 100%;
-  padding: 1.5vh 16px;
-  border: none;
-  border-radius: 8px;
-  box-shadow: 0px 2px 4px rgba(128, 128, 128, 0.25);
-  font-family: "Noto Sans JP", sans-serif;
-  font-weight: bold;
-  color: #808080;
-  &::placeholder {
-    color: rgba(128, 128, 128, 0.65);
-  }
-  @media (max-height: 740px) {
-    width: 100%;
-    font-size: 16px;
-    padding: 1.5vh 8px;
-    &::placeholder {
-      font-size: 12px;
-    }
   }
 `;

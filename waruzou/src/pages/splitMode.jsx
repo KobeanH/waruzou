@@ -3,20 +3,21 @@ import { InputWrapper } from "../organism/InputWrapper";
 import { Result } from "../organism/Result";
 import { MainBtn } from "../atoms/btn/Mainbtn";
 import { CalcResult } from "../atoms/title/CalcResult";
-// import { useRecoilValue } from "recoil";
-import { useRecoilState } from "recoil";
 import { TotalState } from "../store/totalState";
+import { PplState } from "../store/pplState";
+import { CalculatedObjState } from "../store/calculatedObj";
+import { useRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 
 export const SplitMode = () => {
-  // const TotalStatee = useRecoilValue(TotalState);
-  const [total, setTotal] = useRecoilState(TotalState);
+  const total = useRecoilValue(TotalState);
+  const ppl = useRecoilValue(PplState);
 
-  // const [total, setTotal] = useState(""); //合計金額
-  const [ppl, setPpl] = useState(""); //人数
+  const [calculatedObj, setCalculatedObj] = useRecoilState(CalculatedObjState);
 
   const [perPerson, setPerPerson] = useState([]); //一人分の金額
-  const [calculatedObj, setCalculatedObj] = useState({});
-  const [aboutAmounr, setAboutAmount] = useState(null);
+  // const [calculatedObj, setCalculatedObj] = useState({});
+  const [aboutAmount, setAboutAmount] = useState(null);
 
   const cal = () => {
     let person = total / (ppl * 100);
@@ -83,14 +84,13 @@ export const SplitMode = () => {
 
   return (
     <>
-      <InputWrapper setTotal={setTotal} setPpl={setPpl} />
+      <InputWrapper />
       <CalcResult>計算結果</CalcResult>
       <Result
         total={total}
         ppl={ppl}
         perPerson={perPerson}
-        calculatedObj={calculatedObj}
-        aboutAmounr={aboutAmounr}
+        aboutAmount={aboutAmount}
       />
       <MainBtn onClick={cal}>計算する</MainBtn>
     </>

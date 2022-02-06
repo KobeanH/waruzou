@@ -1,7 +1,9 @@
 import { css, keyframes } from "@emotion/css";
+import { useRecoilValue } from "recoil";
+import { CalculatedObjState } from "../../store/calculatedObj";
 
-export const ResultList = (props) => {
-  const { calculatedObj } = props;
+export const ResultList = () => {
+  const calculatedObj = useRecoilValue(CalculatedObjState);
 
   return (
     <ul className={resultWrapUl}>

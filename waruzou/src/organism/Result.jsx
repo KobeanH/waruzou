@@ -4,16 +4,16 @@ import { AboutPerPerson } from "../atoms/text/AboutAmount";
 import { ResultSuggest } from "../atoms/title/ResultSuggest";
 
 export const Result = (props) => {
-  const { calculatedObj, aboutAmounr } = props;
+  const { aboutAmount } = props;
 
   return (
     <div className={resultWrap}>
       <AboutPerPerson>
         一人あたり・・・
-        {aboutAmounr && <span>{aboutAmounr}円</span>}
+        {aboutAmount && <span>{aboutAmount}円</span>}
       </AboutPerPerson>
       <ResultSuggest>Suggest</ResultSuggest>
-      <ResultList calculatedObj={calculatedObj}></ResultList>
+      <ResultList></ResultList>
     </div>
   );
 };
