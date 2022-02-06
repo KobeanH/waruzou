@@ -1,11 +1,17 @@
 import { useState } from "react";
-import { css } from "@emotion/css";
 import { InputWrapper } from "../organism/InputWrapper";
 import { Result } from "../organism/Result";
 import { MainBtn } from "../atoms/btn/Mainbtn";
+import { CalcResult } from "../atoms/title/CalcResult";
+// import { useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
+import { TotalState } from "../store/totalState";
 
 export const SplitMode = () => {
-  const [total, setTotal] = useState(""); //合計金額
+  // const TotalStatee = useRecoilValue(TotalState);
+  const [total, setTotal] = useRecoilState(TotalState);
+
+  // const [total, setTotal] = useState(""); //合計金額
   const [ppl, setPpl] = useState(""); //人数
 
   const [perPerson, setPerPerson] = useState([]); //一人分の金額
@@ -78,7 +84,7 @@ export const SplitMode = () => {
   return (
     <>
       <InputWrapper setTotal={setTotal} setPpl={setPpl} />
-      <span className={calcResult}>計算結果</span>
+      <CalcResult>計算結果</CalcResult>
       <Result
         total={total}
         ppl={ppl}
@@ -90,22 +96,3 @@ export const SplitMode = () => {
     </>
   );
 };
-
-const calcResult = css`
-  display: inline-block;
-  color: #808080;
-  padding: 6px 24px;
-  border-radius: 20px;
-  text-align: center;
-  background-color: #fff;
-  vertical-align: middle;
-  box-shadow: 0px 2px 4px rgba(128, 128, 128, 0.25);
-  margin-bottom: 16px;
-  margin-left: 32px;
-  font-family: "Noto Sans JP", sans-serif;
-  font-weight: bold;
-  font-size: 12px;
-  @media (max-height: 740px) {
-    margin-bottom: 1.5vh;
-  }
-`;

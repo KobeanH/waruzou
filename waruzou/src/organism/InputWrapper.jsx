@@ -1,16 +1,16 @@
 import { useState } from "react";
 import { css } from "@emotion/css";
-import yen from "../img/yen.svg";
 import person from "../img/user.svg";
+import { InputWrap } from "../molecules/inputWrap/inputWrap";
 
 export const InputWrapper = (props) => {
   const [total, setTotal] = useState(""); //合計金額
   const [ppl, setPpl] = useState(""); //人数
 
   //合計金額入力欄
-  const getValueFromTotal = (e) => {
-    props.setTotal(() => e.target.value);
-  };
+  // const getValueFromTotal = (e) => {
+  //   setTotal(() => e.target.value);
+  // };
   console.log(total);
   //人数入力欄
   const getValueFromPpl = (e) => {
@@ -19,7 +19,7 @@ export const InputWrapper = (props) => {
 
   return (
     <div className={inputWrapper}>
-      <div className={inputWrap}>
+      {/* <div className={inputWrap}>
         <span className={total == true ? amountSpanOn : amountSpan}>
           <img className={amountImg} src={yen} alt="yen" />
         </span>
@@ -30,7 +30,8 @@ export const InputWrapper = (props) => {
           onChange={getValueFromTotal}
           maxLength="8"
         />
-      </div>
+      </div> */}
+      <InputWrap setTotal={setTotal}></InputWrap>
       <div className={inputWrap}>
         <span className={ppl == true ? amountSpanOn : amountSpan}>
           <img className={personImg} src={person} alt="person" />
