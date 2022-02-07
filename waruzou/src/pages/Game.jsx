@@ -4,7 +4,8 @@ import Modal from "react-modal";
 
 import { css } from "@emotion/css";
 import { MainBtn } from "../atoms/btn/Mainbtn";
-import { SplitModeInput } from "../atoms/input/SplitModeInput";
+// import { SplitModeInput } from "../atoms/input/SplitModeInput";
+import { GameInputWrao } from "../molecules/inputWrap/GameInputWrap";
 
 Modal.setAppElement("#root");
 
@@ -25,14 +26,15 @@ export const Game = () => {
   //inputタグを生成
   const createInput = () => {
     const newItems = [...items];
-    let www = 0;
+
+    //全てのinputに金額と人数に数字が入ってなければアラートを出す
+    let numInput = 0;
     for (let i = 0; i < newItems.length; i++) {
       if (!(newItems[i].amount && newItems[i].people)) {
-        www += 1;
+        numInput += 1;
       }
     }
-    console.log(www);
-    if (www > 0) {
+    if (numInput > 0) {
       alert("金額と人数を入力してください");
     } else {
       setItems([...items, { amount: "", people: "" }]);
@@ -58,6 +60,7 @@ export const Game = () => {
 
   //入力された金額をitemsへ格納
   const updateAmount = (index, value) => {
+    // const val = val.target.value.replace(/\D/g, "");
     const newItems = [...items];
     newItems[index] = { ...items[index], amount: value };
     setItems(newItems);
@@ -65,6 +68,7 @@ export const Game = () => {
 
   //入力された人数をitemsへ格納
   const updatePeople = (index, value) => {
+    // const val = val.target.value.replace(/\D/g, "");
     const newItems = [...items];
     newItems[index] = { ...items[index], people: value };
     setItems(newItems);
@@ -174,37 +178,58 @@ export const Game = () => {
   const hideResetModal = () => {
     setReset(false);
   };
-
+  const GameInputWrap = css`
+    display: flex;
+    align-items: flex-end;
+    gap: 6px;
+    margin-bottom: 8px;
+  `;
+  const DeleteBtn = css`
+    white-space: nowrap;
+  `;
   return (
     <div className="game">
       {showAdd && <MainBtn onClick={() => createInput()}>追加する</MainBtn>}
       {showInput &&
         items.map((item, i) => (
-          <div key={i}>
-            {/* <input
-              type="number"
-              value={item.amount}
-              onChange={(e) => updateAmount(i, e.target.value)}
-            /> */}
-            <SplitModeInput
-              value={item.amount}
-              onChange={(e) => updateAmount(i, e.target.value)}
-            />
-            <SplitModeInput
-              value={item.people}
-              onChange={(e) => updatePeople(i, e.target.value)}
-            />
-            {/* <input
-              type="number"
-              value={item.people}
-              onChange={(e) => updatePeople(i, e.target.value)}
-            /> */}
-            {showDelete && (
-              <button type="button" onClick={() => deleteInput(i)}>
-                削除
-              </button>
-            )}
-          </div>
+          // <div className={GameInputWrap} key={i}>
+          //   <SplitModeInput
+          //     placeholder={"金額"}
+          //     value={item.amount}
+          //     onChange={(e) => updateAmount(i, e.target.value)}
+          //     type={"tel"}
+          //     maxLength={"8"}
+          //   />
+          //   <SplitModeInput
+          //     placeholder={"人数"}
+          //     value={item.people}
+          //     onChange={(e) => updatePeople(i, e.target.value)}
+          //     type={"tel"}
+          //     maxLength={"2"}
+          //   />
+          //   {showDelete && (
+          //     <button
+          //       className={DeleteBtn}
+          //       type="button"
+          //       onClick={() => deleteInput(i)}
+          //     >
+          //       削除
+          //     </button>
+          //   )}
+          // </div>
+          <GameInputWrao
+            key={i}
+            amount={"金額"}
+            itemAmount={item.amount}
+            updateAmount={(e) => updateAmount(i, e.target.value)}
+            tel={"tel"}
+            maxLength8={"8"}
+            people={"人数"}
+            itemPeople={item.people}
+            updatePeople={(e) => updatePeople(i, e.target.value)}
+            maxLength2={"2"}
+            deleteInput={() => deleteInput(i)}
+          ></GameInputWrao>
         ))}
 
       {showlist &&
@@ -214,8 +239,8 @@ export const Game = () => {
             <span>{item.people}</span>{" "}
           </div>
         ))}
-
-      <p>array1 = {JSON.stringify(amountLists)}</p>
+      {/*
+      <p>array1 = {JSON.stringify(amountLists)}</p> */}
 
       {showAdd && <MainBtn onClick={startGame}>ゲームを開始する</MainBtn>}
       {amountLists.map((amountList, index) => (
@@ -238,67 +263,7 @@ export const Game = () => {
               beforeClose: "content-before",
             }}
             closeTimeoutMS={500}
-            portalClassName={css`
-              .overlay-base {
-                padding: 1rem;
-                position: fixed;
-                top: 0;
-                bottom: 0;
-                right: 0;
-                left: 0;
-                background-color: rgba(0, 0, 0, 0);
-                opacity: 0;
-                transition-property: background-color, opacity;
-                transition-duration: 500ms;
-                transition-timing-function: ease-in-out;
-                outline: 0;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-              }
-
-              .overlay-after {
-                background-color: rgba(0, 0, 0, 0.8);
-                opacity: 1;
-              }
-
-              .overlay-before {
-                background-color: rgba(0, 0, 0, 0);
-                opacity: 0;
-              }
-
-              .content-base {
-                position: relative;
-                top: auto;
-                left: auto;
-                right: auto;
-                bottom: auto;
-                margin: 0 auto;
-                border: 0;
-                outline: 0;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                height: 0%;
-                width: 0%;
-                background-color: transparent;
-                transition-property: background-color, width, height;
-                transition-duration: 500ms;
-                transition-timing-function: ease-in-out;
-              }
-
-              .content-after {
-                width: 70%;
-                height: 40%;
-                background-color: rgba(250, 190, 190, 0.8);
-              }
-
-              .content-before {
-                width: 0%;
-                height: 0%;
-                background-color: transparent;
-              }
-            `}
+            portalClassName={portalClassName}
           >
             <span className={none[index] === true ? "" : styles.none}>
               {amountList}
@@ -339,67 +304,7 @@ export const Game = () => {
               beforeClose: "content-before",
             }}
             closeTimeoutMS={500}
-            portalClassName={css`
-              .overlay-base {
-                padding: 1rem;
-                position: fixed;
-                top: 0;
-                bottom: 0;
-                right: 0;
-                left: 0;
-                background-color: rgba(0, 0, 0, 0);
-                opacity: 0;
-                transition-property: background-color, opacity;
-                transition-duration: 500ms;
-                transition-timing-function: ease-in-out;
-                outline: 0;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-              }
-
-              .overlay-after {
-                background-color: rgba(0, 0, 0, 0.8);
-                opacity: 1;
-              }
-
-              .overlay-before {
-                background-color: rgba(0, 0, 0, 0);
-                opacity: 0;
-              }
-
-              .content-base {
-                position: relative;
-                top: auto;
-                left: auto;
-                right: auto;
-                bottom: auto;
-                margin: 0 auto;
-                border: 0;
-                outline: 0;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                height: 0%;
-                width: 0%;
-                background-color: transparent;
-                transition-property: background-color, width, height;
-                transition-duration: 500ms;
-                transition-timing-function: ease-in-out;
-              }
-
-              .content-after {
-                width: 70%;
-                height: 40%;
-                background-color: rgba(250, 190, 190, 0.8);
-              }
-
-              .content-before {
-                width: 0%;
-                height: 0%;
-                background-color: transparent;
-              }
-            `}
+            portalClassName={portalClassName2}
           >
             <span>本当にリセットしますか？</span>
 
@@ -412,3 +317,125 @@ export const Game = () => {
     </div>
   );
 };
+const portalClassName = css`
+  .overlay-base {
+    padding: 1rem;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0);
+    opacity: 0;
+    transition-property: background-color, opacity;
+    transition-duration: 500ms;
+    transition-timing-function: ease-in-out;
+    outline: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .overlay-after {
+    background-color: rgba(0, 0, 0, 0.8);
+    opacity: 1;
+  }
+
+  .overlay-before {
+    background-color: rgba(0, 0, 0, 0);
+    opacity: 0;
+  }
+
+  .content-base {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    margin: 0 auto;
+    border: 0;
+    outline: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 0%;
+    width: 0%;
+    background-color: transparent;
+    transition-property: background-color, width, height;
+    transition-duration: 500ms;
+    transition-timing-function: ease-in-out;
+  }
+
+  .content-after {
+    width: 70%;
+    height: 40%;
+    background-color: rgba(250, 190, 190, 0.8);
+  }
+
+  .content-before {
+    width: 0%;
+    height: 0%;
+    background-color: transparent;
+  }
+`;
+const portalClassName2 = css`
+  .overlay-base {
+    padding: 1rem;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0);
+    opacity: 0;
+    transition-property: background-color, opacity;
+    transition-duration: 500ms;
+    transition-timing-function: ease-in-out;
+    outline: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .overlay-after {
+    background-color: rgba(0, 0, 0, 0.8);
+    opacity: 1;
+  }
+
+  .overlay-before {
+    background-color: rgba(0, 0, 0, 0);
+    opacity: 0;
+  }
+
+  .content-base {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    margin: 0 auto;
+    border: 0;
+    outline: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 0%;
+    width: 0%;
+    background-color: transparent;
+    transition-property: background-color, width, height;
+    transition-duration: 500ms;
+    transition-timing-function: ease-in-out;
+  }
+
+  .content-after {
+    width: 70%;
+    height: 40%;
+    background-color: rgba(250, 190, 190, 0.8);
+  }
+
+  .content-before {
+    width: 0%;
+    height: 0%;
+    background-color: transparent;
+  }
+`;
