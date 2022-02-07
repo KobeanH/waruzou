@@ -6,6 +6,8 @@ import { css } from "@emotion/css";
 import { MainBtn } from "../atoms/btn/Mainbtn";
 // import { SplitModeInput } from "../atoms/input/SplitModeInput";
 import { GameInputWrao } from "../molecules/inputWrap/GameInputWrap";
+import { LeftLose } from "../molecules/leftLose/LeftLose";
+import { GameLottery } from "../organism/GameLottery";
 
 Modal.setAppElement("#root");
 
@@ -178,45 +180,12 @@ export const Game = () => {
   const hideResetModal = () => {
     setReset(false);
   };
-  const GameInputWrap = css`
-    display: flex;
-    align-items: flex-end;
-    gap: 6px;
-    margin-bottom: 8px;
-  `;
-  const DeleteBtn = css`
-    white-space: nowrap;
-  `;
+
   return (
     <div className="game">
       {showAdd && <MainBtn onClick={() => createInput()}>追加する</MainBtn>}
       {showInput &&
         items.map((item, i) => (
-          // <div className={GameInputWrap} key={i}>
-          //   <SplitModeInput
-          //     placeholder={"金額"}
-          //     value={item.amount}
-          //     onChange={(e) => updateAmount(i, e.target.value)}
-          //     type={"tel"}
-          //     maxLength={"8"}
-          //   />
-          //   <SplitModeInput
-          //     placeholder={"人数"}
-          //     value={item.people}
-          //     onChange={(e) => updatePeople(i, e.target.value)}
-          //     type={"tel"}
-          //     maxLength={"2"}
-          //   />
-          //   {showDelete && (
-          //     <button
-          //       className={DeleteBtn}
-          //       type="button"
-          //       onClick={() => deleteInput(i)}
-          //     >
-          //       削除
-          //     </button>
-          //   )}
-          // </div>
           <GameInputWrao
             key={i}
             amount={"金額"}
@@ -234,10 +203,11 @@ export const Game = () => {
 
       {showlist &&
         items.map((item, i) => (
-          <div key={i}>
-            金額:<span>{item.amount}</span> 円、 人数:{" "}
-            <span>{item.people}</span>{" "}
-          </div>
+          <LeftLose
+            key={i}
+            itemAmount={item.amount}
+            itemPeople={item.people}
+          ></LeftLose>
         ))}
       {/*
       <p>array1 = {JSON.stringify(amountLists)}</p> */}
@@ -282,6 +252,20 @@ export const Game = () => {
             </button>
           </Modal>
         </li>
+        // <GameLottery
+        //   index={index}
+        //   modalOpen={() => modalOpen(amountList, index)}
+        //   stylesNone={none[index] === true ? "" : styles.none}
+        //   amountList={amountList}
+        //   modalIsOpen={modalIsOpen[index] === true ? true : false}
+        //   closeModal={() => closeModal(amountList, index)}
+        //   None={none[index] === true ? "" : styles.none}
+        //   orClick={() => orclick(amountList, index)}
+        //   closeModalBtn={(e) => {
+        //     e.stopPropagation();
+        //     closeModal(amountList, index);
+        //   }}
+        // ></GameLottery>
       ))}
 
       {gameEnd && <span>ゲームが終了しました</span>}
