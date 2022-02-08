@@ -8,6 +8,7 @@ import { PplState } from "../store/pplState";
 import { CalculatedObjState } from "../store/calculatedObj";
 import { useRecoilState } from "recoil";
 import { useRecoilValue } from "recoil";
+import { css } from "@emotion/css";
 
 export const SplitMode = () => {
   const total = useRecoilValue(TotalState);
@@ -88,7 +89,15 @@ export const SplitMode = () => {
       <InputWrapper />
       <CalcResult>計算結果</CalcResult>
       <Result total={total} ppl={ppl} aboutAmount={aboutAmount} />
-      <MainBtn onClick={cal}>計算する</MainBtn>
+      <MainBtn mainBtnPosition={mainBtnPosition} onClick={cal}>
+        計算する
+      </MainBtn>
     </>
   );
 };
+const mainBtnPosition = css`
+  position: fixed;
+  left: 50%;
+  bottom: 11vh;
+  transform: translate(-50%, -50%);
+`;

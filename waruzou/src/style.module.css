@@ -1,3 +1,10 @@
 .none {
-  display: none;
+  /* display: none; */
+  visibility: hidden;
+  display: flex;
+  height: 70px;
+  font-size: 24px;
+  vertical-align: middle;
+  margin-bottom: 36px;
+  align-items: center;
 }

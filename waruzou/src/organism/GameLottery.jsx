@@ -18,7 +18,7 @@ export const GameLottery = (props) => {
   } = props;
 
   return (
-    <li key={index} onClick={modalOpen}>
+    <li key={index} onClick={modalOpen} className={GameLotteryItem}>
       ？<span className={stylesNone}>{amountList}</span>
       <Modal
         isOpen={modalIsOpen}
@@ -37,11 +37,14 @@ export const GameLottery = (props) => {
         portalClassName={portalClassName}
       >
         <span className={None}>{amountList}</span>
-        <button type="button" onClick={orClick}>
-          Yes
-        </button>
-
-        <button onClick={closeModalBtn}>Close Modal</button>
+        <div className={modalBtnWrap}>
+          <button type="button" onClick={orClick} className={modalBtn}>
+            Yes
+          </button>
+          <button onClick={closeModalBtn} className={modalBtn}>
+            Close Modal
+          </button>
+        </div>
       </Modal>
     </li>
   );
@@ -93,12 +96,14 @@ const portalClassName = css`
     transition-property: background-color, width, height;
     transition-duration: 500ms;
     transition-timing-function: ease-in-out;
+    flex-direction: column;
   }
 
   .content-after {
-    width: 70%;
-    height: 40%;
-    background-color: rgba(250, 190, 190, 0.8);
+    width: 100%;
+    height: 30%;
+    background-color: #f8f9ff;
+    border-radius: 6px;
   }
 
   .content-before {
@@ -106,4 +111,32 @@ const portalClassName = css`
     height: 0%;
     background-color: transparent;
   }
+`;
+const GameLotteryItem = css`
+  list-style: none;
+  display: flex;
+  list-style: none;
+  width: 9.5vh;
+  height: 9vh;
+  background-color: #fff;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  box-shadow: 0px 2px 4px rgba(128, 128, 128, 0.25);
+`;
+const modalBtnWrap = css`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+`;
+const modalBtn = css`
+  border: none;
+  padding: 20px 16px;
+  border-radius: 6px;
+  background: #6f86d6;
+  color: #fff;
+  width: 120px;
+  box-sizing: border-box;
+  white-space: nowrap;
 `;

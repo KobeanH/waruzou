@@ -1,6 +1,7 @@
 import Modal from "react-modal";
 
 import { css } from "@emotion/css";
+import { MainBtn } from "../atoms/btn/Mainbtn";
 
 Modal.setAppElement("#root");
 
@@ -10,9 +11,12 @@ export const ResetGame = (props) => {
   console.log(props);
   return (
     <>
-      <button type="button" onClick={resetModal}>
+      {/* <button type="button" onClick={resetModal}>
         リセットする
-      </button>
+      </button> */}
+      <MainBtn mainBtnPosition={mainBtnPosition} onClick={resetModal}>
+        リセットする
+      </MainBtn>
       <Modal
         isOpen={reset}
         onRequestClose={hideResetModal}
@@ -29,7 +33,7 @@ export const ResetGame = (props) => {
         closeTimeoutMS={closeTimeoutMS}
         portalClassName={portalClassName22}
       >
-        <span>本当にリセットしますか？</span>
+        <span className={block}>本当にリセットしますか？</span>
 
         <button onClick={gameReset}>Yes</button>
       </Modal>
@@ -86,9 +90,11 @@ const portalClassName22 = css`
   }
 
   .content-after {
-    width: 70%;
-    height: 40%;
-    background-color: rgba(250, 190, 190, 0.8);
+    width: 100%;
+    height: 30%;
+    background-color: #f8f9ff;
+
+    border-radius: 6px;
   }
 
   .content-before {
@@ -96,4 +102,14 @@ const portalClassName22 = css`
     height: 0%;
     background-color: transparent;
   }
+`;
+const mainBtnPosition = css`
+  position: fixed;
+  left: 50%;
+  bottom: 11vh;
+  transform: translate(-50%, -50%);
+`;
+
+const block = css`
+  white-space: nowrap;
 `;

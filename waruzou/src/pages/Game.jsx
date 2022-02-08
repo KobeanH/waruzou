@@ -8,10 +8,17 @@ import { GameInputWrao } from "../molecules/inputWrap/GameInputWrap";
 import { LeftLose } from "../molecules/leftLose/LeftLose";
 import { GameLottery } from "../organism/GameLottery";
 import { ResetGame } from "../organism/ResetGame";
+import { Icon } from "../atoms/icon/icon";
+import { TotalState } from "../store/totalState";
+import { PplState } from "../store/pplState";
+import { useRecoilValue } from "recoil";
+import { css } from "@emotion/css";
 
 Modal.setAppElement("#root");
 
 export const Game = () => {
+  const total = useRecoilValue(TotalState);
+  const ppl = useRecoilValue(PplState);
   const [items, setItems] = useState([{ amount: "", people: "" }]); //人数分、金額を格納する配列
   const [amountLists, setAmountLists] = useState([]); //
   const [none, setNone] = useState([]); //クラスを付与するstate
@@ -183,51 +190,109 @@ export const Game = () => {
 
   return (
     <div className="game">
-      {showAdd && <MainBtn onClick={() => createInput()}>追加する</MainBtn>}
-      {showInput &&
-        items.map((item, i) => (
-          <GameInputWrao
-            key={i}
-            amount={"金額"}
-            itemAmount={item.amount}
-            updateAmount={(e) => updateAmount(i, e.target.value)}
-            tel={"tel"}
-            maxLength8={"8"}
-            people={"人数"}
-            itemPeople={item.people}
-            updatePeople={(e) => updatePeople(i, e.target.value)}
-            maxLength2={"2"}
-            deleteInput={() => deleteInput(i)}
-            showDelete={showDelete}
-          ></GameInputWrao>
-        ))}
+      {showAdd && (
+        <MainBtn
+          createInputMargin={createInputMargin}
+          onClick={() => createInput()}
+        >
+          追加する
+        </MainBtn>
+      )}
+      {showInput && (
+        <>
+          <Icon ppl={total}>
+            <svg
+              id="Layer_1"
+              height="26"
+              viewBox="0 0 24 24"
+              width="26"
+              xmlns="http://www.w3.org/2000/svg"
+              data-name="Layer 1"
+              className={amountImg}
+            >
+              <path
+                fill="#808080"
+                d="m22.61.208a1 1 0 0 0 -1.4.182l-9.21 11.97-9.208-11.97a1 1 0 0 0 -1.584 1.22l9.53 12.39h-4.738a1 1 0 0 0 0 2h5v2h-5a1 1 0 0 0 0 2h5v3a1 1 0 0 0 2 0v-3h5a1 1 0 0 0 0-2h-5v-2h5a1 1 0 0 0 0-2h-4.738l9.53-12.39a1 1 0 0 0 -.182-1.402z"
+              />
+            </svg>
+          </Icon>
+          <Icon
+            ppl={ppl}
+            pplIcon={showDelete === true ? notShowPplIcon : pplIcon}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="26"
+              height="26"
+              className={personImg}
+            >
+              <g id="_01_align_center" data-name="01 align center">
+                <path
+                  fill="#808080"
+                  d="M21,24H19V18.957A2.96,2.96,0,0,0,16.043,16H7.957A2.96,2.96,0,0,0,5,18.957V24H3V18.957A4.963,4.963,0,0,1,7.957,14h8.086A4.963,4.963,0,0,1,21,18.957Z"
+                />
+                <path d="M12,12a6,6,0,1,1,6-6A6.006,6.006,0,0,1,12,12ZM12,2a4,4,0,1,0,4,4A4,4,0,0,0,12,2Z" />
+              </g>
+            </svg>
+          </Icon>
 
-      {showlist &&
-        items.map((item, i) => (
-          <LeftLose
-            key={i}
-            itemAmount={item.amount}
-            itemPeople={item.people}
-          ></LeftLose>
-        ))}
+          <div className={GameInputWrapHeight}>
+            {items.map((item, i) => (
+              <GameInputWrao
+                key={i}
+                amount={"金額"}
+                itemAmount={item.amount}
+                updateAmount={(e) => updateAmount(i, e.target.value)}
+                tel={"tel"}
+                maxLength8={"8"}
+                people={"人数"}
+                itemPeople={item.people}
+                updatePeople={(e) => updatePeople(i, e.target.value)}
+                maxLength2={"2"}
+                deleteInput={() => deleteInput(i)}
+                showDelete={showDelete}
+              ></GameInputWrao>
+            ))}
+          </div>
+        </>
+      )}
 
-      {showAdd && <MainBtn onClick={startGame}>ゲームを開始する</MainBtn>}
-      {amountLists.map((amountList, index) => (
-        <GameLottery
-          key={index}
-          modalOpen={() => modalOpen(amountList, index)}
-          stylesNone={none[index] === true ? "" : styles.none}
-          amountList={amountList}
-          modalIsOpen={modalIsOpen[index] === true ? true : false}
-          closeModal={() => closeModal(amountList, index)}
-          None={none[index] === true ? "" : styles.none}
-          orClick={() => orclick(amountList, index)}
-          closeModalBtn={(e) => {
-            e.stopPropagation();
-            closeModal(amountList, index);
-          }}
-        ></GameLottery>
-      ))}
+      {showlist && (
+        <ul className={LeftLoseList}>
+          {items.map((item, i) => (
+            <LeftLose
+              key={i}
+              itemAmount={item.amount}
+              itemPeople={item.people}
+            ></LeftLose>
+          ))}
+        </ul>
+      )}
+
+      {showAdd && (
+        <MainBtn mainBtnPosition={mainBtnPosition} onClick={startGame}>
+          ゲームを開始する
+        </MainBtn>
+      )}
+      <ul className={GameLotteryList}>
+        {amountLists.map((amountList, index) => (
+          <GameLottery
+            key={index}
+            modalOpen={() => modalOpen(amountList, index)}
+            stylesNone={none[index] === true ? "" : styles.none}
+            amountList={amountList}
+            modalIsOpen={modalIsOpen[index] === true ? true : false}
+            closeModal={() => closeModal(amountList, index)}
+            None={none[index] === true ? showAmount : styles.none}
+            orClick={() => orclick(amountList, index)}
+            closeModalBtn={(e) => {
+              e.stopPropagation();
+              closeModal(amountList, index);
+            }}
+          ></GameLottery>
+        ))}
+      </ul>
 
       {gameEnd && <span>ゲームが終了しました</span>}
       {showlist && (
@@ -246,3 +311,72 @@ export const Game = () => {
     </div>
   );
 };
+
+const amountImg = css`
+  margin: 9px 11px 4px;
+  width: 20px;
+  @media (max-height: 740px) {
+    width: 18px;
+  }
+`;
+const personImg = css`
+  margin: 8px 12px 6px;
+  width: 20px;
+  @media (max-height: 740px) {
+    width: 18px;
+  }
+`;
+const pplIcon = css`
+  position: absolute;
+  left: 50%;
+  transition: initial;
+  margin-bottom: 10px;
+`;
+const notShowPplIcon = css`
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: initial;
+`;
+const GameInputWrapHeight = css`
+  height: 50vh;
+  overflow: scroll;
+`;
+const mainBtnPosition = css`
+  position: fixed;
+  left: 50%;
+  bottom: 11vh;
+  transform: translate(-50%, -50%);
+`;
+const createInputMargin = css`
+  margin: 0 auto 2.5vh;
+`;
+
+const GameLotteryList = css`
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5vh 1vh;
+`;
+
+const LeftLoseList = css`
+  padding: 20px 22px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 0;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 2px 4px rgba(128, 128, 128, 0.25);
+  gap: 1.5vh;
+`;
+const showAmount = css`
+  display: flex;
+  height: 70px;
+  font-size: 24px;
+  vertical-align: middle;
+  margin-bottom: 36px;
+  align-items: center;
+`;
