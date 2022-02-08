@@ -1,4 +1,8 @@
 import { useState } from "react";
+import { css } from "@emotion/css";
+import { useRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
+
 import { InputWrapper } from "../organism/InputWrapper";
 import { Result } from "../organism/Result";
 import { MainBtn } from "../atoms/btn/Mainbtn";
@@ -6,19 +10,15 @@ import { CalcResult } from "../atoms/title/CalcResult";
 import { TotalState } from "../store/totalState";
 import { PplState } from "../store/pplState";
 import { CalculatedObjState } from "../store/calculatedObj";
-import { useRecoilState } from "recoil";
-import { useRecoilValue } from "recoil";
-import { css } from "@emotion/css";
 
 export const SplitMode = () => {
   const total = useRecoilValue(TotalState);
   const ppl = useRecoilValue(PplState);
 
   const [calculatedObj, setCalculatedObj] = useRecoilState(CalculatedObjState);
-
   const [aboutAmount, setAboutAmount] = useState(null);
 
-  const cal = () => {
+  const calculate = () => {
     if (total && ppl) {
       let person = total / (ppl * 100);
       person = Math.trunc(person); //小数点以下切り捨て
@@ -89,7 +89,7 @@ export const SplitMode = () => {
       <InputWrapper />
       <CalcResult>計算結果</CalcResult>
       <Result total={total} ppl={ppl} aboutAmount={aboutAmount} />
-      <MainBtn mainBtnPosition={mainBtnPosition} onClick={cal}>
+      <MainBtn mainBtnPosition={mainBtnPosition} onClick={calculate}>
         計算する
       </MainBtn>
     </>

@@ -3,7 +3,6 @@ import styles from "../style.module.css";
 import Modal from "react-modal";
 
 import { MainBtn } from "../atoms/btn/Mainbtn";
-// import { SplitModeInput } from "../atoms/input/SplitModeInput";
 import { GameInputWrao } from "../molecules/inputWrap/GameInputWrap";
 import { LeftLose } from "../molecules/leftLose/LeftLose";
 import { GameLottery } from "../organism/GameLottery";
@@ -16,7 +15,7 @@ import { css } from "@emotion/css";
 
 Modal.setAppElement("#root");
 
-export const Game = () => {
+export const GameMode = () => {
   const total = useRecoilValue(TotalState);
   const ppl = useRecoilValue(PplState);
   const [items, setItems] = useState([{ amount: "", people: "" }]); //人数分、金額を格納する配列
@@ -31,7 +30,6 @@ export const Game = () => {
   const [showInput, setShowInput] = useState(true); //追加するボタン切り替え
   const [showlist, setShowlist] = useState(false); //追加するボタン切り替え
   const [reset, setReset] = useState(false); //リセットモーダル
-  const [showQ, setShowQ] = useState(false); //?の表示
 
   //inputタグを生成
   const createInput = () => {
@@ -309,7 +307,7 @@ export const Game = () => {
         </>
       )}
 
-      {cantStart && <span>金額と人数を入力してください</span>}
+      {/* {cantStart && <span>金額と人数を入力してください</span>} */}
     </div>
   );
 };
@@ -343,6 +341,9 @@ const notShowPplIcon = css`
 const GameInputWrapHeight = css`
   height: 50vh;
   overflow: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 const mainBtnPosition = css`
   position: fixed;

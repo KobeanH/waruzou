@@ -1,24 +1,25 @@
 import { Route, Switch } from "react-router-dom";
-import { Game } from "../pages/Game";
 import { css } from "@emotion/css";
-import { SplitMode } from "../pages/splitMode";
 
-export const MainWrap = () => {
+import { SplitMode } from "../pages/splitMode";
+import { GameMode } from "../pages/GameMode";
+
+export const MainContent = () => {
   return (
-    <div className={mainWrap}>
+    <div className={mainContent}>
       <Switch>
         <Route exact path="/">
           <SplitMode />
         </Route>
         <Route exact path="/Game">
-          <Game></Game>
+          <GameMode></GameMode>
         </Route>
       </Switch>
     </div>
   );
 };
 
-const mainWrap = css`
+const mainContent = css`
   max-width: 400px;
   margin: 0 auto;
   padding: 0 20px;

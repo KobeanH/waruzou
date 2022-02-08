@@ -2,17 +2,17 @@ import { css } from "@emotion/css";
 
 export const ChangeModeText = (props) => {
   const { modeOn, children } = props;
-  return <span className={modeOn == true ? hidden : show}>{children}</span>;
+  return <span className={modeOn == true ? show : hidden}>{children}</span>;
 };
 const show = css`
-  overflow: hidden;
-  display: none;
+  display: inline-block;
   transition: all 1s;
-  position: absolute;
-  right: -90px;
+  overflow: hidden;
 `;
 const hidden = css`
-  display: inline-block;
-  overflow: hidden;
+  position: absolute;
+  right: -90px;
+  display: none;
   transition: all 1s;
+  overflow: hidden;
 `;

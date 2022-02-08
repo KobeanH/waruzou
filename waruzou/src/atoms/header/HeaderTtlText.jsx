@@ -10,7 +10,7 @@ export const HeaderTtlText = () => {
 
 const headerTtlText = css`
   color: #6f86d6;
-  font-size: 16px;
+  font-size: 1.6rem;
 `;
 const headerTtlTextEn = css`
   color: #ffc56f;
