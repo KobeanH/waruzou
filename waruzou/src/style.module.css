@@ -8,3 +8,6 @@
   margin-bottom: 36px;
   align-items: center;
 }
+.hide {
+  display: none;
+}

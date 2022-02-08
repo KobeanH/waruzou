@@ -31,6 +31,7 @@ export const Game = () => {
   const [showInput, setShowInput] = useState(true); //追加するボタン切り替え
   const [showlist, setShowlist] = useState(false); //追加するボタン切り替え
   const [reset, setReset] = useState(false); //リセットモーダル
+  const [showQ, setShowQ] = useState(false); //?の表示
 
   //inputタグを生成
   const createInput = () => {
@@ -280,7 +281,8 @@ export const Game = () => {
           <GameLottery
             key={index}
             modalOpen={() => modalOpen(amountList, index)}
-            stylesNone={none[index] === true ? "" : styles.none}
+            stylesNone={none[index] === true ? "" : styles.hide}
+            stylesShow={none[index] === true ? styles.hide : ""}
             amountList={amountList}
             modalIsOpen={modalIsOpen[index] === true ? true : false}
             closeModal={() => closeModal(amountList, index)}
@@ -371,6 +373,11 @@ const LeftLoseList = css`
   border-radius: 8px;
   box-shadow: 0px 2px 4px rgba(128, 128, 128, 0.25);
   gap: 1.5vh;
+  &::after {
+    content: "";
+    display: block;
+    width: 100px;
+  }
 `;
 const showAmount = css`
   display: flex;

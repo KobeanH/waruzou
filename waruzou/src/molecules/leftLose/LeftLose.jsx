@@ -15,8 +15,4 @@ const LeftLoseItem = css`
   width: 100px;
   font-size: 20px;
   text-align: center;
-  &:after {
-    content: "";
-    width: 100px;
-  }
 `;

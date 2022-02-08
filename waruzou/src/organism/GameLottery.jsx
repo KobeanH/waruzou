@@ -15,11 +15,13 @@ export const GameLottery = (props) => {
     None,
     orClick,
     closeModalBtn,
+    stylesShow,
   } = props;
 
   return (
     <li key={index} onClick={modalOpen} className={GameLotteryItem}>
-      ？<span className={stylesNone}>{amountList}</span>
+      <span className={stylesShow}>？</span>
+      <span className={stylesNone}>{amountList}</span>
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
