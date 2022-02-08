@@ -2,12 +2,12 @@ import { useState, useEffect } from "react";
 import styles from "../style.module.css";
 import Modal from "react-modal";
 
-import { css } from "@emotion/css";
 import { MainBtn } from "../atoms/btn/Mainbtn";
 // import { SplitModeInput } from "../atoms/input/SplitModeInput";
 import { GameInputWrao } from "../molecules/inputWrap/GameInputWrap";
 import { LeftLose } from "../molecules/leftLose/LeftLose";
 import { GameLottery } from "../organism/GameLottery";
+import { ResetGame } from "../organism/ResetGame";
 
 Modal.setAppElement("#root");
 
@@ -198,6 +198,7 @@ export const Game = () => {
             updatePeople={(e) => updatePeople(i, e.target.value)}
             maxLength2={"2"}
             deleteInput={() => deleteInput(i)}
+            showDelete={showDelete}
           ></GameInputWrao>
         ))}
 
@@ -209,91 +210,35 @@ export const Game = () => {
             itemPeople={item.people}
           ></LeftLose>
         ))}
-      {/*
-      <p>array1 = {JSON.stringify(amountLists)}</p> */}
 
       {showAdd && <MainBtn onClick={startGame}>ゲームを開始する</MainBtn>}
       {amountLists.map((amountList, index) => (
-        <li key={index} onClick={() => modalOpen(amountList, index)}>
-          ？
-          <span className={none[index] === true ? "" : styles.none}>
-            {amountList}
-          </span>
-          <Modal
-            isOpen={modalIsOpen[index] === true ? true : false}
-            onRequestClose={() => closeModal(amountList, index)}
-            overlayClassName={{
-              base: "overlay-base",
-              afterOpen: "overlay-after",
-              beforeClose: "overlay-before",
-            }}
-            className={{
-              base: "content-base",
-              afterOpen: "content-after",
-              beforeClose: "content-before",
-            }}
-            closeTimeoutMS={500}
-            portalClassName={portalClassName}
-          >
-            <span className={none[index] === true ? "" : styles.none}>
-              {amountList}
-            </span>
-            <button type="button" onClick={() => orclick(amountList, index)}>
-              Yes
-            </button>
-
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                closeModal(amountList, index);
-              }}
-            >
-              Close Modal
-            </button>
-          </Modal>
-        </li>
-        // <GameLottery
-        //   index={index}
-        //   modalOpen={() => modalOpen(amountList, index)}
-        //   stylesNone={none[index] === true ? "" : styles.none}
-        //   amountList={amountList}
-        //   modalIsOpen={modalIsOpen[index] === true ? true : false}
-        //   closeModal={() => closeModal(amountList, index)}
-        //   None={none[index] === true ? "" : styles.none}
-        //   orClick={() => orclick(amountList, index)}
-        //   closeModalBtn={(e) => {
-        //     e.stopPropagation();
-        //     closeModal(amountList, index);
-        //   }}
-        // ></GameLottery>
+        <GameLottery
+          key={index}
+          modalOpen={() => modalOpen(amountList, index)}
+          stylesNone={none[index] === true ? "" : styles.none}
+          amountList={amountList}
+          modalIsOpen={modalIsOpen[index] === true ? true : false}
+          closeModal={() => closeModal(amountList, index)}
+          None={none[index] === true ? "" : styles.none}
+          orClick={() => orclick(amountList, index)}
+          closeModalBtn={(e) => {
+            e.stopPropagation();
+            closeModal(amountList, index);
+          }}
+        ></GameLottery>
       ))}
 
       {gameEnd && <span>ゲームが終了しました</span>}
       {showlist && (
         <>
-          <button type="button" onClick={() => resetModal()}>
-            リセットする
-          </button>
-          <Modal
-            isOpen={reset}
-            onRequestClose={() => hideResetModal()}
-            overlayClassName={{
-              base: "overlay-base",
-              afterOpen: "overlay-after",
-              beforeClose: "overlay-before",
-            }}
-            className={{
-              base: "content-base",
-              afterOpen: "content-after",
-              beforeClose: "content-before",
-            }}
+          <ResetGame
+            resetModal={() => resetModal()}
+            reset={reset}
+            hideResetModal={() => hideResetModal()}
             closeTimeoutMS={500}
-            portalClassName={portalClassName2}
-          >
-            <span>本当にリセットしますか？</span>
-
-            <button onClick={() => gameReset()}>Yes</button>
-          </Modal>
+            gameReset={() => gameReset()}
+          />
         </>
       )}
 
@@ -301,125 +246,3 @@ export const Game = () => {
     </div>
   );
 };
-const portalClassName = css`
-  .overlay-base {
-    padding: 1rem;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0);
-    opacity: 0;
-    transition-property: background-color, opacity;
-    transition-duration: 500ms;
-    transition-timing-function: ease-in-out;
-    outline: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .overlay-after {
-    background-color: rgba(0, 0, 0, 0.8);
-    opacity: 1;
-  }
-
-  .overlay-before {
-    background-color: rgba(0, 0, 0, 0);
-    opacity: 0;
-  }
-
-  .content-base {
-    position: relative;
-    top: auto;
-    left: auto;
-    right: auto;
-    bottom: auto;
-    margin: 0 auto;
-    border: 0;
-    outline: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 0%;
-    width: 0%;
-    background-color: transparent;
-    transition-property: background-color, width, height;
-    transition-duration: 500ms;
-    transition-timing-function: ease-in-out;
-  }
-
-  .content-after {
-    width: 70%;
-    height: 40%;
-    background-color: rgba(250, 190, 190, 0.8);
-  }
-
-  .content-before {
-    width: 0%;
-    height: 0%;
-    background-color: transparent;
-  }
-`;
-const portalClassName2 = css`
-  .overlay-base {
-    padding: 1rem;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0);
-    opacity: 0;
-    transition-property: background-color, opacity;
-    transition-duration: 500ms;
-    transition-timing-function: ease-in-out;
-    outline: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .overlay-after {
-    background-color: rgba(0, 0, 0, 0.8);
-    opacity: 1;
-  }
-
-  .overlay-before {
-    background-color: rgba(0, 0, 0, 0);
-    opacity: 0;
-  }
-
-  .content-base {
-    position: relative;
-    top: auto;
-    left: auto;
-    right: auto;
-    bottom: auto;
-    margin: 0 auto;
-    border: 0;
-    outline: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 0%;
-    width: 0%;
-    background-color: transparent;
-    transition-property: background-color, width, height;
-    transition-duration: 500ms;
-    transition-timing-function: ease-in-out;
-  }
-
-  .content-after {
-    width: 70%;
-    height: 40%;
-    background-color: rgba(250, 190, 190, 0.8);
-  }
-
-  .content-before {
-    width: 0%;
-    height: 0%;
-    background-color: transparent;
-  }
-`;

@@ -2,6 +2,7 @@ import Modal from "react-modal";
 
 import { css } from "@emotion/css";
 import { SplitModeInput } from "../../atoms/input/SplitModeInput";
+import { DeleteBtn } from "../../atoms/btn/DeleteBtn";
 
 Modal.setAppElement("#root");
 
@@ -18,6 +19,7 @@ export const GameInputWrao = (props) => {
     updatePeople,
     maxLength2,
     deleteInput,
+    showDelete,
   } = props;
 
   return (
@@ -36,9 +38,7 @@ export const GameInputWrao = (props) => {
         type={tel}
         maxLength={maxLength2}
       />
-      <button className={DeleteBtn} type="button" onClick={deleteInput}>
-        削除
-      </button>
+      {showDelete && <DeleteBtn deleteInput={deleteInput}>削除</DeleteBtn>}
     </div>
   );
 };
@@ -48,7 +48,4 @@ const GameInputWrap = css`
   align-items: flex-end;
   gap: 6px;
   margin-bottom: 8px;
-`;
-const DeleteBtn = css`
-  white-space: nowrap;
 `;

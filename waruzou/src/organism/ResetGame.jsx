@@ -4,25 +4,18 @@ import { css } from "@emotion/css";
 
 Modal.setAppElement("#root");
 
-export const GameLottery = (props) => {
-  const {
-    index,
-    modalOpen,
-    stylesNone,
-    amountList,
-    modalIsOpen,
-    closeModal,
-    None,
-    orClick,
-    closeModalBtn,
-  } = props;
-
+export const ResetGame = (props) => {
+  const { resetModal, reset, hideResetModal, closeTimeoutMS, gameReset } =
+    props;
+  console.log(props);
   return (
-    <li key={index} onClick={modalOpen}>
-      ？<span className={stylesNone}>{amountList}</span>
+    <>
+      <button type="button" onClick={resetModal}>
+        リセットする
+      </button>
       <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
+        isOpen={reset}
+        onRequestClose={hideResetModal}
         overlayClassName={{
           base: "overlay-base",
           afterOpen: "overlay-after",
@@ -33,20 +26,17 @@ export const GameLottery = (props) => {
           afterOpen: "content-after",
           beforeClose: "content-before",
         }}
-        closeTimeoutMS={500}
-        portalClassName={portalClassName}
+        closeTimeoutMS={closeTimeoutMS}
+        portalClassName={portalClassName22}
       >
-        <span className={None}>{amountList}</span>
-        <button type="button" onClick={orClick}>
-          Yes
-        </button>
+        <span>本当にリセットしますか？</span>
 
-        <button onClick={closeModalBtn}>Close Modal</button>
+        <button onClick={gameReset}>Yes</button>
       </Modal>
-    </li>
+    </>
   );
 };
-const portalClassName = css`
+const portalClassName22 = css`
   .overlay-base {
     padding: 1rem;
     position: fixed;
