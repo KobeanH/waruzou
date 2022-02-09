@@ -8,7 +8,7 @@ import { LeftLose } from "../molecules/leftLose/LeftLose";
 import { GameLottery } from "../organism/GameLottery";
 import { ResetGame } from "../organism/ResetGame";
 import { Icon } from "../atoms/icon/icon";
-import { TotalState } from "../store/totalState";
+import { AmountState } from "../store/amountState";
 import { PplState } from "../store/pplState";
 import { useRecoilValue } from "recoil";
 import { css } from "@emotion/css";
@@ -16,9 +16,9 @@ import { css } from "@emotion/css";
 Modal.setAppElement("#root");
 
 export const GameMode = () => {
-  const total = useRecoilValue(TotalState);
+  const total = useRecoilValue(AmountState);
   const ppl = useRecoilValue(PplState);
-  const [items, setItems] = useState([{ amount: "", people: "" }]); //人数分、金額を格納する配列
+  const [items, setItems] = useState([{ objAmount: "", people: "" }]); //人数分、金額を格納する配列
   const [amountLists, setAmountLists] = useState([]); //
   const [none, setNone] = useState([]); //クラスを付与するstate
   const [count, setCount] = useState(null); //ゲーム終了するカウンター
@@ -38,14 +38,14 @@ export const GameMode = () => {
     //全てのinputに金額と人数に数字が入ってなければアラートを出す
     let numInput = 0;
     for (let i = 0; i < newItems.length; i++) {
-      if (!(newItems[i].amount && newItems[i].people)) {
+      if (!(newItems[i].objAmount && newItems[i].people)) {
         numInput += 1;
       }
     }
     if (numInput > 0) {
       alert("金額と人数を入力してください");
     } else {
-      setItems([...items, { amount: "", people: "" }]);
+      setItems([...items, { objAmount: "", people: "" }]);
     }
   };
 
@@ -70,7 +70,7 @@ export const GameMode = () => {
   const updateAmount = (index, value) => {
     // const val = val.target.value.replace(/\D/g, "");
     const newItems = [...items];
-    newItems[index] = { ...items[index], amount: value };
+    newItems[index] = { ...items[index], objAmount: value };
     setItems(newItems);
   };
 
@@ -85,10 +85,10 @@ export const GameMode = () => {
   //入力された金額を人数分itemsへ格納
   const array1 = [];
   items.forEach((item) => {
-    const amount = parseInt(item.amount) || 0;
+    const objAmount = parseInt(item.objAmount) || 0;
     const people = parseInt(item.people) || 0;
     for (let i = 0; i < people; i++) {
-      array1.push(amount);
+      array1.push(objAmount);
     }
   });
 
@@ -97,7 +97,7 @@ export const GameMode = () => {
     const newItems = [...items];
     let www = 0;
     for (let i = 0; i < newItems.length; i++) {
-      if (!(newItems[i].amount && newItems[i].people)) {
+      if (!(newItems[i].objAmount && newItems[i].people)) {
         www += 1;
       }
     }
@@ -172,7 +172,7 @@ export const GameMode = () => {
 
   //ゲームをリセットする
   const gameReset = () => {
-    setItems([{ amount: "", people: "" }]);
+    setItems([{ objAmount: "", people: "" }]);
     setAmountLists([]);
     setGameEnd(false);
     setShowAdd(true);
@@ -240,8 +240,8 @@ export const GameMode = () => {
             {items.map((item, i) => (
               <GameInputWrao
                 key={i}
-                amount={"金額"}
-                itemAmount={item.amount}
+                objAmount={"金額"}
+                itemAmount={item.objAmount}
                 updateAmount={(e) => updateAmount(i, e.target.value)}
                 tel={"tel"}
                 maxLength8={"8"}
@@ -262,7 +262,7 @@ export const GameMode = () => {
           {items.map((item, i) => (
             <LeftLose
               key={i}
-              itemAmount={item.amount}
+              itemAmount={item.objAmount}
               itemPeople={item.people}
             ></LeftLose>
           ))}

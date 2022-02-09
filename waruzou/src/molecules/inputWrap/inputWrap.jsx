@@ -1,11 +1,11 @@
 import { css } from "@emotion/css";
 import { useRecoilState } from "recoil";
-import { TotalState } from "../../store/totalState";
+import { AmountState } from "../../store/amountState";
 import { SplitModeInput } from "../../atoms/input/SplitModeInput";
 import { Icon } from "../../atoms/icon/icon";
 
 export const InputWrap = () => {
-  const [total, setTotal] = useRecoilState(TotalState);
+  const [total, setTotal] = useRecoilState(AmountState);
 
   //合計金額入力欄
   const getValueFromTotal = (e) => {

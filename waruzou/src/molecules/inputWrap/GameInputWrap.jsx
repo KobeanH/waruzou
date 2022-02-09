@@ -8,7 +8,7 @@ Modal.setAppElement("#root");
 
 export const GameInputWrao = (props) => {
   const {
-    amount,
+    objAmount,
     itemAmount,
     updateAmount,
     tel,
@@ -25,7 +25,7 @@ export const GameInputWrao = (props) => {
   return (
     <div className={GameInputWrap} key={i}>
       <SplitModeInput
-        placeholder={amount}
+        placeholder={objAmount}
         value={itemAmount}
         onChange={updateAmount}
         type={tel}
