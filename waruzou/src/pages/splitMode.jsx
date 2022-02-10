@@ -4,100 +4,89 @@ import { useRecoilState } from "recoil";
 import { useRecoilValue } from "recoil";
 
 import { InputWrapper } from "../organism/InputWrapper";
+import { CalcResult } from "../atoms/title/CalcResult";
 import { Result } from "../organism/Result";
 import { MainBtn } from "../atoms/btn/Mainbtn";
-import { CalcResult } from "../atoms/title/CalcResult";
 import { AmountState } from "../store/amountState";
-import { PplState } from "../store/pplState";
+import { numPplState } from "../store/numPplState";
 import { CalculatedObjState } from "../store/calculatedObj";
 
 export const SplitMode = () => {
   const amount = useRecoilValue(AmountState);
-  const ppl = useRecoilValue(PplState);
-
+  const numPpl = useRecoilValue(numPplState);
   const [calculatedObj, setCalculatedObj] = useRecoilState(CalculatedObjState);
   const [aboutAmount, setAboutAmount] = useState(null);
 
+  let perPerson = amount / (numPpl * 100); //百以下の位以外を計算
+  perPerson = Math.trunc(perPerson); //小数点以下切り捨て
+
+  let remainder = amount % (numPpl * 100); //割り切れない百以下の値を取得
+  let amountArray = [];
+
+  let remainderNumHundred = Math.floor(remainder / 100); //百の桁取得(割り切れなかった百の順番に足すため)
+  let lastTwoDigits = remainder % 100; //下二桁取得
+
   const calculate = () => {
-    if (amount && ppl) {
-      let person = amount / (ppl * 100);
-      person = Math.trunc(person); //小数点以下切り捨て
-
-      let remainder = amount % (ppl * 100); //400 % 100 = あまり100
-      let amountArray = [];
-      //下二桁が"00"ではない時の処理
-      if (remainder) {
-        let hundred = Math.floor(remainder / 100); //百の桁取得(割り切れなかった百の順番に足すため)
-        let twoDigits = remainder % 100; //下二桁取得
-
-        //百の値をperPersonに格納
-        for (let i = 0; i < ppl; i++) {
-          amountArray.push(person);
-        }
-
-        //割り切れなかった余った百の値を順に足す処理
-        for (let i = 0; i < hundred; i++) {
-          amountArray[i] += 1;
-        }
-
-        //下二桁をもとに戻す
-        for (let i = 0; i < ppl; i++) {
-          amountArray[i] *= 100;
-        }
-
-        //下二桁を数字の低いものに足す処理
-        let lowNumber = amountArray.reduce((a, b) => (a < b ? a : b)); //perPersonにある一番低い値取得
-        let lowNumberFirst = amountArray.indexOf(lowNumber); //一番低い値の先頭を取得
-        amountArray[lowNumberFirst] += twoDigits;
-
-        //重複する金額を数え、CalculatedObjに格納
-        let count = {};
-        for (let i = 0; i < amountArray.length; i++) {
-          let elm = amountArray[i];
-          count[elm] = (count[elm] || 0) + 1;
-        }
-        setCalculatedObj(count);
-      } else {
-        //百の値をperPersonに格納
-        for (let i = 0; i < ppl; i++) {
-          amountArray.push(person);
-        }
-        //下二桁をもとに戻す
-        for (let i = 0; i < ppl; i++) {
-          amountArray[i] *= 100;
-        }
-        //重複する金額を数え、CalculatedObjに格納
-        let count = {};
-        for (let i = 0; i < amountArray.length; i++) {
-          let elm = amountArray[i];
-          count[elm] = (count[elm] || 0) + 1;
-        }
-        setCalculatedObj(count);
+    //金額と人数が入力されている場合の処理
+    if (amount && numPpl) {
+      //割り切れる百位上の値をamountArrayに格納
+      for (let i = 0; i < numPpl; i++) {
+        amountArray.push(perPerson);
       }
 
+      //割り切れなかった余りの百の値を順に足す処理
+      for (let i = 0; i < remainderNumHundred; i++) {
+        amountArray[i] += 1;
+      }
+
+      //下二桁をもとに戻す
+      for (let i = 0; i < numPpl; i++) {
+        amountArray[i] *= 100;
+      }
+
+      //下二桁を一番値の低いものに足す処理
+      let lowestNumber = amountArray.reduce((a, b) => (a < b ? a : b)); //perPersonにある一番低い値取得
+      let lowestNumberFirst = amountArray.indexOf(lowestNumber); //一番低い値の先頭のindexを取得
+      amountArray[lowestNumberFirst] += lastTwoDigits; //一番低い値の先頭に余りの下二桁を足す
+
+      //三桁単位でカンマ区切り
+      for (let i = 0; i < numPpl; i++) {
+        amountArray[i] = amountArray[i].toLocaleString();
+      }
+
+      //重複する金額を数え、CalculatedObjに格納
+      let countObj = {};
+      for (let i = 0; i < amountArray.length; i++) {
+        let index = amountArray[i];
+        countObj[index] = (countObj[index] || 0) + 1;
+      }
+      setCalculatedObj(countObj);
+
       //一人あたりの金額表示
-      let aboutAmount = amount / ppl;
-      aboutAmount = Math.trunc(aboutAmount);
+      let aboutAmount = amount / numPpl;
+      aboutAmount = Math.trunc(aboutAmount); //小数点以下切り捨て
+      aboutAmount = aboutAmount.toLocaleString(); //三桁単位でカンマ区切り
       setAboutAmount(aboutAmount);
     } else {
       alert("金額と人数を入力してください");
     }
   };
 
+  const mainBtnPosition = css`
+    position: fixed;
+    left: 50%;
+    bottom: 11vh;
+    transform: translate(-50%, -50%);
+  `;
+
   return (
     <>
       <InputWrapper />
       <CalcResult>計算結果</CalcResult>
-      <Result amount={amount} ppl={ppl} aboutAmount={aboutAmount} />
+      <Result aboutAmount={aboutAmount} />
       <MainBtn mainBtnPosition={mainBtnPosition} onClick={calculate}>
         計算する
       </MainBtn>
     </>
   );
 };
-const mainBtnPosition = css`
-  position: fixed;
-  left: 50%;
-  bottom: 11vh;
-  transform: translate(-50%, -50%);
-`;

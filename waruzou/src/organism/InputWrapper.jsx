@@ -1,11 +1,12 @@
 import { css } from "@emotion/css";
-import { InputWrap } from "../molecules/inputWrap/inputWrap";
+
+import { AmountInputWrap } from "../molecules/inputWrap/AmountInputWrap";
 import { PersonInputWrap } from "../molecules/inputWrap/PersonInputWrap";
 
 export const InputWrapper = () => {
   return (
     <div className={inputWrapper}>
-      <InputWrap></InputWrap>
+      <AmountInputWrap></AmountInputWrap>
       <PersonInputWrap></PersonInputWrap>
     </div>
   );

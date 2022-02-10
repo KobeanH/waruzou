@@ -1,30 +1,31 @@
 import { css } from "@emotion/css";
 import { useRecoilState } from "recoil";
 
-import { numPplState } from "../../store/numPplState";
+import { AmountState } from "../../store/amountState";
 import { Icon } from "../../atoms/icon/icon";
-import { PersonIcon } from "../../atoms/icon/PersonIcon";
+import { AmountIcon } from "../../atoms/icon/AmountIcon";
 import { BaseInput } from "../../atoms/input/BaseModeInput";
 
-export const PersonInputWrap = () => {
-  const [ppl, setPpl] = useRecoilState(numPplState); //人数
+export const AmountInputWrap = () => {
+  const [amount, setAmount] = useRecoilState(AmountState);
 
-  const getValueFromPpl = (e) => {
+  //合計金額入力欄
+  const getValueFromAmount = (e) => {
     const value = e.target.value.replace(/\D/g, ""); //数字以外は入力できないように
-    setPpl(value);
+    setAmount(value);
   };
 
   return (
     <div className={inputWrap}>
       <Icon>
-        <PersonIcon />
+        <AmountIcon />
       </Icon>
       <BaseInput
-        placeholder={"人数"}
+        placeholder={"金額"}
         type={"tel"}
-        onChange={getValueFromPpl}
-        maxLength={"3"}
-        value={ppl}
+        onChange={getValueFromAmount}
+        maxLength={"8"}
+        value={amount}
       ></BaseInput>
     </div>
   );

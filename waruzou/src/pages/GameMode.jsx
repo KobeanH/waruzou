@@ -9,7 +9,7 @@ import { GameLottery } from "../organism/GameLottery";
 import { ResetGame } from "../organism/ResetGame";
 import { Icon } from "../atoms/icon/icon";
 import { AmountState } from "../store/amountState";
-import { PplState } from "../store/pplState";
+import { numPplState } from "../store/numPplState";
 import { useRecoilValue } from "recoil";
 import { css } from "@emotion/css";
 
@@ -17,7 +17,7 @@ Modal.setAppElement("#root");
 
 export const GameMode = () => {
   const total = useRecoilValue(AmountState);
-  const ppl = useRecoilValue(PplState);
+  const ppl = useRecoilValue(numPplState);
   const [items, setItems] = useState([{ objAmount: "", people: "" }]); //人数分、金額を格納する配列
   const [amountLists, setAmountLists] = useState([]); //
   const [none, setNone] = useState([]); //クラスを付与するstate

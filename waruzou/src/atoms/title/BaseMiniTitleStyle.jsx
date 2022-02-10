@@ -9,7 +9,6 @@ export const BaseMiniTitleStyle = css`
   background-color: #fff;
   vertical-align: middle;
   box-shadow: 0px 2px 4px rgba(128, 128, 128, 0.25);
-
   font-family: "Noto Sans JP", sans-serif;
   font-weight: bold;
   font-size: 12px;

@@ -3,10 +3,6 @@ import { css } from "@emotion/css";
 export const MainBtn = (props) => {
   const { children, onClick, mainBtnPosition, createInputMargin } = props;
   const mainBtn = css`
-    // position: fixed;
-    // left: 50%;
-    // bottom: 11vh;
-    // transform: translate(-50%, -50%);
     display: block;
     max-width: 200px;
     width: 100%;

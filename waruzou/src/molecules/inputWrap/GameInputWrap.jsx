@@ -1,7 +1,7 @@
 import Modal from "react-modal";
 
 import { css } from "@emotion/css";
-import { SplitModeInput } from "../../atoms/input/SplitModeInput";
+import { BaseInput } from "../../atoms/input/BaseModeInput";
 import { DeleteBtn } from "../../atoms/btn/DeleteBtn";
 
 Modal.setAppElement("#root");
@@ -24,14 +24,14 @@ export const GameInputWrao = (props) => {
 
   return (
     <div className={GameInputWrap} key={i}>
-      <SplitModeInput
+      <BaseInput
         placeholder={objAmount}
         value={itemAmount}
         onChange={updateAmount}
         type={tel}
         maxLength={maxLength8}
       />
-      <SplitModeInput
+      <BaseInput
         placeholder={people}
         value={itemPeople}
         onChange={updatePeople}
