@@ -1,7 +1,7 @@
 import { css } from "@emotion/css";
 
 export const Icon = (props) => {
-  const { ppl, children, pplIcon, notShowPplIcon } = props;
+  const { ppl, children, pplIcon, notShowPplIcon, fromGameMode } = props;
 
   const amountSpan = css`
     display: inline-block;
@@ -10,6 +10,7 @@ export const Icon = (props) => {
     box-shadow: 0px 2px 4px rgba(128, 128, 128, 0.25);
     transition: all 1s;
     ${pplIcon}
+    ${fromGameMode}
   `;
   const amountSpanOn = css`
     display: inline-block;

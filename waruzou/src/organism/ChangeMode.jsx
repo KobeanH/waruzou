@@ -15,25 +15,38 @@ export const ChangeMode = () => {
     newModeOn[index] = true;
     setModeOn(newModeOn);
   };
-
+  const aaa = css`
+    position: fixed;
+    bottom: 4vh;
+    left: 0;
+    right: 0;
+    max-width: 375px;
+    margin: auto;
+    padding: 0 20px;
+    @media (max-height: 740px) {
+      bottom: 2vh;
+    }
+  `;
   return (
-    <div className={modeWrap}>
-      <Link
-        onClick={() => changeMode(0)}
-        className={modeOn[0] == true ? modeOnn : modeOff}
-        to="/"
-      >
-        <SplitIcon />
-        <ChangeModeText modeOn={modeOn[0]}>割り勘モード</ChangeModeText>
-      </Link>
-      <Link
-        onClick={() => changeMode(1)}
-        className={modeOn[1] == true ? modeOnn : modeOff}
-        to="/game"
-      >
-        <GameIcon />
-        <ChangeModeText modeOn={modeOn[1]}>割り勘モード</ChangeModeText>
-      </Link>
+    <div className={aaa}>
+      <div className={modeWrap}>
+        <Link
+          onClick={() => changeMode(0)}
+          className={modeOn[0] == true ? modeOnn : modeOff}
+          to="/"
+        >
+          <SplitIcon />
+          <ChangeModeText modeOn={modeOn[0]}>割り勘モード</ChangeModeText>
+        </Link>
+        <Link
+          onClick={() => changeMode(1)}
+          className={modeOn[1] == true ? modeOnn : modeOff}
+          to="/game"
+        >
+          <GameIcon />
+          <ChangeModeText modeOn={modeOn[1]}>割り勘モード</ChangeModeText>
+        </Link>
+      </div>
     </div>
   );
 };
@@ -42,12 +55,8 @@ const modeWrap = css`
   display: flex;
   justify-content: center;
   gap: 20px;
-  position: fixed;
-  bottom: 2vh;
-  left: 50%;
-  transform: translateX(-50%);
   width: 100%;
-  max-width: 400px;
+  max-width: 375px;
   padding: 10px 14px;
   box-sizing: border-box;
   background-color: #fff;

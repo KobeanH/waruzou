@@ -8,6 +8,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-weight: bold;
+  color: #808080;
   background-color: #f8f9ff;
   height: 100vh;
 }

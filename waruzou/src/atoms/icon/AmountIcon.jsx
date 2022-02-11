@@ -1,6 +1,15 @@
 import { css } from "@emotion/css";
 
-export const AmountIcon = () => {
+export const AmountIcon = (props) => {
+  const { fromGameMode } = props;
+  const amountIcon = css`
+    margin: 12px 10px 6px;
+    @media (max-height: 740px) {
+      width: 18px;
+    }
+    ${fromGameMode}
+  `;
+
   return (
     <svg
       id="Layer_1"
@@ -18,10 +27,3 @@ export const AmountIcon = () => {
     </svg>
   );
 };
-
-const amountIcon = css`
-  margin: 12px 10px 6px;
-  @media (max-height: 740px) {
-    width: 18px;
-  }
-`;

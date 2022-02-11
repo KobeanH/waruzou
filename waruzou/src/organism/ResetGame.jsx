@@ -1,24 +1,28 @@
 import Modal from "react-modal";
-
 import { css } from "@emotion/css";
+
 import { MainBtn } from "../atoms/btn/Mainbtn";
+import { BaseModalBtn } from "../atoms/btn/BaseModalBtn";
+import { ModalBtnWrap } from "../molecules/ModalBtnWrap";
 
 Modal.setAppElement("#root");
 
 export const ResetGame = (props) => {
-  const { resetModal, reset, hideResetModal, closeTimeoutMS, gameReset } =
-    props;
+  const {
+    resetModal,
+    showResetModal,
+    hideResetModal,
+    closeTimeoutMS,
+    resetGame,
+  } = props;
   console.log(props);
   return (
     <>
-      {/* <button type="button" onClick={resetModal}>
-        リセットする
-      </button> */}
       <MainBtn mainBtnPosition={mainBtnPosition} onClick={resetModal}>
         リセットする
       </MainBtn>
       <Modal
-        isOpen={reset}
+        isOpen={showResetModal}
         onRequestClose={hideResetModal}
         overlayClassName={{
           base: "overlay-base",
@@ -33,9 +37,14 @@ export const ResetGame = (props) => {
         closeTimeoutMS={closeTimeoutMS}
         portalClassName={portalClassName22}
       >
-        <span className={block}>本当にリセットしますか？</span>
-
-        <button onClick={gameReset}>Yes</button>
+        {/* <span className={block}>本当にリセットしますか？</span>
+        <BaseModalBtn onClick={resetGame}>Yes</BaseModalBtn> */}
+        <span className={showAmount}>本当にリセットしますか？</span>
+        <div className={modalBtnWrap}>
+          <BaseModalBtn onClick={resetGame}>はい</BaseModalBtn>
+          <BaseModalBtn onClick={hideResetModal}>いいえ</BaseModalBtn>
+        </div>
+        {/* <ModalBtnWrap></ModalBtnWrap> */}
       </Modal>
     </>
   );
@@ -87,6 +96,7 @@ const portalClassName22 = css`
     transition-property: background-color, width, height;
     transition-duration: 500ms;
     transition-timing-function: ease-in-out;
+    flex-direction: column;
   }
 
   .content-after {
@@ -103,13 +113,32 @@ const portalClassName22 = css`
     background-color: transparent;
   }
 `;
+const modalBtnWrap = css`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+`;
+
 const mainBtnPosition = css`
   position: fixed;
   left: 50%;
-  bottom: 11vh;
+  bottom: 12vh;
   transform: translate(-50%, -50%);
+  @media (max-height: 740px) {
+    bottom: 2vh;
+  }
 `;
 
 const block = css`
+  white-space: nowrap;
+`;
+
+const showAmount = css`
+  display: flex;
+  height: 70px;
+  font-size: 2rem;
+  align-items: center;
+  margin-bottom: 36px;
   white-space: nowrap;
 `;

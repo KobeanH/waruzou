@@ -1,6 +1,16 @@
 import { css } from "@emotion/css";
 
-export const PersonIcon = () => {
+export const PersonIcon = (props) => {
+  const { fromGameMode } = props;
+
+  const personIcon = css`
+    margin: 10px 10px 8px;
+    @media (max-height: 740px) {
+      width: 18px;
+    }
+    ${fromGameMode}
+  `;
+
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -19,10 +29,3 @@ export const PersonIcon = () => {
     </svg>
   );
 };
-
-const personIcon = css`
-  margin: 10px 10px 8px;
-  @media (max-height: 740px) {
-    width: 18px;
-  }
-`;
