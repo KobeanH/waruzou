@@ -11,7 +11,7 @@ export const BaseModalBtn = (props) => {
 
 const baseModalBtn = css`
   border: none;
-  padding: 20px 16px;
+  padding: 16px;
   border-radius: 6px;
   background: #6f86d6;
   color: #fff;

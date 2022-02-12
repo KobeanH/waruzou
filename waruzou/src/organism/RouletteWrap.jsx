@@ -6,16 +6,15 @@ import { AboutPerPerson } from "../atoms/text/AboutAmount";
 import { ResultSuggest } from "../atoms/title/ResultSuggest";
 import { aboutAmountState } from "../store/aboutAmountState";
 
-export const Result = () => {
+export const RouletteWrap = () => {
   const aboutAmount = useRecoilValue(aboutAmountState);
 
   return (
     <div className={resultWrap}>
       <AboutPerPerson>
-        一人あたり・・・
+        今日のおごりは・・・
         {aboutAmount && <span>{aboutAmount}円</span>}
       </AboutPerPerson>
-      <ResultSuggest>Suggest</ResultSuggest>
       <ResultList></ResultList>
     </div>
   );

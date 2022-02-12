@@ -3,7 +3,6 @@ import { css } from "@emotion/css";
 
 import { MainBtn } from "../atoms/btn/Mainbtn";
 import { BaseModalBtn } from "../atoms/btn/BaseModalBtn";
-import { ModalBtnWrap } from "../molecules/ModalBtnWrap";
 
 Modal.setAppElement("#root");
 
@@ -136,8 +135,8 @@ const block = css`
 
 const showAmount = css`
   display: flex;
-  height: 70px;
-  font-size: 2rem;
+  height: 40px;
+  font-size: 1.6rem;
   align-items: center;
   margin-bottom: 36px;
   white-space: nowrap;

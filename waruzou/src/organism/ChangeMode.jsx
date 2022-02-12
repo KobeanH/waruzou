@@ -46,6 +46,14 @@ export const ChangeMode = () => {
           <GameIcon />
           <ChangeModeText modeOn={modeOn[1]}>割り勘モード</ChangeModeText>
         </Link>
+        <Link
+          onClick={() => changeMode(2)}
+          className={modeOn[2] == true ? modeOnn : modeOff}
+          to="/Roulette"
+        >
+          <GameIcon />
+          <ChangeModeText modeOn={modeOn[2]}>ルーレットモード</ChangeModeText>
+        </Link>
       </div>
     </div>
   );

@@ -3,11 +3,11 @@ import { css } from "@emotion/css";
 export const LeftLose = (props) => {
   const { lottoArray } = props;
   return (
-    <div className={aaa}>
+    <div className={LeftLoseWrap}>
       <ul className={LeftLoseList}>
         {lottoArray.map((lotto, i) => (
           <li className={leftLoseItem} key={i}>
-            <span>{Number(lotto.objAmount).toLocaleString()}</span>•••
+            <span>¥{Number(lotto.objAmount).toLocaleString()}</span>•••
             <span>{lotto.objNumPpl}</span>
           </li>
         ))}
@@ -15,7 +15,7 @@ export const LeftLose = (props) => {
     </div>
   );
 };
-const aaa = css`
+const LeftLoseWrap = css`
   padding: 20px 22px;
   margin: 0 0 28px;
   background: #fff;
@@ -35,18 +35,10 @@ const LeftLoseList = css`
   flex-wrap: wrap;
   justify-content: space-between;
   margin: 0 0;
-  // background: #fff;
-  // border-radius: 8px;
-  // box-shadow: 0px 2px 4px rgba(128, 128, 128, 0.25);
   gap: 1.5vh;
   height: 10vh;
   box-sizing: border-box;
   overflow: scroll;
-  // &::after {
-  //   content: "";
-  //   display: block;
-  //   width: 100px;
-  // }
   @media (max-height: 740px) {
     height: 8vh;
   }

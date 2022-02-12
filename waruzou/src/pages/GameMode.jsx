@@ -134,6 +134,7 @@ export const GameMode = () => {
     setGameEnd(false);
     setShow(true);
     setShowLeftLose(false);
+    setCount(null);
   };
 
   const resetModal = () => {

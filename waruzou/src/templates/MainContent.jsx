@@ -6,6 +6,7 @@ import { GameMode } from "../pages/GameMode";
 import { ChangeMode } from "../organism/ChangeMode";
 import { useRecoilValue } from "recoil";
 import { showState } from "../store/showState";
+import { RouletteMode } from "../pages/RouletteMode";
 
 export const MainContent = () => {
   const show = useRecoilValue(showState);
@@ -16,7 +17,10 @@ export const MainContent = () => {
           <SplitMode />
         </Route>
         <Route exact path="/Game">
-          <GameMode></GameMode>
+          <GameMode />
+        </Route>
+        <Route exact path="/Roulette">
+          <RouletteMode />
         </Route>
       </Switch>
       {show && <ChangeMode />}

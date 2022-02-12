@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { css } from "@emotion/css";
 import { useRecoilState } from "recoil";
 import { useRecoilValue } from "recoil";
@@ -10,12 +9,13 @@ import { MainBtn } from "../atoms/btn/Mainbtn";
 import { AmountState } from "../store/amountState";
 import { numPplState } from "../store/numPplState";
 import { CalculatedObjState } from "../store/calculatedObj";
+import { aboutAmountState } from "../store/aboutAmountState";
 
 export const SplitMode = () => {
   const amount = useRecoilValue(AmountState);
   const numPpl = useRecoilValue(numPplState);
   const [calculatedObj, setCalculatedObj] = useRecoilState(CalculatedObjState);
-  const [aboutAmount, setAboutAmount] = useState(null);
+  const [aboutAmount, setAboutAmount] = useRecoilState(aboutAmountState);
 
   let perPerson = amount / (numPpl * 100); //百以下の位以外を計算
   perPerson = Math.trunc(perPerson); //小数点以下切り捨て

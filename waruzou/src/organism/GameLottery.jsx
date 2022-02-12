@@ -1,5 +1,5 @@
 import Modal from "react-modal";
-import { css } from "@emotion/css";
+import { css, keyframes } from "@emotion/css";
 import { useRecoilState } from "recoil";
 
 import { toggleLottoArrayState } from "../store/toggleLottoArrayState";
@@ -46,20 +46,27 @@ export const GameLottery = (props) => {
       )
     );
   };
-
+  const handleLink = () => {
+    if (openModal) return;
+  };
+  const clickHandler = (index) => (openModal(index) ? handleLink : null);
   return (
     <ul className={GameLotteryList}>
       {amountLists.map((amountList, index) => (
         <li
           key={index}
-          onClick={() => openModal(index)}
-          className={GameLotteryItem}
+          onClick={() => clickHandler(index)}
+          className={
+            toggleLottoArray[index] === true
+              ? opendGameLotteryItem
+              : GameLotteryItem
+          }
         >
           <span className={toggleLottoArray[index] === true ? hide : show}>
             ？
           </span>
           <span className={toggleLottoArray[index] === true ? show : hide}>
-            {amountList.toLocaleString()}
+            ¥{amountList.toLocaleString()}
           </span>
           <Modal
             isOpen={modalIsOpen[index] === true ? true : false}
@@ -82,7 +89,11 @@ export const GameLottery = (props) => {
                 toggleLottoArray[index] === true ? showAmount : invisible
               }
             >
-              {amountList.toLocaleString()}
+              <span
+                className={toggleLottoArray[index] === true ? fade : invisible}
+              >
+                ¥{amountList.toLocaleString()}
+              </span>
             </span>
             <div className={modalBtnWrap}>
               <BaseModalBtn onClick={() => openAmount(amountList, index)}>
@@ -167,22 +178,71 @@ const portalClassName = css`
     background-color: transparent;
   }
 `;
+const ItemFade = keyframes`
+0%{
+  opacity:0;
+  transform: translateY(20px);
+}
+100%{
+  opacity:1;
+  transform: translateY(0);
+}
+`;
+
+const makeNthChild = (i) => {
+  return `
+        &:nth-child(${i}) {
+          animation: ${ItemFade} 1s ;
+          animation-delay: ${i * 0.1}s;
+          animation-fill-mode: forwards;
+         }
+      `;
+};
+const getNthChild = () => {
+  let nthChild = "";
+  for (let i = 1; i <= 16; i += 1) {
+    nthChild += makeNthChild(i);
+  }
+  return nthChild;
+};
 const GameLotteryItem = css`
-  list-style: none;
   display: flex;
-  list-style: none;
-  width: 23%;
-  // height: 9vh;
-  background-color: #fff;
   justify-content: center;
   align-items: center;
+  width: 23%;
+  padding: 6px;
+  box-sizing: border-box;
+  background-color: #fff;
   border-radius: 6px;
   box-shadow: 0px 2px 4px rgba(128, 128, 128, 0.25);
+  list-style: none;
   &::before {
     content: "";
     display: block;
     padding-top: 100%;
   }
+  opacity: 0;
+  ${getNthChild()}
+`;
+
+const opendGameLotteryItem = css`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 23%;
+  padding: 6px;
+  box-sizing: border-box;
+  background-color: #fff;
+  border-radius: 6px;
+  box-shadow: 0px 2px 4px rgba(128, 128, 128, 0.25);
+  list-style: none;
+  &::before {
+    content: "";
+    display: block;
+    padding-top: 100%;
+  }
+  pointer-events: none;
+  opacity: 0.7;
 `;
 const modalBtnWrap = css`
   width: 100%;
@@ -195,30 +255,74 @@ const GameLotteryList = css`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  align-lottoarray: center;
+  align-items: center;
   gap: 1.5vh 0;
   padding: 0;
 `;
-
+const resultItemAnime = keyframes`
+0%{
+  left:0;
+  right:100%;
+  background-color:#6f86d6;
+}
+50%{
+  left:0;
+  right:0;
+  background-color:#6f86d6;
+}
+100%{
+  left:100%;
+  right:0;
+  background-color:#6f86d6;
+}
+`;
+const resultItemFadeIn = keyframes`
+0%{
+  opacity:0;
+}
+50%{
+  opacity:0;
+}
+100%{
+  opacity:1;
+}
+`;
 const showAmount = css`
+  position: relative;
   display: flex;
-  height: 70px;
-  font-size: 24px;
-  vertical-align: middle;
   margin-bottom: 36px;
   align-items: center;
+  justify-content: center;
+  height: 40px;
+  width: 150px;
+  font-size: 24px;
+  &:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 2;
+    animation: ${resultItemAnime} 1s;
+  }
+`;
+const fade = css`
+  animation: ${resultItemFadeIn} 1s;
 `;
 const show = css`
-  font-size: 1.4rem;
+  font-size: 1.3rem;
+  word-break: break-all;
 `;
 const hide = css`
   display: none;
 `;
+
 const invisible = css`
   visibility: hidden;
   display: flex;
   align-items: center;
-  height: 70px;
+  height: 40px;
   vertical-align: middle;
   margin-bottom: 36px;
   font-size: 24px;
