@@ -29,7 +29,10 @@ export const MainContent = () => {
 };
 
 const mainContent = css`
+  position: relative;
+  height: 60vh;
   max-width: 375px;
   margin: 0 auto;
   padding: 0 20px;
+  box-sizing: border-box;
 `;

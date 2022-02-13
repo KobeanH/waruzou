@@ -1,20 +1,24 @@
 import { css, keyframes } from "@emotion/css";
-import { useState } from "react";
 
 import { useRecoilValue } from "recoil";
 import { CalculatedObjState } from "../../store/calculatedObj";
 
 export const ResultList = () => {
   const calculatedObj = useRecoilValue(CalculatedObjState);
-  const [rouletteContents, setRouletteContents] = useState([
-    "身長が二番目に低い人",
-    "財布の中身が一番多い人",
-    "クレジットカードを持ってる人",
-  ]);
 
   return (
     <ul className={resultList}>
-      <p className={resultItem}>{rouletteContents}</p>
+      {Object.keys(calculatedObj).map((key, value) => (
+        <li className={resultItem} key={key}>
+          <p className={resultText}>
+            {Object.keys(calculatedObj)[value]}
+            <span className={resultUnit}>円</span>
+            ・・・
+            {calculatedObj[key]}
+            <span className={resultUnit}>人</span>
+          </p>
+        </li>
+      ))}
     </ul>
   );
 };

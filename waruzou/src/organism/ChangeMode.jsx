@@ -5,6 +5,7 @@ import { css } from "@emotion/css";
 import { ChangeModeText } from "../atoms/text/ChangeModeText";
 import { SplitIcon } from "../atoms/icon/SplitIcon";
 import { GameIcon } from "../atoms/icon/GameIcon";
+import { RouletteIcon } from "../atoms/icon/RouletteIcon";
 
 export const ChangeMode = () => {
   const [modeOn, setModeOn] = useState([true, false]);
@@ -15,20 +16,9 @@ export const ChangeMode = () => {
     newModeOn[index] = true;
     setModeOn(newModeOn);
   };
-  const aaa = css`
-    position: fixed;
-    bottom: 4vh;
-    left: 0;
-    right: 0;
-    max-width: 375px;
-    margin: auto;
-    padding: 0 20px;
-    @media (max-height: 740px) {
-      bottom: 2vh;
-    }
-  `;
+
   return (
-    <div className={aaa}>
+    <div className={changeModePosition}>
       <div className={modeWrap}>
         <Link
           onClick={() => changeMode(0)}
@@ -44,21 +34,32 @@ export const ChangeMode = () => {
           to="/game"
         >
           <GameIcon />
-          <ChangeModeText modeOn={modeOn[1]}>割り勘モード</ChangeModeText>
+          <ChangeModeText modeOn={modeOn[1]}>ゲームモード</ChangeModeText>
         </Link>
         <Link
           onClick={() => changeMode(2)}
           className={modeOn[2] == true ? modeOnn : modeOff}
           to="/Roulette"
         >
-          <GameIcon />
+          <RouletteIcon />
           <ChangeModeText modeOn={modeOn[2]}>ルーレットモード</ChangeModeText>
         </Link>
       </div>
     </div>
   );
 };
-
+const changeModePosition = css`
+  position: fixed;
+  bottom: 4vh;
+  left: 0;
+  right: 0;
+  max-width: 375px;
+  margin: auto;
+  padding: 0 20px;
+  @media (max-height: 740px) {
+    bottom: 2vh;
+  }
+`;
 const modeWrap = css`
   display: flex;
   justify-content: center;
