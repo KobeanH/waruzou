@@ -75,14 +75,14 @@ export const SplitMode = () => {
   const mainBtnPosition = css`
     position: fixed;
     left: 50%;
-    bottom: 12vh;
+    bottom: 10vh;
     transform: translate(-50%, -50%);
   `;
 
   return (
     <>
       <InputWrapper />
-      <CalcResult>計算結果</CalcResult>
+      {/* <CalcResult>計算結果</CalcResult> */}
       <Result aboutAmount={aboutAmount} />
       <MainBtn mainBtnPosition={mainBtnPosition} onClick={calculate}>
         計算する

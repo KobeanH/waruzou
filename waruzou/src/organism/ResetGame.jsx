@@ -122,7 +122,7 @@ const modalBtnWrap = css`
 const mainBtnPosition = css`
   position: fixed;
   left: 50%;
-  bottom: 12vh;
+  bottom: 10vh;
   transform: translate(-50%, -50%);
   @media (max-height: 740px) {
     bottom: 2vh;

@@ -12,8 +12,8 @@ export const Result = () => {
   return (
     <div className={resultWrap}>
       <AboutPerPerson>
-        一人あたり・・・
-        {aboutAmount && <span>{aboutAmount}円</span>}
+        <span className={aboutSmall}>一人あたり</span>
+        {aboutAmount && <span>￥{aboutAmount}円</span>}
       </AboutPerPerson>
       <ResultSuggest>Suggest</ResultSuggest>
       <ResultList></ResultList>
@@ -29,10 +29,11 @@ const resultWrap = css`
   border-radius: 12px;
   background-color: #fff;
   box-shadow: 0px 2px 4px rgba(128, 128, 128, 0.25);
-  font-family: "Noto Sans JP", sans-serif;
-  font-weight: bold;
   @media (max-height: 740px) {
     height: 43vh;
     margin: 0 auto 3.5vh;
   }
+`;
+const aboutSmall = css`
+  font-size: 1.2rem;
 `;

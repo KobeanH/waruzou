@@ -9,7 +9,7 @@ export const RouletteText = (props) => {
 const resultItem = css`
   margin-bottom: 2.5vh;
   font-size: 28px;
-  color: #6f86d6;
+  color: #ffb901;
   text-align: center;
   @media (max-height: 740px) {
     font-size: 24px;

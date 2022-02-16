@@ -13,7 +13,7 @@ const baseModalBtn = css`
   border: none;
   padding: 16px;
   border-radius: 6px;
-  background: #6f86d6;
+  background: #ffb901;
   color: #fff;
   width: 120px;
   box-sizing: border-box;

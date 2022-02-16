@@ -4,19 +4,21 @@ import { useEffect } from "react/cjs/react.development";
 import logo from "../img/warican-logo.png";
 
 export const StartAnime = () => {
+  const [anime, setAnime] = useState(true);
   const [titleAnime, setTitleAnime] = useState(false);
   const [logoAnime, setLogoAnime] = useState(false);
-  const [anime, setAnime] = useState(true);
-  const TIMEOUT = 500;
 
+  //アニメーション全体をフェードアウト
   setTimeout(() => {
     setAnime(false);
   }, 2300);
 
+  //タイトルのスライドアニメーション
   setTimeout(() => {
     setTitleAnime(true);
-  }, TIMEOUT);
+  }, 500);
 
+  //ロゴのアニメーション
   useEffect(() => {
     setTimeout(() => {
       setLogoAnime(true);
@@ -92,17 +94,17 @@ const endAnime = css`
   width: 100%;
   z-index: 9000;
   background: #fff;
-  &:before {
-    content: "";
-    display: block;
-    position: absolute;
-    width: 140px;
-    height: 120px;
-    border-radius: 50%;
-    background-color: #ffb901;
-    top: -23px;
-    right: -40px;
-  }
+  // &:before {
+  //   content: "";
+  //   display: block;
+  //   position: absolute;
+  //   width: 140px;
+  //   height: 120px;
+  //   border-radius: 50%;
+  //   background-color: #ffb901;
+  //   top: -23px;
+  //   right: -40px;
+  // }
   &:after {
     content: "";
     display: block;

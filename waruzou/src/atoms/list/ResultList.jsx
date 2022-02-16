@@ -27,51 +27,51 @@ const resultItemAnime = keyframes`
 0%{
   left:0;
   right:100%;
-  background-color: #a6b1d9;
+  background-color: #FFE08E;
 }
 50%{
   left:0;
   right:0;
-  background-color: #a6b1d9;
+  background-color: #FFE08E;
 }
 100%{
   left:100%;
   right:0;
-  background-color: #a6b1d9;
+  background-color: #FFE08E;
 }
 `;
 const resultItemAnime2 = keyframes`
 0%{
   left:0;
   right:100%;
-  background-color: #6f86d6;
+  background-color: #FFCE4E;
 }
 50%{
   left:0;
   right:0;
-  background-color: #6f86d6;ß
+  background-color: #FFCE4E;
 }
 100%{
   left:100%;
   right:0;
-  background-color: #6f86d6;ß
+  background-color: #FFCE4E;
 }
 `;
 const resultItemAnime3 = keyframes`
 0%{
   left:0;
   right:100%;
-  background-color:#3549c9;
+  background-color:#FFB901;
 }
 50%{
   left:0;
   right:0;
-  background-color:#3549c9;
+  background-color:#FFB901;
 }
 100%{
   left:100%;
   right:0;
-  background-color: #3549c9;
+  background-color: #FFB901;
 }
 `;
 
@@ -105,7 +105,7 @@ const resultList = css`
 
 const resultItem = css`
   position: relative;
-  margin-bottom: 2.5vh;
+  margin-bottom: 1.5vh;
   font-size: 28px;
   list-style: none;
   text-align: center;
@@ -131,13 +131,13 @@ const resultItem = css`
     will-change: ${resultItemAnime3};
   }
   &:nth-of-type(1) {
-    color: #a6b1d9;
+    color: #ffe08e;
   }
   &:nth-of-type(2) {
-    color: #6f86d6;
+    color: #ffce4e;
   }
   &:nth-of-type(3) {
-    color: #3549c9;
+    color: #ffb901;
     margin-bottom: 0px;
   }
   @media (max-height: 740px) {

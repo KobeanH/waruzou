@@ -50,7 +50,7 @@ export const ChangeMode = () => {
 };
 const changeModePosition = css`
   position: fixed;
-  bottom: 4vh;
+  bottom: 2vh;
   left: 0;
   right: 0;
   max-width: 375px;
@@ -81,18 +81,18 @@ const modeOnn = css`
   max-width: 220px;
   width: 100%;
   padding: 12px;
-  background-color: #e5eaf6;
+  background-color: #ffe9af;
   border-radius: 36px;
   box-shadow: 0px 1px 7px rgba(229, 234, 246, 1);
   transition: all 0.3s linear;
   overflow: hidden;
-  color: #3549c9;
+  color: #ffb901;
   font-size: 1.6rem;
   font-weight: bold;
   text-decoration: none;
   white-space: nowrap;
   > svg {
-    fill: #3549c9;
+    fill: #ffb901;
   }
 `;
 const modeOff = css`
@@ -110,7 +110,7 @@ const modeOff = css`
   box-sizing: border-box;
   box-shadow: 0px 2px 4px rgba(128, 128, 128, 0.25);
   transition: all 0.3s linear;
-  color: #3549c9;
+  color: #ffb901;
   font-weight: bold;
   text-decoration: none;
   > svg {

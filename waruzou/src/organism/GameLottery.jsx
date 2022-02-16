@@ -263,17 +263,17 @@ const resultItemAnime = keyframes`
 0%{
   left:0;
   right:100%;
-  background-color:#6f86d6;
+  background-color:#FFB901;
 }
 50%{
   left:0;
   right:0;
-  background-color:#6f86d6;
+  background-color:#FFB901;
 }
 100%{
   left:100%;
   right:0;
-  background-color:#6f86d6;
+  background-color:#FFB901;
 }
 `;
 const resultItemFadeIn = keyframes`

@@ -14,7 +14,7 @@ export const Icon = (props) => {
   `;
   const amountSpanOn = css`
     display: inline-block;
-    background-color: #e5eaf6;
+    background-color: #ffe9af;
     border-radius: 100%;
     box-shadow: 0px 2px 4px rgba(128, 128, 128, 0.25);
     transition: all 1s;

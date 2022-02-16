@@ -5,11 +5,12 @@ import { css } from "@emotion/css";
 import { LottoArrayState } from "../../store/lottoArrayState";
 import { BaseInput } from "../../atoms/input/BaseModeInput";
 import { DeleteBtn } from "../../atoms/btn/DeleteBtn";
+import { AddInputBtn } from "../../atoms/btn/AddInputBtn";
 
 Modal.setAppElement("#root");
 
 export const GameInputWrao = (props) => {
-  const { showDelete, spreadLottoArray } = props;
+  const { showDelete, spreadLottoArray, onClick } = props;
   const [lottoArray, setLottoArray] = useRecoilState(LottoArrayState);
 
   //inputタグを削除
@@ -54,6 +55,7 @@ export const GameInputWrao = (props) => {
           )}
         </div>
       ))}
+      <AddInputBtn onClick={onClick} />
     </div>
   );
 };
@@ -71,5 +73,5 @@ const GameInputWrap = css`
   display: flex;
   align-items: flex-end;
   gap: 6px;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
 `;

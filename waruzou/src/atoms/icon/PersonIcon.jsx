@@ -4,7 +4,13 @@ export const PersonIcon = (props) => {
   const { fromGameMode } = props;
 
   const personIcon = css`
-    margin: 10px 10px 8px;
+    display: flex;
+    font-size: 2rem;
+    font-weight: 500;
+    width: 20px;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
     @media (max-height: 740px) {
       width: 18px;
     }
@@ -15,8 +21,6 @@ export const PersonIcon = (props) => {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
-      width="26"
-      height="26"
       className={personIcon}
     >
       <g id="_01_align_center" data-name="01 align center">

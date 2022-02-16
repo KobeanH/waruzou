@@ -16,12 +16,11 @@ const inputWrapper = css`
   &:nth-child(1) {
     margin-bottom: 3.5vh;
   }
-  @media (max-height: 740px) {
-    display: flex;
-    justify-content: space-between;
-    gap: 12px;
-    &:nth-child(1) {
-      margin-bottom: 2vh;
-    }
+
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  &:nth-child(1) {
+    margin-bottom: 2vh;
   }
 `;

@@ -148,12 +148,6 @@ export const GameMode = () => {
     <>
       {show && (
         <>
-          <MainBtn
-            createInputMargin={createInputMargin}
-            onClick={() => addInput()}
-          >
-            追加する
-          </MainBtn>
           <Icon fromGameMode={amountIconMargin}>
             <AmountIcon fromGameMode={amountIcon} />
           </Icon>
@@ -163,7 +157,9 @@ export const GameMode = () => {
           <GameInputWrao
             spreadLottoArray={spreadLottoArray}
             showDelete={showDelete}
+            onClick={() => addInput()}
           />
+
           <MainBtn mainBtnPosition={mainBtnPosition} onClick={startGame}>
             ゲームを開始する
           </MainBtn>
@@ -183,8 +179,6 @@ export const GameMode = () => {
           />
         </>
       )}
-
-      {/* {cantStart && <span>金額と人数を入力してください</span>} */}
     </>
   );
 };
@@ -194,14 +188,12 @@ const amountIconMargin = css`
   }
 `;
 const amountIcon = css`
-  margin: 9px 11px 4px;
-  width: 20px;
   @media (max-height: 740px) {
     width: 18px;
   }
 `;
 const personIcon = css`
-  margin: 8px 12px 6px;
+  margin: 10px;
   width: 20px;
   @media (max-height: 740px) {
     width: 18px;
@@ -222,7 +214,7 @@ const notShowPplIcon = css`
 const mainBtnPosition = css`
   position: fixed;
   left: 50%;
-  bottom: 12vh;
+  bottom: 10vh;
   transform: translate(-50%, -50%);
 `;
 const createInputMargin = css`

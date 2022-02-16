@@ -34,7 +34,7 @@ const inputWrap = css`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;
+  gap: 5px;
   margin-bottom: 12px;
   @media (max-height: 740px) {
     margin-bottom: 0.5vh;

@@ -23,6 +23,6 @@ export const RouletteMode = () => {
 const mainBtnPosition = css`
   position: fixed;
   left: 50%;
-  bottom: 12vh;
+  bottom: 10vh;
   transform: translate(-50%, -50%);
 `;

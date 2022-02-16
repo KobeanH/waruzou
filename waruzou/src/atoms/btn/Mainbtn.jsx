@@ -6,12 +6,12 @@ export const MainBtn = (props) => {
     display: block;
     max-width: 200px;
     width: 100%;
-    background-color: #6f86d6;
+    background-color: #ffb901;
     color: #fff;
-    padding: 12px;
+    padding: 16px;
     border-radius: 100px;
     border: none;
-    box-shadow: 0px 4px 4px #808080;
+    box-shadow: 0px 4px 4px rgba(255, 197, 111, 0.25);
     transition: all 0.3s;
     font-family: "Noto Sans JP", sans-serif;
     font-weight: bold;

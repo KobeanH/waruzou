@@ -9,9 +9,11 @@ export const HeaderTtlText = () => {
 };
 
 const headerTtlText = css`
-  color: #6f86d6;
-  font-size: 1.6rem;
+  color: #000000;
+  font-size: 2rem;
 `;
 const headerTtlTextEn = css`
-  color: #ffc56f;
+  color: #ffb901;
+  font-size: 2.2rem;
+  font-family: "Noto Sans", sans-serif;
 `;
