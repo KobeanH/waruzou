@@ -1,20 +1,24 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { css } from "@emotion/css";
+import { useRecoilState } from "recoil";
 
 import { ChangeModeText } from "../atoms/text/ChangeModeText";
 import { SplitIcon } from "../atoms/icon/SplitIcon";
 import { GameIcon } from "../atoms/icon/GameIcon";
 import { RouletteIcon } from "../atoms/icon/RouletteIcon";
+import { showAnounceState } from "../store/showAnounceState";
 
 export const ChangeMode = () => {
   const [modeOn, setModeOn] = useState([true, false]);
+  const [showAnounce, setShowAnounce] = useRecoilState(showAnounceState);
 
   //モード切り替え
   const changeMode = (index) => {
     let newModeOn = [false, false];
     newModeOn[index] = true;
     setModeOn(newModeOn);
+    setShowAnounce(true);
   };
 
   return (

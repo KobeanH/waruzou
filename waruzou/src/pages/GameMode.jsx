@@ -16,6 +16,8 @@ import { toggleLottoArrayState } from "../store/toggleLottoArrayState";
 import { countState } from "../store/countState";
 import { modalIsOpenState } from "../store/modalIsOpenState";
 import { showState } from "../store/showState";
+import { AnounceText } from "../atoms/text/AnounceText";
+import { showAnounceState } from "../store/showAnounceState";
 
 Modal.setAppElement("#root");
 
@@ -34,6 +36,7 @@ export const GameMode = () => {
   );
   const [count, setCount] = useRecoilState(countState);
   const [modalIsOpen, setIsOpen] = useRecoilState(modalIsOpenState);
+  const [showAnounce, setShowAnounce] = useRecoilState(showAnounceState);
 
   const spreadLottoArray = [...lottoArray];
 
@@ -104,8 +107,8 @@ export const GameMode = () => {
       setCount(0);
     }
     makeArray();
-
     tentativeArray.sort(() => Math.random() - 0.5); //配列の中身をシャッフルする
+    setShowAnounce(false);
   };
 
   //クラスを付与するために16個のfalseを作成し、格納
@@ -135,6 +138,7 @@ export const GameMode = () => {
     setShow(true);
     setShowLeftLose(false);
     setCount(null);
+    setShowAnounce(true);
   };
 
   const resetModal = () => {
@@ -146,6 +150,7 @@ export const GameMode = () => {
 
   return (
     <>
+      <AnounceText>金額と人数を入力してください</AnounceText>
       {show && (
         <>
           <Icon fromGameMode={amountIconMargin}>

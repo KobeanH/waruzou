@@ -3,7 +3,6 @@ import { useRecoilState } from "recoil";
 import { useRecoilValue } from "recoil";
 
 import { InputWrapper } from "../organism/InputWrapper";
-import { CalcResult } from "../atoms/title/CalcResult";
 import { Result } from "../organism/Result";
 import { MainBtn } from "../atoms/btn/Mainbtn";
 import { AmountState } from "../store/amountState";
@@ -11,12 +10,14 @@ import { numPplState } from "../store/numPplState";
 import { CalculatedObjState } from "../store/calculatedObj";
 import { aboutAmountState } from "../store/aboutAmountState";
 import { AnounceText } from "../atoms/text/AnounceText";
+import { showAnounceState } from "../store/showAnounceState";
 
 export const SplitMode = () => {
   const amount = useRecoilValue(AmountState);
   const numPpl = useRecoilValue(numPplState);
   const [calculatedObj, setCalculatedObj] = useRecoilState(CalculatedObjState);
   const [aboutAmount, setAboutAmount] = useRecoilState(aboutAmountState);
+  const [showAnounce, setShowAnounce] = useRecoilState(showAnounceState);
 
   let perPerson = amount / (numPpl * 100); //百以下の位以外を計算
   perPerson = Math.trunc(perPerson); //小数点以下切り捨て
@@ -68,6 +69,8 @@ export const SplitMode = () => {
       aboutAmount = Math.trunc(aboutAmount); //小数点以下切り捨て
       aboutAmount = aboutAmount.toLocaleString(); //三桁単位でカンマ区切り
       setAboutAmount(aboutAmount);
+
+      setShowAnounce(false);
     } else {
       alert("金額と人数を入力してください");
     }
@@ -84,7 +87,6 @@ export const SplitMode = () => {
     <>
       <AnounceText>金額と人数を入力してください</AnounceText>
       <InputWrapper />
-      {/* <CalcResult>計算結果</CalcResult> */}
       <Result aboutAmount={aboutAmount} />
       <MainBtn mainBtnPosition={mainBtnPosition} onClick={calculate}>
         計算する
