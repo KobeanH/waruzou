@@ -252,6 +252,10 @@ const modalBtnWrap = css`
 `;
 
 const GameLotteryList = css`
+  position: absolute;
+  max-width: 350px;
+  top: 40%;
+  transform: translateY(-50%);
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;

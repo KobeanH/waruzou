@@ -16,7 +16,12 @@ export const LeftLose = (props) => {
   );
 };
 const LeftLoseWrap = css`
-  padding: 20px 22px;
+  position: absolute;
+  top: -110px;
+  max-width: 350px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 22px;
   margin: 0 0 28px;
   background: #fff;
   border-radius: 8px;
@@ -32,7 +37,6 @@ const LeftLoseWrap = css`
 const LeftLoseList = css`
   padding: 0;
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-between;
   margin: 0 0;
   gap: 1.5vh;

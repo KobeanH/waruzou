@@ -8,7 +8,7 @@ export const ResultSuggest = (props) => {
 
 const resultSuggest = css`
   ${BaseMiniTitleStyle}
-  margin-bottom: 2vh;
+  margin-bottom: 3vh;
   color: #ffb901;
   background-color: #ffe9af;
   box-shadow: 0px 2px 9px #ffe9af;

@@ -22,7 +22,7 @@ export const RouletteWrap = (props) => {
     "最終学歴の偏差値が一番低い人",
     "今日一番最後に集合した人",
     "身長が一番高い人",
-    "爪一番長い人",
+    "爪が一番長い人",
     "Instagramのフォロワーが一番多い人",
     "最終学歴の偏差値が二番目に低い人",
     "Instagramのフォロワーが二番目に多い人",
@@ -30,7 +30,7 @@ export const RouletteWrap = (props) => {
     "今日一番最初に集合した人",
     "誕生日が二番目に早い人",
     "最終学歴の偏差値が一番高い人",
-    "爪一番短い人",
+    "爪が一番短い人",
   ];
 
   useEffect(() => {
@@ -63,19 +63,10 @@ const rouletteText = css`
 `;
 const resultWrap = css`
   position: absolute;
+  top: 45%;
   left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
   height: 40vh;
-  width: 100%;
-  box-sizing: inherit;
-  margin: 0;
-  padding: 40px 32px;
-  border-radius: 12px;
-  background-color: #fff;
-  box-shadow: 0px 2px 4px rgba(128, 128, 128, 0.25);
-  font-family: "Noto Sans JP", sans-serif;
-  font-weight: bold;
+  transform: translate(-50%, -50%);
   @media (max-width: 400px) {
     width: calc(100vw - 40px);
   }

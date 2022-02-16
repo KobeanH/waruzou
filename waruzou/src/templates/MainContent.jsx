@@ -44,7 +44,7 @@ const mainContent = css`
   width: 100vw;
   border-radius: 30px 30px 0 0;
   background-color: #fff;
-  padding: 20px;
+  padding: 24px 20px 20px;
   box-sizing: border-box;
   &:before {
     content: "";

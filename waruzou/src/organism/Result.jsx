@@ -22,9 +22,8 @@ export const Result = () => {
 };
 
 const resultWrap = css`
-  height: 40vh;
+  height: 42vh;
   box-sizing: border-box;
-  margin: 0 auto 3.5vh;
   padding: 16px 32px;
   border-radius: 12px;
   background-color: #fff;

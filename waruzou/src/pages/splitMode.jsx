@@ -10,6 +10,7 @@ import { AmountState } from "../store/amountState";
 import { numPplState } from "../store/numPplState";
 import { CalculatedObjState } from "../store/calculatedObj";
 import { aboutAmountState } from "../store/aboutAmountState";
+import { AnounceText } from "../atoms/text/AnounceText";
 
 export const SplitMode = () => {
   const amount = useRecoilValue(AmountState);
@@ -81,6 +82,7 @@ export const SplitMode = () => {
 
   return (
     <>
+      <AnounceText>金額と人数を入力してください</AnounceText>
       <InputWrapper />
       {/* <CalcResult>計算結果</CalcResult> */}
       <Result aboutAmount={aboutAmount} />
