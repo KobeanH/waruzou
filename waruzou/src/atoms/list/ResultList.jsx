@@ -91,12 +91,15 @@ const resultList = css`
   margin: 0;
   & li:nth-of-type(1) > p {
     animation: ${resultItemFadeIn} 1s;
+    will-change: ${resultItemFadeIn};
   }
   & li:nth-of-type(2) > p {
     animation: ${resultItemFadeIn} 1.6s;
+    will-change: ${resultItemFadeIn};
   }
   & li:nth-of-type(3) > p {
     animation: ${resultItemFadeIn} 2.1s;
+    will-change: ${resultItemFadeIn};
   }
 `;
 
@@ -117,12 +120,15 @@ const resultItem = css`
   }
   &:nth-of-type(1)&:after {
     animation: ${resultItemAnime} 1s;
+    will-change: ${resultItemAnime};
   }
   &:nth-of-type(2)&:after {
     animation: ${resultItemAnime2} 1s 0.3s;
+    will-change: ${resultItemAnime2};
   }
   &:nth-of-type(3)&:after {
     animation: ${resultItemAnime3} 1s 0.6s;
+    will-change: ${resultItemAnime3};
   }
   &:nth-of-type(1) {
     color: #a6b1d9;

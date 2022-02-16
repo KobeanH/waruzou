@@ -23,7 +23,7 @@ export const ChangeMode = () => {
         <Link
           onClick={() => changeMode(0)}
           className={modeOn[0] == true ? modeOnn : modeOff}
-          to="/"
+          to="/build/"
         >
           <SplitIcon />
           <ChangeModeText modeOn={modeOn[0]}>割り勘モード</ChangeModeText>
@@ -31,7 +31,7 @@ export const ChangeMode = () => {
         <Link
           onClick={() => changeMode(1)}
           className={modeOn[1] == true ? modeOnn : modeOff}
-          to="/game"
+          to="/game/"
         >
           <GameIcon />
           <ChangeModeText modeOn={modeOn[1]}>ゲームモード</ChangeModeText>
@@ -39,7 +39,7 @@ export const ChangeMode = () => {
         <Link
           onClick={() => changeMode(2)}
           className={modeOn[2] == true ? modeOnn : modeOff}
-          to="/Roulette"
+          to="/roulette/"
         >
           <RouletteIcon />
           <ChangeModeText modeOn={modeOn[2]}>ルーレットモード</ChangeModeText>
@@ -84,7 +84,7 @@ const modeOnn = css`
   background-color: #e5eaf6;
   border-radius: 36px;
   box-shadow: 0px 1px 7px rgba(229, 234, 246, 1);
-  transition: all 1s;
+  transition: all 0.3s linear;
   overflow: hidden;
   color: #3549c9;
   font-size: 1.6rem;
@@ -109,7 +109,7 @@ const modeOff = css`
   border-radius: 36px;
   box-sizing: border-box;
   box-shadow: 0px 2px 4px rgba(128, 128, 128, 0.25);
-  transition: all 1s;
+  transition: all 0.3s linear;
   color: #3549c9;
   font-weight: bold;
   text-decoration: none;

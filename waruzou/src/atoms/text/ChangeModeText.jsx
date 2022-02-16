@@ -6,13 +6,14 @@ export const ChangeModeText = (props) => {
 };
 const show = css`
   display: inline-block;
-  transition: all 1s;
+  // transition: all 1s;
   overflow: hidden;
 `;
 const hidden = css`
   position: absolute;
   right: -90px;
-  display: none;
-  transition: all 1s;
+  visibility: hidden;
+  // display: none;
+  // transition: all 1s;
   overflow: hidden;
 `;

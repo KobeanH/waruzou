@@ -1,5 +1,5 @@
 import { css } from "@emotion/css";
-import { useState } from "react/cjs/react.development";
+import { useState } from "react";
 import { MainBtn } from "../atoms/btn/Mainbtn";
 import { RouletteWrap } from "../organism/RouletteWrap";
 

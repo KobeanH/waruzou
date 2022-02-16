@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react/cjs/react.development";
+import { useEffect, useState } from "react";
 import { css } from "@emotion/css";
 
 import { AboutPerPerson } from "../atoms/text/AboutAmount";

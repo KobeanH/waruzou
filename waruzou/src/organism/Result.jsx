@@ -6,7 +6,7 @@ import { AboutPerPerson } from "../atoms/text/AboutAmount";
 import { ResultSuggest } from "../atoms/title/ResultSuggest";
 import { aboutAmountState } from "../store/aboutAmountState";
 
-export const Result = (props) => {
+export const Result = () => {
   const aboutAmount = useRecoilValue(aboutAmountState);
 
   return (
