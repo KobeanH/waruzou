@@ -67,7 +67,7 @@ const changeModePosition = css`
 const modeWrap = css`
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 10px;
   width: 100%;
   max-width: 375px;
   padding: 10px 14px;
@@ -75,14 +75,17 @@ const modeWrap = css`
   background-color: #fff;
   border-radius: 12px;
   box-shadow: 0px 2px 4px rgba(128, 128, 128, 0.25);
+  & :nth-child(3) {
+    gap: 6px;
+  }
 `;
 
 const modeOnn = css`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 16px;
-  max-width: 220px;
+  gap: 12px;
+  max-width: 170px;
   width: 100%;
   padding: 12px;
   background-color: #ffe9af;
@@ -105,8 +108,8 @@ const modeOff = css`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 16px;
-  padding: 16px;
+  gap: 12px;
+  // padding: 16px;
   width: 52px;
   height: 52px;
   background-color: rgba(128, 128, 128, 0.25);

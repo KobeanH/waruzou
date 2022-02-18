@@ -1,17 +1,21 @@
 import { css } from "@emotion/css";
 
 export const LeftLose = (props) => {
-  const { lottoArray } = props;
+  const { lottoArray, gameEnd } = props;
   return (
     <div className={LeftLoseWrap}>
-      <ul className={LeftLoseList}>
-        {lottoArray.map((lotto, i) => (
-          <li className={leftLoseItem} key={i}>
-            <span>¥{Number(lotto.objAmount).toLocaleString()}</span>•••
-            <span>{lotto.objNumPpl}</span>
-          </li>
-        ))}
-      </ul>
+      {gameEnd === true ? (
+        <p className={textAfterGame}>全てのはずれが引かれました</p>
+      ) : (
+        <ul className={LeftLoseList}>
+          {lottoArray.map((lotto, i) => (
+            <li className={leftLoseItem} key={i}>
+              <span>¥{Number(lotto.objAmount).toLocaleString()}</span>•••
+              <span>{lotto.objNumPpl}</span>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };
@@ -32,6 +36,21 @@ const LeftLoseWrap = css`
   }
   @media (max-height: 667px) {
     margin: 0 0 24px;
+  }
+`;
+const textAfterGame = css`
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.6rem;
+  height: 10vh;
+
+  @media (max-height: 740px) {
+    height: 8vh;
+  }
+  @media (max-height: 667px) {
+    height: 10vh;
   }
 `;
 const LeftLoseList = css`

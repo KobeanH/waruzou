@@ -18,6 +18,7 @@ import { modalIsOpenState } from "../store/modalIsOpenState";
 import { showState } from "../store/showState";
 import { AnounceText } from "../atoms/text/AnounceText";
 import { showAnounceState } from "../store/showAnounceState";
+import { showHeaderState } from "../store/showHeaderState";
 
 Modal.setAppElement("#root");
 
@@ -37,6 +38,7 @@ export const GameMode = () => {
   const [count, setCount] = useRecoilState(countState);
   const [modalIsOpen, setIsOpen] = useRecoilState(modalIsOpenState);
   const [showAnounce, setShowAnounce] = useRecoilState(showAnounceState);
+  const [showHeader, setShowHeader] = useRecoilState(showHeaderState);
 
   const spreadLottoArray = [...lottoArray];
 
@@ -109,6 +111,7 @@ export const GameMode = () => {
     makeArray();
     tentativeArray.sort(() => Math.random() - 0.5); //配列の中身をシャッフルする
     setShowAnounce(false);
+    setShowHeader(false);
   };
 
   //クラスを付与するために16個のfalseを作成し、格納
@@ -139,6 +142,7 @@ export const GameMode = () => {
     setShowLeftLose(false);
     setCount(null);
     setShowAnounce(true);
+    setShowHeader(true);
   };
 
   const resetModal = () => {

@@ -260,7 +260,7 @@ const GameLotteryList = css`
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  gap: 1.5vh 0;
+  gap: 2vh 0;
   padding: 0;
 `;
 const resultItemAnime = keyframes`

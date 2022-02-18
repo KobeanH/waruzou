@@ -1,11 +1,19 @@
 import { css } from "@emotion/css";
 import { HeaderTtl } from "../molecules/HeaderTtl";
 
+import { useRecoilValue } from "recoil";
+import { showHeaderState } from "../store/showHeaderState";
+
 export const Header = () => {
+  const showHeader = useRecoilValue(showHeaderState);
   return (
-    <header className={header}>
-      <HeaderTtl />
-    </header>
+    <>
+      {showHeader && (
+        <header className={header}>
+          <HeaderTtl />
+        </header>
+      )}
+    </>
   );
 };
 const header = css`
