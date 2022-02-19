@@ -18,7 +18,7 @@ export const AboutPerPerson = (props) => {
     box-sizing: border-box;
     @media (max-height: 740px) {
       font-size: 16px;
-      margin: 0 0 1.5vh;
+      margin: 0 0 16px;
       padding: 0 0 1.5vh 16px;
     }
     ${addedStyle}

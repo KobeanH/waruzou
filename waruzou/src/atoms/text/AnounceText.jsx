@@ -4,12 +4,12 @@ import { useRecoilValue } from "recoil";
 import { showAnounceState } from "../../store/showAnounceState";
 
 export const AnounceText = (props) => {
-  const { children } = props;
+  const { children, addStyle } = props;
   const showAnounce = useRecoilValue(showAnounceState);
 
   const anounceText = css`
     position: absolute;
-    top: -70px;
+    top: -60px;
     left: 50%;
     transform: translateX(-50%);
     font-size: 2rem;
@@ -18,11 +18,13 @@ export const AnounceText = (props) => {
     margin: 0;
     text-align: center;
     color: #fff;
+    white-space: pre-line;
+    ${addStyle}
   `;
   const hideAnounceText = css`
     visibility: hidden;
     position: absolute;
-    top: -70px;
+    top: -60px;
     left: 50%;
     transform: translateX(-50%);
     font-size: 2rem;

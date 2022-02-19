@@ -21,15 +21,15 @@ export const GameInputWrao = (props) => {
 
   //金額inputの更新
   const updateAmount = (index, value) => {
-    // const val = val.target.value.replace(/\D/g, "");
-    spreadLottoArray[index] = { ...lottoArray[index], objAmount: value };
+    const val = value.replace(/\D/g, "");
+    spreadLottoArray[index] = { ...lottoArray[index], objAmount: val };
     setLottoArray(spreadLottoArray);
   };
 
   //人数inputの更新
   const updatePeople = (index, value) => {
-    // const val = val.target.value.replace(/\D/g, "");
-    spreadLottoArray[index] = { ...lottoArray[index], objNumPpl: value };
+    const val = value.replace(/\D/g, "");
+    spreadLottoArray[index] = { ...lottoArray[index], objNumPpl: val };
     setLottoArray(spreadLottoArray);
   };
   return (
@@ -49,6 +49,8 @@ export const GameInputWrao = (props) => {
             onChange={(e) => updatePeople(i, e.target.value)}
             type={"tel"}
             maxLength={2}
+            min={1}
+            max={15}
           />
           {showDelete && (
             <DeleteBtn onClick={() => deleteInput(i)}>削除</DeleteBtn>
@@ -60,11 +62,10 @@ export const GameInputWrao = (props) => {
   );
 };
 const GameInputWrapHeight = css`
-  height: 48vh;
+  height: 284px;
   overflow: scroll;
-  @media (max-height: 740px) {
-    height: 44vh;
-  }
+  padding-bottom: 16px;
+  box-sizing: border-box;
   &::-webkit-scrollbar {
     display: none;
   }

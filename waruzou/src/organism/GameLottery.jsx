@@ -2,6 +2,8 @@ import Modal from "react-modal";
 import { css, keyframes } from "@emotion/css";
 import { useRecoilState } from "recoil";
 
+import { setGameEndState } from "../store/setGameEndState";
+
 import { toggleLottoArrayState } from "../store/toggleLottoArrayState";
 import { countState } from "../store/countState";
 import { modalIsOpenState } from "../store/modalIsOpenState";
@@ -10,12 +12,15 @@ import { BaseModalBtn } from "../atoms/btn/BaseModalBtn";
 Modal.setAppElement("#root");
 
 export const GameLottery = (props) => {
-  const { amountLists } = props;
+  const { amountLists, tentativeArray } = props;
   const [toggleLottoArray, setToggleLottoArray] = useRecoilState(
     toggleLottoArrayState
   ); //クラスを付与するstate
   const [count, setCount] = useRecoilState(countState); //ゲーム終了するカウンター
   const [modalIsOpen, setIsOpen] = useRecoilState(modalIsOpenState); //モーダル管理
+  console.log(tentativeArray);
+
+  const [gameEnd, setGameEnd] = useRecoilState(setGameEndState);
 
   //アイテムを選択し、開くか開かないかを決める処理
   const openAmount = (amountList, index) => {
@@ -45,6 +50,9 @@ export const GameLottery = (props) => {
         secondIndex === index ? false : modal
       )
     );
+    if (tentativeArray.length == count) {
+      setGameEnd(true);
+    }
   };
   const handleLink = () => {
     if (openModal) return;
@@ -315,7 +323,7 @@ const fade = css`
   animation: ${resultItemFadeIn} 1s;
 `;
 const show = css`
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   word-break: break-all;
 `;
 const hide = css`

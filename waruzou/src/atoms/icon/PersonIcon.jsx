@@ -11,9 +11,6 @@ export const PersonIcon = (props) => {
     justify-content: center;
     align-items: center;
     margin: 10px;
-    @media (max-height: 740px) {
-      width: 18px;
-    }
     ${fromGameMode}
   `;
 

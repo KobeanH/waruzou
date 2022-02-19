@@ -10,12 +10,18 @@ export const AddInputBtn = (props) => {
 };
 
 const addInputBtn = css`
-  display: block;
-  margin: 0 auto;
-  border: none;
-  background-color: #ffe9af;
-  border-radius: 100%;
-  color: #ffb901;
-  font-size: 2.5rem;
-  font-weight: bold;
+display: flex;
+    margin: 0 auto;
+    border: none;
+    background-color: #ffe9af;
+    border-radius: 100%;
+    color: #ffb901;
+    width: 36px;
+    font-size: 2.5rem;
+    font-weight: bold;
+    height: 36px;
+    justify-content: center;
+    align-items: center;
+    padding:0;
+}
 `;

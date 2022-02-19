@@ -1,6 +1,5 @@
 import { css } from "@emotion/css";
-import { useState } from "react";
-import { useEffect } from "react/cjs/react.development";
+import { useState, useEffect } from "react";
 import logo from "../img/warican-logo.png";
 
 export const StartAnime = () => {

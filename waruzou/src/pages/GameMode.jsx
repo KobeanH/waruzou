@@ -19,6 +19,7 @@ import { showState } from "../store/showState";
 import { AnounceText } from "../atoms/text/AnounceText";
 import { showAnounceState } from "../store/showAnounceState";
 import { showHeaderState } from "../store/showHeaderState";
+import { setGameEndState } from "../store/setGameEndState";
 
 Modal.setAppElement("#root");
 
@@ -26,7 +27,7 @@ export const GameMode = () => {
   const [lottoArray, setLottoArray] = useRecoilState(LottoArrayState); //人数分、金額を格納する配列
   const [showDelete, setShowDelete] = useState(false); //削除ボタン表示切り替え
   const [amountLists, setAmountLists] = useState([]);
-  const [gameEnd, setGameEnd] = useState(false); //ゲーム終了を表示
+  // const [gameEnd, setGameEnd] = useState(false); //ゲーム終了を表示
   const [cantStart, setCantStart] = useState(false); //ゲーム終了を表示
   // const [show, setShow] = useState(true); //追加するボタン切り替え
   const [show, setShow] = useRecoilState(showState);
@@ -39,6 +40,7 @@ export const GameMode = () => {
   const [modalIsOpen, setIsOpen] = useRecoilState(modalIsOpenState);
   const [showAnounce, setShowAnounce] = useRecoilState(showAnounceState);
   const [showHeader, setShowHeader] = useRecoilState(showHeaderState);
+  const [gameEnd, setGameEnd] = useRecoilState(setGameEndState);
 
   const spreadLottoArray = [...lottoArray];
 
@@ -95,12 +97,16 @@ export const GameMode = () => {
         setAmountLists(tentativeArray);
         setShow(false);
         setShowLeftLose(true);
+        setShowAnounce(false);
+        setShowHeader(false);
       } else if (tentativeArray.length > 16) {
         alert("16人以下に設定してください");
       } else {
         setAmountLists(tentativeArray);
         setShow(false);
         setShowLeftLose(true);
+        setShowAnounce(false);
+        setShowHeader(false);
       }
       //人数が16の時モーダルが表示されるのを無効化
       if (showResetModal) {
@@ -109,9 +115,8 @@ export const GameMode = () => {
       setCount(0);
     }
     makeArray();
+
     tentativeArray.sort(() => Math.random() - 0.5); //配列の中身をシャッフルする
-    setShowAnounce(false);
-    setShowHeader(false);
   };
 
   //クラスを付与するために16個のfalseを作成し、格納
@@ -127,11 +132,11 @@ export const GameMode = () => {
   };
 
   //金額が入力されたものが全部引かれたらゲーム終了
-  useEffect(() => {
-    if (tentativeArray.length == count) {
-      setGameEnd(true);
-    }
-  }, [count]);
+  // useEffect(() => {
+  //   if (tentativeArray.length == count) {
+  //     setGameEnd(true);
+  //   }
+  // }, [count]);
 
   //ゲームをリセットする
   const resetGame = () => {
@@ -154,11 +159,13 @@ export const GameMode = () => {
 
   return (
     <>
-      <AnounceText>金額と人数を入力してください</AnounceText>
+      <AnounceText addStyle={anounceTextPosition}>
+        金額と人数(16人以下)を{"\n"}入力してください
+      </AnounceText>
       {show && (
         <>
           <Icon fromGameMode={amountIconMargin}>
-            <AmountIcon fromGameMode={amountIcon} />
+            <AmountIcon />
           </Icon>
           <Icon pplIcon={showDelete === true ? notShowPplIcon : pplIcon}>
             <PersonIcon fromGameMode={personIcon} />
@@ -174,11 +181,14 @@ export const GameMode = () => {
           </MainBtn>
         </>
       )}
-      {gameEnd && <span>ゲームが終了しました</span>}
+      {/* {gameEnd && <span>ゲームが終了しました</span>} */}
       {showLeftLose && (
         <>
-          <LeftLose lottoArray={lottoArray}></LeftLose>
-          <GameLottery amountLists={amountLists} />
+          <LeftLose gameEnd={gameEnd} lottoArray={lottoArray}></LeftLose>
+          <GameLottery
+            tentativeArray={tentativeArray}
+            amountLists={amountLists}
+          />
           <ResetGame
             resetModal={() => resetModal()}
             showResetModal={showResetModal}
@@ -196,11 +206,7 @@ const amountIconMargin = css`
   margin-bottom: 8px;
   }
 `;
-const amountIcon = css`
-  @media (max-height: 740px) {
-    width: 18px;
-  }
-`;
+
 const personIcon = css`
   margin: 10px;
   width: 20px;
@@ -223,9 +229,9 @@ const notShowPplIcon = css`
 const mainBtnPosition = css`
   position: fixed;
   left: 50%;
-  bottom: 10vh;
+  bottom: 70px;
   transform: translate(-50%, -50%);
 `;
-const createInputMargin = css`
-  margin: 0 auto 2.5vh;
+const anounceTextPosition = css`
+  top: -75px;
 `;

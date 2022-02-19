@@ -14,7 +14,6 @@ export const ResetGame = (props) => {
     closeTimeoutMS,
     resetGame,
   } = props;
-  console.log(props);
   return (
     <>
       <MainBtn mainBtnPosition={mainBtnPosition} onClick={resetModal}>

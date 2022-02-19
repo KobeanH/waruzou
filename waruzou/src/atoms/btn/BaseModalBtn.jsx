@@ -16,6 +16,8 @@ const baseModalBtn = css`
   background: #ffb901;
   color: #fff;
   width: 120px;
+  font-size: 1.5rem;
+  font-weight: bold;
   box-sizing: border-box;
   white-space: nowrap;
 `;

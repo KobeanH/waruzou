@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { css } from "@emotion/css";
 import { useRecoilState } from "recoil";
 
@@ -10,43 +9,48 @@ import { RouletteIcon } from "../atoms/icon/RouletteIcon";
 import { showAnounceState } from "../store/showAnounceState";
 
 export const ChangeMode = () => {
-  const [modeOn, setModeOn] = useState([true, false]);
   const [showAnounce, setShowAnounce] = useRecoilState(showAnounceState);
+  const location = useLocation();
 
   //モード切り替え
-  const changeMode = (index) => {
-    let newModeOn = [false, false];
-    newModeOn[index] = true;
-    setModeOn(newModeOn);
+  const changeMode = () => {
     setShowAnounce(true);
   };
-
+  console.log(location.pathname);
   return (
     <div className={changeModePosition}>
       <div className={modeWrap}>
         <Link
-          onClick={() => changeMode(0)}
-          className={modeOn[0] == true ? modeOnn : modeOff}
-          to="/build/"
+          onClick={() => changeMode()}
+          className={location.pathname == "/" ? modeOnn : modeOff}
+          to="/"
         >
           <SplitIcon />
-          <ChangeModeText modeOn={modeOn[0]}>割り勘モード</ChangeModeText>
+          <ChangeModeText modeOn={location.pathname == "/" ? true : false}>
+            割り勘モード
+          </ChangeModeText>
         </Link>
         <Link
-          onClick={() => changeMode(1)}
-          className={modeOn[1] == true ? modeOnn : modeOff}
+          onClick={() => changeMode()}
+          className={location.pathname == "/game/" ? modeOnn : modeOff}
           to="/game/"
         >
           <GameIcon />
-          <ChangeModeText modeOn={modeOn[1]}>ゲームモード</ChangeModeText>
+          <ChangeModeText modeOn={location.pathname == "/game/" ? true : false}>
+            ゲームモード
+          </ChangeModeText>
         </Link>
         <Link
-          onClick={() => changeMode(2)}
-          className={modeOn[2] == true ? modeOnn : modeOff}
+          onClick={() => changeMode()}
+          className={location.pathname == "/roulette/" ? modeOnn : modeOff}
           to="/roulette/"
         >
           <RouletteIcon />
-          <ChangeModeText modeOn={modeOn[2]}>ルーレットモード</ChangeModeText>
+          <ChangeModeText
+            modeOn={location.pathname == "/roulette/" ? true : false}
+          >
+            ルーレットモード
+          </ChangeModeText>
         </Link>
       </div>
     </div>

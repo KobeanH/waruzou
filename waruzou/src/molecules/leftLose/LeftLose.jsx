@@ -1,7 +1,10 @@
 import { css } from "@emotion/css";
+import { useRecoilValue } from "recoil";
 
 export const LeftLose = (props) => {
   const { lottoArray, gameEnd } = props;
+  // const gameEnd = useRecoilValue(setGameEndState);
+
   return (
     <div className={LeftLoseWrap}>
       {gameEnd === true ? (
@@ -10,7 +13,7 @@ export const LeftLose = (props) => {
         <ul className={LeftLoseList}>
           {lottoArray.map((lotto, i) => (
             <li className={leftLoseItem} key={i}>
-              <span>¥{Number(lotto.objAmount).toLocaleString()}</span>•••
+              <span>¥{Number(lotto.objAmount).toLocaleString()}</span>…
               <span>{lotto.objNumPpl}</span>
             </li>
           ))}
@@ -57,6 +60,7 @@ const LeftLoseList = css`
   padding: 0;
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   margin: 0 0;
   gap: 1.5vh;
   height: 10vh;
@@ -82,8 +86,5 @@ const leftLoseItem = css`
   display: flex;
   justify-content: center;
   align-items: center;
-  // @media (max-height: 740px) {
-  //   padding: 13px 22px;
-  //   margin: 0 0 14px;
-  // }
+  gap: 0 1px;
 `;

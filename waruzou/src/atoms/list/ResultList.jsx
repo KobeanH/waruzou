@@ -145,7 +145,7 @@ const resultItem = css`
   }
   @media (max-height: 740px) {
     font-size: 26px;
-    margin-bottom: 3vh;
+    margin-bottom: 18px;
   }
 `;
 

@@ -1,7 +1,7 @@
 import { css } from "@emotion/css";
 
 export const BaseInput = (props) => {
-  const { placeholder, type, onChange, maxLength, value } = props;
+  const { placeholder, type, onChange, maxLength, value, min, max } = props;
 
   return (
     <input
@@ -12,6 +12,8 @@ export const BaseInput = (props) => {
       maxLength={maxLength}
       required="required"
       value={value}
+      min={min}
+      max={max}
     />
   );
 };
@@ -25,6 +27,7 @@ const baseInput = css`
   font-family: "Noto Sans JP", sans-serif;
   font-weight: bold;
   color: #808080;
+  -webkit-appearance: none;
   &::placeholder {
     color: rgba(128, 128, 128, 0.65);
   }

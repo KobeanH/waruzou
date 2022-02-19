@@ -10,9 +10,7 @@ export const AmountIcon = (props) => {
     height: 40px;
     justify-content: center;
     align-items: center;
-    @media (max-height: 740px) {
-      width: 18px;
-    }
+
     ${fromGameMode}
   `;
 

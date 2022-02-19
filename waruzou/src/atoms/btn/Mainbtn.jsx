@@ -8,11 +8,12 @@ export const MainBtn = (props) => {
     width: 100%;
     background-color: #ffb901;
     color: #fff;
-    padding: 16px;
+    padding: 15px 16px;
     border-radius: 100px;
     border: none;
     box-shadow: 0px 4px 4px rgba(255, 197, 111, 0.25);
     transition: all 0.3s;
+    font-size: 1.5rem;
     font-family: "Noto Sans JP", sans-serif;
     font-weight: bold;
     &:hover {
@@ -22,7 +23,6 @@ export const MainBtn = (props) => {
     }
     &:hover resultItem {
       color: red;
-      margin-bottom: 3vh;
     }
     ${mainBtnPosition}
     ${createInputMargin}

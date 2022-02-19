@@ -20,7 +20,7 @@ export const MainContent = () => {
     <main className={mainContent}>
       <div className={mainContentWrap}>
         <Switch>
-          <Route exact path="/build//">
+          <Route exact path="/">
             <SplitMode />
           </Route>
           <Route path="/game/">
@@ -40,11 +40,12 @@ export const MainContent = () => {
 const mainContent = css`
   position: fixed;
   bottom: 0;
-  height: 77vh;
+  height: 100%;
+  max-height: 524px;
   width: 100vw;
   border-radius: 30px 30px 0 0;
   background-color: #fff;
-  padding: 24px 20px 20px;
+  padding: 16px 20px;
   box-sizing: border-box;
   &:before {
     content: "";

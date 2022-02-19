@@ -79,7 +79,7 @@ export const SplitMode = () => {
   const mainBtnPosition = css`
     position: fixed;
     left: 50%;
-    bottom: 10vh;
+    bottom: 70px;
     transform: translate(-50%, -50%);
   `;
 
