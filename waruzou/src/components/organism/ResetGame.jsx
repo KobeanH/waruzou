@@ -1,7 +1,7 @@
 import Modal from "react-modal";
 import { css } from "@emotion/css";
 
-import { MainBtn } from "../atoms/btn/Mainbtn";
+import { MainBtn } from "../atoms/btn/MainBtn";
 import { BaseModalBtn } from "../atoms/btn/BaseModalBtn";
 
 Modal.setAppElement("#root");

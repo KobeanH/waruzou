@@ -2,36 +2,35 @@ import { css } from "@emotion/css";
 import { useRecoilState } from "recoil";
 
 import { AmountState } from "../../store/amountState";
-import { Icon } from "../../atoms/icon/icon";
+import { BaseIcon } from "../../atoms/icon/Baseicon";
 import { AmountIcon } from "../../atoms/icon/AmountIcon";
-import { BaseInput } from "../../atoms/input/BaseModeInput";
+import { BaseInput } from "../../atoms/input/BaseInput";
 
 export const AmountInputWrap = () => {
   const [amount, setAmount] = useRecoilState(AmountState);
 
-  //合計金額入力欄
   const getValueFromAmount = (e) => {
     const value = e.target.value.replace(/\D/g, ""); //数字以外は入力できないように
     setAmount(value);
   };
 
   return (
-    <div className={inputWrap}>
-      <Icon>
+    <div className={amountInputWrap}>
+      <BaseIcon>
         <AmountIcon />
-      </Icon>
+      </BaseIcon>
       <BaseInput
-        placeholder={"金額"}
-        type={"tel"}
-        onChange={getValueFromAmount}
-        maxLength={"8"}
+        placeholder="金額"
+        type="tel"
+        maxLength="8"
         value={amount}
+        onChange={getValueFromAmount}
       ></BaseInput>
     </div>
   );
 };
 
-const inputWrap = css`
+const amountInputWrap = css`
   display: flex;
   justify-content: center;
   align-items: center;

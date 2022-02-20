@@ -4,20 +4,20 @@ import { useRecoilState } from "recoil";
 import { css } from "@emotion/css";
 
 import { LottoArrayState } from "../store/lottoArrayState";
-import { MainBtn } from "../atoms/btn/Mainbtn";
+import { MainBtn } from "../atoms/btn/MainBtn";
 import { GameInputWrao } from "../molecules/inputWrap/GameInputWrap";
 import { LeftLose } from "../molecules/leftLose/LeftLose";
 import { GameLottery } from "../organism/GameLottery";
 import { ResetGame } from "../organism/ResetGame";
-import { Icon } from "../atoms/icon/icon";
-import { PersonIcon } from "../atoms/icon/PersonIcon";
+import { BaseIcon } from "../atoms/icon/Baseicon";
+import { NumPplIcon } from "../atoms/icon/NumPplIcon";
 import { AmountIcon } from "../atoms/icon/AmountIcon";
 import { toggleLottoArrayState } from "../store/toggleLottoArrayState";
 import { countState } from "../store/countState";
 import { modalIsOpenState } from "../store/modalIsOpenState";
-import { showState } from "../store/showState";
-import { AnounceText } from "../atoms/text/AnounceText";
-import { showAnounceState } from "../store/showAnounceState";
+import { ShowState } from "../store/ShowState";
+import { AnnounceText } from "../atoms/text/AnnounceText";
+import { ShowAnnounceState } from "../store/ShowAnnounceState";
 import { showHeaderState } from "../store/showHeaderState";
 import { setGameEndState } from "../store/setGameEndState";
 
@@ -30,7 +30,7 @@ export const GameMode = () => {
   // const [gameEnd, setGameEnd] = useState(false); //ゲーム終了を表示
   const [cantStart, setCantStart] = useState(false); //ゲーム終了を表示
   // const [show, setShow] = useState(true); //追加するボタン切り替え
-  const [show, setShow] = useRecoilState(showState);
+  const [show, setShow] = useRecoilState(ShowState);
   const [showLeftLose, setShowLeftLose] = useState(false); //追加するボタン切り替え
   const [showResetModal, setShowResetModal] = useState(false); //リセットモーダル
   const [toggleLottoArray, setToggleLottoArray] = useRecoilState(
@@ -38,7 +38,7 @@ export const GameMode = () => {
   );
   const [count, setCount] = useRecoilState(countState);
   const [modalIsOpen, setIsOpen] = useRecoilState(modalIsOpenState);
-  const [showAnounce, setShowAnounce] = useRecoilState(showAnounceState);
+  const [showAnnounce, setShowAnnounce] = useRecoilState(ShowAnnounceState);
   const [showHeader, setShowHeader] = useRecoilState(showHeaderState);
   const [gameEnd, setGameEnd] = useRecoilState(setGameEndState);
 
@@ -99,7 +99,7 @@ export const GameMode = () => {
         setAmountLists(tentativeArray);
         setShow(false);
         setShowLeftLose(true);
-        setShowAnounce(false);
+        setShowAnnounce(false);
         setShowHeader(false);
       } else if (tentativeArray.length > sixteen) {
         alert("16人以下に設定してください");
@@ -107,7 +107,7 @@ export const GameMode = () => {
         setAmountLists(tentativeArray);
         setShow(false);
         setShowLeftLose(true);
-        setShowAnounce(false);
+        setShowAnnounce(false);
         setShowHeader(false);
       }
       //人数が16の時モーダルが表示されるのを無効化
@@ -144,7 +144,7 @@ export const GameMode = () => {
     setShow(true);
     setShowLeftLose(false);
     setCount(null);
-    setShowAnounce(true);
+    setShowAnnounce(true);
     setShowHeader(true);
   };
 
@@ -157,17 +157,19 @@ export const GameMode = () => {
 
   return (
     <>
-      <AnounceText addStyle={anounceTextPosition}>
+      <AnnounceText addStyle={announceTextPosition}>
         金額と人数(16人以下)を{"\n"}入力してください
-      </AnounceText>
+      </AnnounceText>
       {show && (
         <>
-          <Icon fromGameMode={amountIconMargin}>
+          <BaseIcon amountIconMargin={amountIconMargin}>
             <AmountIcon />
-          </Icon>
-          <Icon pplIcon={showDelete === true ? notShowPplIcon : pplIcon}>
-            <PersonIcon fromGameMode={personIcon} />
-          </Icon>
+          </BaseIcon>
+          <BaseIcon
+            numPplIconPosition={showDelete === true ? moveLeft : positionCenter}
+          >
+            <NumPplIcon />
+          </BaseIcon>
           <GameInputWrao
             spreadLottoArray={spreadLottoArray}
             showDelete={showDelete}
@@ -201,28 +203,17 @@ export const GameMode = () => {
 };
 
 const amountIconMargin = css`
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   }
 `;
-
-const personIcon = css`
-  margin: 10px;
-  width: 20px;
-  @media (max-height: 740px) {
-    width: 18px;
-  }
-`;
-const pplIcon = css`
+const positionCenter = css`
   position: absolute;
   left: 50%;
-  transition: initial;
-  margin-bottom: 10px;
 `;
-const notShowPplIcon = css`
+const moveLeft = css`
   position: absolute;
   left: 50%;
   transform: translateX(-55%);
-  transition: initial;
 `;
 const mainBtnPosition = css`
   position: fixed;
@@ -233,7 +224,7 @@ const mainBtnPosition = css`
     bottom: 12vh;
   }
 `;
-const anounceTextPosition = css`
+const announceTextPosition = css`
   top: -90px;
   @media (max-height: 645px) {
     top: -85px;

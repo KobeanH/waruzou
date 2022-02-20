@@ -1,23 +1,23 @@
 import { css } from "@emotion/css";
 
-export const AboutPerPerson = (props) => {
+export const AboutAmount = (props) => {
   const { children, addedStyle } = props;
 
-  const aboutPerPerson = css`
+  const aboutAmount = css`
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 0 4px;
+    box-sizing: border-box;
+    height: 50px;
     margin: 0 0 28px;
     padding-bottom: 20px;
-    text-align: center;
     border-bottom: 1px #808080 dotted;
     font-size: 2rem;
     color: #000000;
-    height: 50px;
-    box-sizing: border-box;
+    text-align: center;
     @media (max-height: 740px) {
-      font-size: 16px;
+      font-size: 1.6rem;
       margin: 0 0 16px;
       padding: 0 0 1.5vh 16px;
     }
@@ -28,5 +28,5 @@ export const AboutPerPerson = (props) => {
     ${addedStyle}
   `;
 
-  return <p className={aboutPerPerson}>{children}</p>;
+  return <p className={aboutAmount}>{children}</p>;
 };

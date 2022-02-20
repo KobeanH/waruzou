@@ -1,6 +1,6 @@
 import { css, keyframes } from "@emotion/css";
-
 import { useRecoilValue } from "recoil";
+
 import { CalculatedObjState } from "../../store/calculatedObj";
 
 export const ResultList = () => {
@@ -74,7 +74,6 @@ const resultItemAnime3 = keyframes`
   background-color: #FFB901;
 }
 `;
-
 const resultItemFadeIn = keyframes`
 0%{
   opacity:0;
@@ -106,9 +105,9 @@ const resultList = css`
 const resultItem = css`
   position: relative;
   margin-bottom: 2.8vh;
-  font-size: 28px;
-  list-style: none;
+  font-size: 2.8rem;
   text-align: center;
+  list-style: none;
   &:after {
     content: "";
     position: absolute;
@@ -120,15 +119,15 @@ const resultItem = css`
   }
   &:nth-of-type(1)&:after {
     animation: ${resultItemAnime} 1s;
-    will-change: ${resultItemAnime};
+    will-change: animation;
   }
   &:nth-of-type(2)&:after {
     animation: ${resultItemAnime2} 1s 0.3s;
-    will-change: ${resultItemAnime2};
+    will-change: $animation;
   }
   &:nth-of-type(3)&:after {
     animation: ${resultItemAnime3} 1s 0.6s;
-    will-change: ${resultItemAnime3};
+    will-change: $animation;
   }
   &:nth-of-type(1) {
     color: #ffe08e;
@@ -141,18 +140,16 @@ const resultItem = css`
     margin-bottom: 0px;
   }
   @media (max-height: 740px) {
-    font-size: 24px;
+    font-size: 2.4rem;
   }
   @media (max-height: 553px) {
-    font-size: 26px;
+    font-size: 2.6rem;
     margin-bottom: 10px;
   }
 `;
-
 const resultText = css`
   margin: 0;
 `;
-
 const resultUnit = css`
   display: inline-block;
   margin-left: 2px;

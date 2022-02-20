@@ -1,21 +1,23 @@
+import { useState } from "react";
 import { Route, Switch } from "react-router-dom";
 import { css } from "@emotion/css";
+import { useRecoilValue } from "recoil";
 
-import { SplitMode } from "../pages/splitMode";
+import { SplitMode } from "../pages/SplitMode";
 import { GameMode } from "../pages/GameMode";
 import { ChangeMode } from "../organism/ChangeMode";
-import { useRecoilValue } from "recoil";
-import { showState } from "../store/showState";
 import { RouletteMode } from "../pages/RouletteMode";
+import { ShowState } from "../store/ShowState";
 import { StartAnime } from "../pages/StartAnime";
-import { useState } from "react";
 
 export const MainContent = () => {
-  const show = useRecoilValue(showState);
   const [showAnime, setShowAnime] = useState(true);
+  const show = useRecoilValue(ShowState);
+
   setTimeout(() => {
     setShowAnime(false);
   }, 3500);
+
   return (
     <main className={mainContent}>
       <div className={mainContentWrap}>
@@ -40,23 +42,23 @@ export const MainContent = () => {
 const mainContent = css`
   position: fixed;
   bottom: 0;
-  height: 100%;
   max-height: 524px;
+  height: 100%;
   width: 100vw;
+  padding: 16px 20px;
   border-radius: 30px 30px 0 0;
   background-color: #fff;
-  padding: 16px 20px;
   box-sizing: border-box;
   &:before {
     content: "";
     position: fixed;
+    top: 16%;
+    right: 110px;
+    z-index: -1;
     width: 20px;
     height: 20px;
     border-radius: 50%;
     background-color: rgba(255, 255, 255, 0.25);
-    top: 16%;
-    right: 110px;
-    z-index: -1;
   }
   @media (max-height: 553px) {
     max-height: 464px;
@@ -67,8 +69,6 @@ const mainContent = css`
   }
 `;
 const mainContentWrap = css`
-  // position: relative;
-  // margin: 0 auto;
   @media (min-width: 430px) {
     max-width: 375px;
     margin: 0 auto;

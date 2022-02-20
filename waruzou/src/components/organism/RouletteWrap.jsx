@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { css } from "@emotion/css";
 
-import { AboutPerPerson } from "../atoms/text/AboutAmount";
+import { AboutAmount } from "../atoms/text/AboutAmount";
 import { RouletteText } from "../atoms/text/RouletteText";
 
 export const RouletteWrap = (props) => {
@@ -49,9 +49,7 @@ export const RouletteWrap = (props) => {
 
   return (
     <div className={resultWrap}>
-      <AboutPerPerson addedStyle={rouletteText}>
-        今回のおごりは・・・
-      </AboutPerPerson>
+      <AboutAmount addedStyle={rouletteText}>今回のおごりは・・・</AboutAmount>
       <RouletteText start={start}>
         {showRoulettePerson && rouletteContents[count]}
       </RouletteText>

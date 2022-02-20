@@ -1,27 +1,27 @@
 import { css } from "@emotion/css";
 import { useRecoilValue } from "recoil";
 
-import { ResultList } from "../atoms/list/ResultList";
-import { AboutPerPerson } from "../atoms/text/AboutAmount";
+import { AboutAmountState } from "../store/AboutAmountState";
+import { AboutAmount } from "../atoms/text/AboutAmount";
 import { ResultSuggest } from "../atoms/title/ResultSuggest";
-import { aboutAmountState } from "../store/aboutAmountState";
+import { ResultList } from "../atoms/list/ResultList";
 
-export const Result = () => {
-  const aboutAmount = useRecoilValue(aboutAmountState);
+export const SplitResult = () => {
+  const aboutAmount = useRecoilValue(AboutAmountState);
 
   return (
-    <div className={resultWrap}>
-      <AboutPerPerson>
-        <span className={aboutSmall}>一人あたり</span>
+    <div className={SplitResultWrap}>
+      <AboutAmount>
+        <span className={aboutAmountSmall}>一人あたり</span>
         {aboutAmount && <span>￥{aboutAmount}円</span>}
-      </AboutPerPerson>
+      </AboutAmount>
       <ResultSuggest>Suggest</ResultSuggest>
-      <ResultList></ResultList>
+      <ResultList />
     </div>
   );
 };
 
-const resultWrap = css`
+const SplitResultWrap = css`
   height: 280px;
   box-sizing: border-box;
   padding: 16px 32px;
@@ -35,6 +35,6 @@ const resultWrap = css`
     height: 38vh;
   }
 `;
-const aboutSmall = css`
+const aboutAmountSmall = css`
   font-size: 1.2rem;
 `;

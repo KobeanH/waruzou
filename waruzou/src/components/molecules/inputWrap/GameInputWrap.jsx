@@ -3,7 +3,7 @@ import { useRecoilState } from "recoil";
 import { css } from "@emotion/css";
 
 import { LottoArrayState } from "../../store/lottoArrayState";
-import { BaseInput } from "../../atoms/input/BaseModeInput";
+import { BaseInput } from "../../atoms/input/BaseInput";
 import { DeleteBtn } from "../../atoms/btn/DeleteBtn";
 import { AddInputBtn } from "../../atoms/btn/AddInputBtn";
 

@@ -6,31 +6,28 @@ export const MainBtn = (props) => {
     display: block;
     max-width: 200px;
     width: 100%;
-    background-color: #ffb901;
-    color: #fff;
     padding: 15px 16px;
+    background-color: #ffb901;
     border-radius: 100px;
     border: none;
     box-shadow: 0px 4px 4px rgba(255, 197, 111, 0.25);
-    transition: all 0.3s;
     font-size: 1.5rem;
     font-family: "Noto Sans JP", sans-serif;
     font-weight: bold;
+    color: #fff;
+    transition: all 0.3s;
     &:hover {
       cursor: pointer;
       opacity: 0.7;
       transition: all 0.3s;
     }
-    &:hover resultItem {
-      color: red;
-    }
-    ${mainBtnPosition}
-    ${createInputMargin}
-      @media (max-height: 553px) {
+    @media (max-height: 553px) {
       max-width: 160px;
       padding: 10px 16px;
       font-size: 1.4rem;
     }
+    ${mainBtnPosition}
+    ${createInputMargin}
   `;
 
   return (

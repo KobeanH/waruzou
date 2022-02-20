@@ -1,6 +1,6 @@
 import { atom } from "recoil";
 
-export const aboutAmountState = atom({
-  key: "aboutAmountState",
+export const AboutAmountState = atom({
+  key: "AboutAmountState",
   default: null,
 });

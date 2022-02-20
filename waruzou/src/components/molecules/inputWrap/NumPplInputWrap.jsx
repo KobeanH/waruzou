@@ -1,13 +1,13 @@
 import { css } from "@emotion/css";
 import { useRecoilState } from "recoil";
 
-import { numPplState } from "../../store/numPplState";
-import { Icon } from "../../atoms/icon/icon";
-import { PersonIcon } from "../../atoms/icon/PersonIcon";
-import { BaseInput } from "../../atoms/input/BaseModeInput";
+import { NumPplState } from "../../store/NumPplState";
+import { BaseIcon } from "../../atoms/icon/Baseicon";
+import { NumPplIcon } from "../../atoms/icon/NumPplIcon";
+import { BaseInput } from "../../atoms/input/BaseInput";
 
-export const PersonInputWrap = () => {
-  const [ppl, setPpl] = useRecoilState(numPplState); //人数
+export const NumPplInputWrap = () => {
+  const [ppl, setPpl] = useRecoilState(NumPplState); //人数
 
   const getValueFromPpl = (e) => {
     const value = e.target.value.replace(/\D/g, ""); //数字以外は入力できないように
@@ -15,22 +15,22 @@ export const PersonInputWrap = () => {
   };
 
   return (
-    <div className={inputWrap}>
-      <Icon>
-        <PersonIcon />
-      </Icon>
+    <div className={numPplInputWrap}>
+      <BaseIcon>
+        <NumPplIcon />
+      </BaseIcon>
       <BaseInput
-        placeholder={"人数"}
-        type={"tel"}
-        onChange={getValueFromPpl}
-        maxLength={"3"}
+        placeholder="人数"
+        type="tel"
+        maxLength="3"
         value={ppl}
+        onChange={getValueFromPpl}
       ></BaseInput>
     </div>
   );
 };
 
-const inputWrap = css`
+const numPplInputWrap = css`
   display: flex;
   justify-content: center;
   align-items: center;

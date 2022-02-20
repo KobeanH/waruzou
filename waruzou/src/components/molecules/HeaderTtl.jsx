@@ -1,4 +1,5 @@
 import { css } from "@emotion/css";
+
 import logo from "../img/warican-logo.png";
 import { HeaderTtlText } from "../atoms/header/HeaderTtlText";
 
@@ -17,9 +18,9 @@ const headerTtl = css`
   align-items: center;
   gap: 6px;
   height: 42px;
-  background-color: #fff;
   max-width: 160px;
   width: 100%;
+  background-color: #fff;
   border-radius: 24px;
   box-shadow: 0px 4px 4px rgba(255, 255, 255, 0.25);
   @media (max-height: 740px) {

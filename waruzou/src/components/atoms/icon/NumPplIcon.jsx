@@ -1,16 +1,16 @@
 import { css } from "@emotion/css";
 
-export const PersonIcon = (props) => {
+export const NumPplIcon = (props) => {
   const { fromGameMode } = props;
 
-  const personIcon = css`
+  const numPplIcon = css`
     display: flex;
-    font-size: 2rem;
-    font-weight: 500;
-    width: 20px;
     justify-content: center;
     align-items: center;
     margin: 10px;
+    width: 20px;
+    font-size: 2rem;
+    font-weight: 500;
     ${fromGameMode}
   `;
 
@@ -18,7 +18,7 @@ export const PersonIcon = (props) => {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
-      className={personIcon}
+      className={numPplIcon}
     >
       <g id="_01_align_center" data-name="01 align center">
         <path

@@ -6,15 +6,15 @@ import { ChangeModeText } from "../atoms/text/ChangeModeText";
 import { SplitIcon } from "../atoms/icon/SplitIcon";
 import { GameIcon } from "../atoms/icon/GameIcon";
 import { RouletteIcon } from "../atoms/icon/RouletteIcon";
-import { showAnounceState } from "../store/showAnounceState";
+import { ShowAnnounceState } from "../store/ShowAnnounceState";
 
 export const ChangeMode = () => {
-  const [showAnounce, setShowAnounce] = useRecoilState(showAnounceState);
+  const [showAnnounce, setShowAnnounce] = useRecoilState(ShowAnnounceState);
   const location = useLocation();
 
   //モード切り替え
   const changeMode = () => {
-    setShowAnounce(true);
+    setShowAnnounce(true);
   };
   console.log(location.pathname);
   return (

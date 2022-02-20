@@ -1,25 +1,24 @@
 import { css } from "@emotion/css";
 import { useRecoilValue } from "recoil";
 
-import { showAnounceState } from "../../store/showAnounceState";
+import { ShowAnnounceState } from "../../store/ShowAnnounceState";
 
-export const AnounceText = (props) => {
+export const AnnounceText = (props) => {
   const { children, addStyle } = props;
-  const showAnounce = useRecoilValue(showAnounceState);
+  const showAnnounce = useRecoilValue(ShowAnnounceState);
 
-  const anounceText = css`
+  const announceText = css`
     position: absolute;
     top: -80px;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 2rem;
     display: block;
-    width: 100%;
     margin: 0;
-    text-align: center;
+    width: 100%;
+    font-size: 2rem;
     color: #fff;
+    text-align: center;
     white-space: pre-line;
-
     @media (max-height: 645px) {
       top: -65px;
     }
@@ -28,25 +27,25 @@ export const AnounceText = (props) => {
     }
     ${addStyle}
   `;
-  const hideAnounceText = css`
+  const hideAnnounceText = css`
     visibility: hidden;
     position: absolute;
     top: -80px;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 2rem;
     display: block;
-    width: 100%;
     margin: 0;
-    text-align: center;
+    width: 100%;
+    font-size: 2rem;
     color: #fff;
+    text-align: center;
     @media (max-height: 553px) {
       top: -60px;
     }
   `;
 
   return (
-    <p className={showAnounce === true ? anounceText : hideAnounceText}>
+    <p className={showAnnounce === true ? announceText : hideAnnounceText}>
       {children}
     </p>
   );

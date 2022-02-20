@@ -1,4 +1,5 @@
 import { css } from "@emotion/css";
+
 import { BaseMiniTitleStyle } from "./BaseMiniTitleStyle";
 
 export const ResultSuggest = (props) => {
@@ -9,9 +10,9 @@ export const ResultSuggest = (props) => {
 const resultSuggest = css`
   ${BaseMiniTitleStyle}
   margin-bottom: 3vh;
-  color: #ffb901;
   background-color: #ffe9af;
   box-shadow: 0px 2px 9px #ffe9af;
+  color: #ffb901;
   @media (min-width: 430px) {
     margin-bottom: 2.5vh;
   }
