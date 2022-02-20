@@ -31,16 +31,14 @@ export const StartAnime = () => {
   }, []);
 
   return (
-    <div className={anime === true ? startAnime : endAnime}>
+    <div className={anime ? startAnime : endAnime}>
       <div className={startTitle}>
         <img
-          className={logoAnime === true ? logoOn : logoOff}
+          className={logoAnime ? logoOn : logoOff}
           src={logo}
           alt="warican-logo"
         />
-        <p
-          className={titleAnime === true ? startTitleTextOn : startTitleTextOff}
-        >
+        <p className={titleAnime ? startTitleTextOn : startTitleTextOff}>
           <span>わ</span>
           <span>り</span>
           <span className={startTitleTextEn}>C</span>

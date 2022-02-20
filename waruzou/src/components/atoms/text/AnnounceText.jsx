@@ -45,8 +45,6 @@ export const AnnounceText = (props) => {
   `;
 
   return (
-    <p className={showAnnounce === true ? announceText : hideAnnounceText}>
-      {children}
-    </p>
+    <p className={showAnnounce ? announceText : hideAnnounceText}>{children}</p>
   );
 };

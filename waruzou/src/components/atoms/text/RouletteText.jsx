@@ -1,27 +1,25 @@
 import { css, keyframes } from "@emotion/css";
 
 export const RouletteText = (props) => {
-  const { children, start } = props;
+  const { children, startRoulette } = props;
 
-  return (
-    <p className={start === true ? resultItemmm : resultItem}>{children}</p>
-  );
+  return <p className={startRoulette ? animeOff : animeOn}>{children}</p>;
 };
 const rouletteTextAnime = keyframes`
 25%{
   transform: scale(1.2);
 }
 50%{
-   transform: scale(1);
+  transform: scale(1);
 }
 75%{
- transform: scale(1.2);
+  transform: scale(1.2);
 }
 100%{
   transform: scale(1);
 }
 `;
-const resultItem = css`
+const animeOn = css`
   margin-bottom: 2.5vh;
   font-size: 24px;
   color: #ffb901;
@@ -30,7 +28,7 @@ const resultItem = css`
   animation: ${rouletteTextAnime} 1.2s;
   will-change: animation;
 `;
-const resultItemmm = css`
+const animeOff = css`
   margin-bottom: 2.5vh;
   font-size: 24px;
   color: #ffb901;

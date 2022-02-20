@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { css } from "@emotion/css";
 
-import { AboutAmount } from "../atoms/text/AboutAmount";
+import { BlackText } from "../atoms/text/BlackText";
 import { RouletteText } from "../atoms/text/RouletteText";
 
 export const RouletteWrap = (props) => {
-  const { start, showRoulettePerson } = props;
+  const { startRoulette, showRoulettePerson } = props;
   const [count, setCount] = useState(0);
 
   const rouletteContents = [
@@ -33,8 +33,9 @@ export const RouletteWrap = (props) => {
     "爪が一番短い人",
   ];
 
+  //ルーレットを回す処理
   useEffect(() => {
-    if (start === true) {
+    if (startRoulette) {
       const interval = setInterval(() => {
         setCount((oldCount) => {
           if (oldCount < rouletteContents.length - 1) return oldCount + 1;
@@ -42,15 +43,15 @@ export const RouletteWrap = (props) => {
         });
       }, 50);
       return () => clearInterval(interval);
-    } else if (start === false) {
+    } else if (!startRoulette) {
       return () => clearInterval();
     }
-  }, [start]);
+  }, [startRoulette]);
 
   return (
-    <div className={resultWrap}>
-      <AboutAmount addedStyle={rouletteText}>今回のおごりは・・・</AboutAmount>
-      <RouletteText start={start}>
+    <div className={rouletteWrap}>
+      <BlackText addedStyle={rouletteText}>今回のおごりは・・・</BlackText>
+      <RouletteText startRoulette={startRoulette}>
         {showRoulettePerson && rouletteContents[count]}
       </RouletteText>
     </div>
@@ -59,15 +60,13 @@ export const RouletteWrap = (props) => {
 const rouletteText = css`
   margin-bottom: 64px;
 `;
-const resultWrap = css`
+const rouletteWrap = css`
   position: absolute;
   top: 45%;
   left: 50%;
   height: 40vh;
   transform: translate(-50%, -50%);
-
   width: calc(100vw - 40px);
-
   @media (max-height: 740px) {
     height: 43vh;
     margin: 0 auto 3.5vh;

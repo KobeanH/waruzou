@@ -6,7 +6,7 @@ export const LeftLose = (props) => {
 
   return (
     <div className={LeftLoseWrap}>
-      {gameEnd === true ? (
+      {gameEnd ? (
         <p className={textAfterGame}>全てのはずれが引かれました</p>
       ) : (
         <ul className={LeftLoseList}>

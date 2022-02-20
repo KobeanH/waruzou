@@ -2,7 +2,7 @@ import { css } from "@emotion/css";
 import { useRecoilValue } from "recoil";
 
 import { AboutAmountState } from "../store/AboutAmountState";
-import { AboutAmount } from "../atoms/text/AboutAmount";
+import { BlackText } from "../atoms/text/BlackText";
 import { ResultSuggest } from "../atoms/title/ResultSuggest";
 import { ResultList } from "../atoms/list/ResultList";
 
@@ -11,10 +11,10 @@ export const SplitResult = () => {
 
   return (
     <div className={SplitResultWrap}>
-      <AboutAmount>
+      <BlackText>
         <span className={aboutAmountSmall}>一人あたり</span>
         {aboutAmount && <span>￥{aboutAmount}円</span>}
-      </AboutAmount>
+      </BlackText>
       <ResultSuggest>Suggest</ResultSuggest>
       <ResultList />
     </div>

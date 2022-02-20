@@ -102,7 +102,7 @@ export const GameMode = () => {
         setShowAnnounce(false);
         setShowHeader(false);
       } else if (tentativeArray.length > sixteen) {
-        alert("16人以下に設定してください");
+        alert(`${sixteen}人以下に設定してください`);
       } else {
         setAmountLists(tentativeArray);
         setShow(false);
@@ -165,15 +165,13 @@ export const GameMode = () => {
           <BaseIcon amountIconMargin={amountIconMargin}>
             <AmountIcon />
           </BaseIcon>
-          <BaseIcon
-            numPplIconPosition={showDelete === true ? moveLeft : positionCenter}
-          >
+          <BaseIcon numPplIconPosition={showDelete ? moveLeft : positionCenter}>
             <NumPplIcon />
           </BaseIcon>
           <GameInputWrao
             spreadLottoArray={spreadLottoArray}
             showDelete={showDelete}
-            onClick={() => addInput()}
+            onClick={addInput}
           />
 
           <MainBtn mainBtnPosition={mainBtnPosition} onClick={startGame}>
@@ -214,12 +212,14 @@ const moveLeft = css`
   position: absolute;
   left: 50%;
   transform: translateX(-55%);
+  transition: initial;
 `;
 const mainBtnPosition = css`
   position: fixed;
   left: 50%;
   bottom: 70px;
   transform: translate(-50%, -50%);
+  transition: initial;
   @media (min-width: 430px) {
     bottom: 12vh;
   }

@@ -1,6 +1,6 @@
 import { css } from "@emotion/css";
 
-export const AboutAmount = (props) => {
+export const BlackText = (props) => {
   const { children, addedStyle } = props;
 
   const aboutAmount = css`

@@ -1,30 +1,34 @@
 import { css } from "@emotion/css";
 import { useState } from "react";
 
-import { MainBtn } from "../atoms/btn/MainBtn";
 import { AnnounceText } from "../atoms/text/AnnounceText";
 import { RouletteWrap } from "../organism/RouletteWrap";
+import { MainBtn } from "../atoms/btn/MainBtn";
 
 export const RouletteMode = () => {
-  const [start, setStart] = useState(false);
-  const [showRoulettePerson, setShowRoulettePerson] = useState(false);
   const [switchAnnounce, setSwitchAnnounce] = useState(true);
+  const [showRoulettePerson, setShowRoulettePerson] = useState(false);
+  const [startRoulette, setStartRoulette] = useState(false);
 
-  const toggleRoulette = () => {
-    setStart(!start);
+  const switchRoulette = () => {
+    setStartRoulette(!startRoulette);
     setShowRoulettePerson(true);
     setSwitchAnnounce(!switchAnnounce);
   };
+
   return (
     <>
       <AnnounceText>
-        {switchAnnounce === true
+        {switchAnnounce
           ? "スタートを押してください"
           : "ストップを押してください"}
       </AnnounceText>
-      <RouletteWrap start={start} showRoulettePerson={showRoulettePerson} />
-      <MainBtn onClick={toggleRoulette} mainBtnPosition={mainBtnPosition}>
-        {start === true ? "ストップ" : "スタート"}
+      <RouletteWrap
+        startRoulette={startRoulette}
+        showRoulettePerson={showRoulettePerson}
+      />
+      <MainBtn onClick={switchRoulette} mainBtnPosition={mainBtnPosition}>
+        {startRoulette ? "ストップ" : "スタート"}
       </MainBtn>
     </>
   );

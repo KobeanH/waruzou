@@ -65,19 +65,15 @@ export const GameLottery = (props) => {
           key={index}
           onClick={() => clickHandler(index)}
           className={
-            toggleLottoArray[index] === true
-              ? opendGameLotteryItem
-              : GameLotteryItem
+            toggleLottoArray[index] ? opendGameLotteryItem : GameLotteryItem
           }
         >
-          <span className={toggleLottoArray[index] === true ? hide : show}>
-            ？
-          </span>
-          <span className={toggleLottoArray[index] === true ? show : hide}>
+          <span className={toggleLottoArray[index] ? hide : show}>？</span>
+          <span className={toggleLottoArray[index] ? show : hide}>
             ¥{amountList.toLocaleString()}
           </span>
           <Modal
-            isOpen={modalIsOpen[index] === true ? true : false}
+            isOpen={modalIsOpen[index] ? true : false}
             onRequestClose={() => closeModal(amountList, index)}
             overlayClassName={{
               base: "overlay-base",
@@ -92,14 +88,8 @@ export const GameLottery = (props) => {
             closeTimeoutMS={500}
             portalClassName={portalClassName}
           >
-            <span
-              className={
-                toggleLottoArray[index] === true ? showAmount : invisible
-              }
-            >
-              <span
-                className={toggleLottoArray[index] === true ? fade : invisible}
-              >
+            <span className={toggleLottoArray[index] ? showAmount : invisible}>
+              <span className={toggleLottoArray[index] ? fade : invisible}>
                 ¥{amountList.toLocaleString()}
               </span>
             </span>
