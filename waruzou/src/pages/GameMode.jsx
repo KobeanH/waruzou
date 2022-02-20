@@ -64,7 +64,7 @@ export const GameMode = () => {
 
   //inputが一つしかない時に削除ボタンを非表示
   useEffect(() => {
-    if (lottoArray.length == 1) {
+    if (lottoArray.length === 1) {
       setShowDelete(false);
     } else {
       setShowDelete(true);
@@ -81,6 +81,8 @@ export const GameMode = () => {
     }
   });
 
+  const sixteen = 16;
+
   //ゲームを開始する処理
   const startGame = () => {
     //全てのinputに金額と人数の数字が入ってなければアラートを出す
@@ -89,9 +91,9 @@ export const GameMode = () => {
       setCantStart(true);
     } else {
       //人数inputに入力された合計が16以下の場合、16になるよう<li>タグを生成
-      if (tentativeArray.length < 16) {
-        const sixteen = 16 - tentativeArray.length;
-        for (let i = 0; i < sixteen; i++) {
+      if (tentativeArray.length < sixteen) {
+        const numAddedZero = sixteen - tentativeArray.length;
+        for (let i = 0; i < numAddedZero; i++) {
           tentativeArray.push(0);
         }
         setAmountLists(tentativeArray);
@@ -99,7 +101,7 @@ export const GameMode = () => {
         setShowLeftLose(true);
         setShowAnounce(false);
         setShowHeader(false);
-      } else if (tentativeArray.length > 16) {
+      } else if (tentativeArray.length > sixteen) {
         alert("16人以下に設定してください");
       } else {
         setAmountLists(tentativeArray);
@@ -121,12 +123,8 @@ export const GameMode = () => {
 
   //クラスを付与するために16個のfalseを作成し、格納
   const makeArray = () => {
-    const hideArray = [];
-    const modalArray = [];
-    for (let i = 0; i < 16; i++) {
-      hideArray.push(false);
-      modalArray.push(false);
-    }
+    const hideArray = new Array(sixteen).fill(false);
+    const modalArray = new Array(sixteen).fill(false);
     setToggleLottoArray(hideArray);
     setIsOpen(modalArray);
   };

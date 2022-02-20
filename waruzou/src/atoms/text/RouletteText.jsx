@@ -4,7 +4,7 @@ export const RouletteText = (props) => {
   const { children, start } = props;
 
   return (
-    <p className={start == true ? resultItemmm : resultItem}>{children}</p>
+    <p className={start === true ? resultItemmm : resultItem}>{children}</p>
   );
 };
 const rouletteTextAnime = keyframes`

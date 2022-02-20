@@ -1,5 +1,4 @@
 import { css } from "@emotion/css";
-import { useRecoilValue } from "recoil";
 
 export const LeftLose = (props) => {
   const { lottoArray, gameEnd } = props;
@@ -59,7 +58,7 @@ const textAfterGame = css`
     height: 8vh;
   }
   @media (max-height: 667px) {
-    height: 10vh;
+    height: 8.5vh;
   }
 `;
 const LeftLoseList = css`

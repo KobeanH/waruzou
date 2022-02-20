@@ -50,7 +50,7 @@ export const GameLottery = (props) => {
         secondIndex === index ? false : modal
       )
     );
-    if (tentativeArray.length == count) {
+    if (tentativeArray.length === count) {
       setGameEnd(true);
     }
   };

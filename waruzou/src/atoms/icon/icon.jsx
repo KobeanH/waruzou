@@ -22,6 +22,6 @@ export const Icon = (props) => {
   `;
 
   return (
-    <span className={ppl == true ? amountSpanOn : amountSpan}>{children}</span>
+    <span className={ppl === true ? amountSpanOn : amountSpan}>{children}</span>
   );
 };

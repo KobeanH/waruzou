@@ -34,7 +34,7 @@ export const RouletteWrap = (props) => {
   ];
 
   useEffect(() => {
-    if (start == true) {
+    if (start === true) {
       const interval = setInterval(() => {
         setCount((oldCount) => {
           if (oldCount < rouletteContents.length - 1) return oldCount + 1;
@@ -42,7 +42,7 @@ export const RouletteWrap = (props) => {
         });
       }, 50);
       return () => clearInterval(interval);
-    } else if (start == false) {
+    } else if (start === false) {
       return () => clearInterval();
     }
   }, [start]);

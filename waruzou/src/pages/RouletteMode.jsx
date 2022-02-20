@@ -18,13 +18,13 @@ export const RouletteMode = () => {
   return (
     <>
       <AnounceText>
-        {switchAnounce == true
+        {switchAnounce === true
           ? "スタートを押してください"
           : "ストップを押してください"}
       </AnounceText>
       <RouletteWrap start={start} showRoulettePerson={showRoulettePerson} />
       <MainBtn onClick={toggleRoulette} mainBtnPosition={mainBtnPosition}>
-        {start == true ? "ストップ" : "スタート"}
+        {start === true ? "ストップ" : "スタート"}
       </MainBtn>
     </>
   );

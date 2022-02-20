@@ -22,32 +22,34 @@ export const ChangeMode = () => {
       <div className={modeWrap}>
         <Link
           onClick={() => changeMode()}
-          className={location.pathname == "/" ? modeOnn : modeOff}
+          className={location.pathname === "/" ? modeOnn : modeOff}
           to="/"
         >
           <SplitIcon />
-          <ChangeModeText modeOn={location.pathname == "/" ? true : false}>
+          <ChangeModeText modeOn={location.pathname === "/" ? true : false}>
             割り勘モード
           </ChangeModeText>
         </Link>
         <Link
           onClick={() => changeMode()}
-          className={location.pathname == "/game/" ? modeOnn : modeOff}
+          className={location.pathname === "/game/" ? modeOnn : modeOff}
           to="/game/"
         >
           <GameIcon />
-          <ChangeModeText modeOn={location.pathname == "/game/" ? true : false}>
+          <ChangeModeText
+            modeOn={location.pathname === "/game/" ? true : false}
+          >
             ゲームモード
           </ChangeModeText>
         </Link>
         <Link
           onClick={() => changeMode()}
-          className={location.pathname == "/roulette/" ? modeOnn : modeOff}
+          className={location.pathname === "/roulette/" ? modeOnn : modeOff}
           to="/roulette/"
         >
           <RouletteIcon />
           <ChangeModeText
-            modeOn={location.pathname == "/roulette/" ? true : false}
+            modeOn={location.pathname === "/roulette/" ? true : false}
           >
             ルーレットモード
           </ChangeModeText>

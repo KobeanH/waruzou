@@ -19,11 +19,12 @@ export const AnounceText = (props) => {
     text-align: center;
     color: #fff;
     white-space: pre-line;
-    @media (max-height: 553px) {
-      top: -60px;
-    }
+
     @media (max-height: 645px) {
       top: -65px;
+    }
+    @media (max-height: 553px) {
+      top: -60px;
     }
     ${addStyle}
   `;
