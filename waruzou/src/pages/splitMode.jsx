@@ -81,6 +81,12 @@ export const SplitMode = () => {
     left: 50%;
     bottom: 70px;
     transform: translate(-50%, -50%);
+    @media (max-height: 553px) {
+      bottom: 60px;
+    }
+    @media (min-width: 430px) {
+      bottom: 12vh;
+    }
   `;
 
   return (

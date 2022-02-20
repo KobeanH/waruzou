@@ -28,6 +28,12 @@ const resultWrap = css`
   border-radius: 12px;
   background-color: #fff;
   box-shadow: 0px 2px 4px rgba(128, 128, 128, 0.25);
+  @media (max-height: 553px) {
+    height: 260px;
+  }
+  @media (min-width: 430px) {
+    height: 38vh;
+  }
 `;
 const aboutSmall = css`
   font-size: 1.2rem;

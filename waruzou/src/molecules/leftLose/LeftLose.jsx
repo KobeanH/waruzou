@@ -25,11 +25,10 @@ export const LeftLose = (props) => {
 const LeftLoseWrap = css`
   position: absolute;
   top: -110px;
-  max-width: 350px;
+  max-width: calc(100% - 40px);
   width: 100%;
   box-sizing: border-box;
   padding: 12px 22px;
-  margin: 0 0 28px;
   background: #fff;
   border-radius: 8px;
   box-shadow: 0px 2px 4px rgba(128, 128, 128, 0.25);
@@ -37,8 +36,15 @@ const LeftLoseWrap = css`
     padding: 13px 12px;
     margin: 0 0 30px;
   }
-  @media (max-height: 667px) {
-    margin: 0 0 24px;
+
+  @media (max-height: 553px) {
+    max-width: 335px;
+    padding: 12px;
+    top: -80px;
+  }
+  @media (min-width: 430px) {
+    max-width: 414px;
+    top: -17vh;
   }
 `;
 const textAfterGame = css`
@@ -70,7 +76,7 @@ const LeftLoseList = css`
     height: 8vh;
   }
   @media (max-height: 667px) {
-    height: 10vh;
+    height: 8.5vh;
   }
   &::-webkit-scrollbar {
     display: none;

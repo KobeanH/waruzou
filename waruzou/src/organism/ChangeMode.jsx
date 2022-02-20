@@ -64,8 +64,8 @@ const changeModePosition = css`
   max-width: 375px;
   margin: auto;
   padding: 0 20px;
-  @media (max-height: 740px) {
-    bottom: 2vh;
+  @media (min-width: 430px) {
+    bottom: 5vh;
   }
 `;
 const modeWrap = css`
@@ -82,6 +82,9 @@ const modeWrap = css`
   & :nth-child(3) {
     gap: 6px;
   }
+  @media (max-width: 360px) {
+    gap: 6px;
+  }
 `;
 
 const modeOnn = css`
@@ -89,7 +92,8 @@ const modeOnn = css`
   justify-content: center;
   align-items: center;
   gap: 12px;
-  max-width: 170px;
+  box-sizing: border-box;
+  max-width: 190px;
   width: 100%;
   padding: 12px;
   background-color: #ffe9af;
@@ -105,6 +109,13 @@ const modeOnn = css`
   > svg {
     fill: #ffb901;
   }
+  @media (max-height: 553px) {
+    max-width: 180px;
+    padding: 6px 12px;
+  }
+  @media (max-width: 370px) {
+    padding: 6px 12px;
+  }
 `;
 const modeOff = css`
   position: relative;
@@ -113,7 +124,6 @@ const modeOff = css`
   justify-content: center;
   align-items: center;
   gap: 12px;
-  // padding: 16px;
   width: 52px;
   height: 52px;
   background-color: rgba(128, 128, 128, 0.25);
@@ -126,5 +136,13 @@ const modeOff = css`
   text-decoration: none;
   > svg {
     fill: #808080;
+  }
+  @media (max-height: 553px) {
+    width: 42px;
+    height: 42px;
+  }
+  @media (max-width: 370px) {
+    width: 42px;
+    height: 42px;
   }
 `;

@@ -67,9 +67,9 @@ const resultWrap = css`
   left: 50%;
   height: 40vh;
   transform: translate(-50%, -50%);
-  @media (max-width: 400px) {
-    width: calc(100vw - 40px);
-  }
+
+  width: calc(100vw - 40px);
+
   @media (max-height: 740px) {
     height: 43vh;
     margin: 0 auto 3.5vh;

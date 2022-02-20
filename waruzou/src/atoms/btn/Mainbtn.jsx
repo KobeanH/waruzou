@@ -26,6 +26,11 @@ export const MainBtn = (props) => {
     }
     ${mainBtnPosition}
     ${createInputMargin}
+      @media (max-height: 553px) {
+      max-width: 160px;
+      padding: 10px 16px;
+      font-size: 1.4rem;
+    }
   `;
 
   return (

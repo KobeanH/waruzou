@@ -183,7 +183,7 @@ export const GameMode = () => {
       )}
       {/* {gameEnd && <span>ゲームが終了しました</span>} */}
       {showLeftLose && (
-        <>
+        <div className={gameLotteryWrap}>
           <LeftLose gameEnd={gameEnd} lottoArray={lottoArray}></LeftLose>
           <GameLottery
             tentativeArray={tentativeArray}
@@ -196,7 +196,7 @@ export const GameMode = () => {
             closeTimeoutMS={500}
             resetGame={() => resetGame()}
           />
-        </>
+        </div>
       )}
     </>
   );
@@ -231,7 +231,20 @@ const mainBtnPosition = css`
   left: 50%;
   bottom: 70px;
   transform: translate(-50%, -50%);
+  @media (min-width: 430px) {
+    bottom: 12vh;
+  }
 `;
 const anounceTextPosition = css`
-  top: -75px;
+  top: -90px;
+  @media (max-height: 645px) {
+    top: -85px;
+  }
+  @media (max-height: 553px) {
+    top: -73px;
+  }
+`;
+const gameLotteryWrap = css`
+  display: flex;
+  justify-content: center;
 `;

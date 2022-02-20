@@ -105,7 +105,7 @@ const resultList = css`
 
 const resultItem = css`
   position: relative;
-  margin-bottom: 1.5vh;
+  margin-bottom: 2.8vh;
   font-size: 28px;
   list-style: none;
   text-align: center;
@@ -143,9 +143,9 @@ const resultItem = css`
   @media (max-height: 740px) {
     font-size: 24px;
   }
-  @media (max-height: 740px) {
+  @media (max-height: 553px) {
     font-size: 26px;
-    margin-bottom: 18px;
+    margin-bottom: 12px;
   }
 `;
 

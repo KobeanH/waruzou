@@ -69,6 +69,7 @@ const portalClassName22 = css`
   .overlay-after {
     background-color: rgba(0, 0, 0, 0.8);
     opacity: 1;
+    z-index: 11;
   }
 
   .overlay-before {
@@ -100,9 +101,11 @@ const portalClassName22 = css`
   .content-after {
     width: 100%;
     height: 30%;
-    background-color: #f8f9ff;
-
+    background-color: #fffcf4;
     border-radius: 6px;
+    @media (max-height: 553px) {
+      height: 35%;
+    }
   }
 
   .content-before {

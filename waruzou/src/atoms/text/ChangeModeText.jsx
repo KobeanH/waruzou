@@ -8,6 +8,10 @@ const show = css`
   display: inline-block;
   // transition: all 1s;
   overflow: hidden;
+
+  @media (max-width: 375px) {
+    font-size: 1.4rem;
+  }
 `;
 const hidden = css`
   position: absolute;

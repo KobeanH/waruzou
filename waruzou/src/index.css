@@ -13,8 +13,7 @@ body {
   color: #808080;
   background-color: #ffb901;
   z-index: -2;
-  height: 664px;
-  transform: translate3d(0, 0, 0);
+  /* height: 100%; */
 }
 #root::after {
   content: "";

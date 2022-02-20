@@ -12,4 +12,7 @@ const resultSuggest = css`
   color: #ffb901;
   background-color: #ffe9af;
   box-shadow: 0px 2px 9px #ffe9af;
+  @media (min-width: 430px) {
+    margin-bottom: 2.5vh;
+  }
 `;

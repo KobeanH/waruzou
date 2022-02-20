@@ -69,6 +69,12 @@ const GameInputWrapHeight = css`
   &::-webkit-scrollbar {
     display: none;
   }
+  @media (max-height: 553px) {
+    height: 254px;
+  }
+  @media (min-width: 430px) {
+    height: 42vh;
+  }
 `;
 const GameInputWrap = css`
   display: flex;

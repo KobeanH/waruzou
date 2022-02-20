@@ -23,4 +23,7 @@ const inputWrapper = css`
   &:nth-child(1) {
     margin-bottom: 2vh;
   }
+  @media (min-width: 430px) {
+    margin-bottom: 2vh;
+  }
 `;

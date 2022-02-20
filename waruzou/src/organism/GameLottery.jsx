@@ -145,6 +145,7 @@ const portalClassName = css`
   .overlay-after {
     background-color: rgba(0, 0, 0, 0.8);
     opacity: 1;
+    z-index: 11;
   }
 
   .overlay-before {
@@ -176,8 +177,11 @@ const portalClassName = css`
   .content-after {
     width: 100%;
     height: 30%;
-    background-color: #f8f9ff;
+    background-color: #fffcf4;
     border-radius: 6px;
+    @media (max-height: 553px) {
+      height: 35%;
+    }
   }
 
   .content-before {
@@ -261,7 +265,7 @@ const modalBtnWrap = css`
 
 const GameLotteryList = css`
   position: absolute;
-  max-width: 350px;
+  max-width: calc(100% - 40px);
   top: 40%;
   transform: translateY(-50%);
   display: flex;
@@ -270,6 +274,9 @@ const GameLotteryList = css`
   align-items: center;
   gap: 2vh 0;
   padding: 0;
+  @media (max-height: 553px) {
+    max-width: 335px;
+  }
 `;
 const resultItemAnime = keyframes`
 0%{

@@ -28,9 +28,7 @@ const resultItem = css`
   text-align: center;
   white-space: pre-wrap;
   animation: ${rouletteTextAnime} 1.2s;
-  will-change: ${rouletteTextAnime};
   will-change: animation;
-  perspective: 1000;
 `;
 const resultItemmm = css`
   margin-bottom: 2.5vh;

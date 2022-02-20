@@ -9,7 +9,7 @@ export const AnounceText = (props) => {
 
   const anounceText = css`
     position: absolute;
-    top: -60px;
+    top: -80px;
     left: 50%;
     transform: translateX(-50%);
     font-size: 2rem;
@@ -19,12 +19,18 @@ export const AnounceText = (props) => {
     text-align: center;
     color: #fff;
     white-space: pre-line;
+    @media (max-height: 553px) {
+      top: -60px;
+    }
+    @media (max-height: 645px) {
+      top: -65px;
+    }
     ${addStyle}
   `;
   const hideAnounceText = css`
     visibility: hidden;
     position: absolute;
-    top: -60px;
+    top: -80px;
     left: 50%;
     transform: translateX(-50%);
     font-size: 2rem;
@@ -33,6 +39,9 @@ export const AnounceText = (props) => {
     margin: 0;
     text-align: center;
     color: #fff;
+    @media (max-height: 553px) {
+      top: -60px;
+    }
   `;
 
   return (

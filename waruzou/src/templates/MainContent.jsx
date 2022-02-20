@@ -54,12 +54,23 @@ const mainContent = css`
     height: 20px;
     border-radius: 50%;
     background-color: rgba(255, 255, 255, 0.25);
-    top: 140px;
+    top: 16%;
     right: 110px;
     z-index: -1;
+  }
+  @media (max-height: 553px) {
+    max-height: 464px;
+  }
+  @media (min-width: 430px) {
+    max-height: 75vh;
+    padding: 48px;
   }
 `;
 const mainContentWrap = css`
   // position: relative;
   // margin: 0 auto;
+  @media (min-width: 430px) {
+    max-width: 375px;
+    margin: 0 auto;
+  }
 `;

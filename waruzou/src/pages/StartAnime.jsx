@@ -93,17 +93,17 @@ const endAnime = css`
   width: 100%;
   z-index: 9000;
   background: #fff;
-  // &:before {
-  //   content: "";
-  //   display: block;
-  //   position: absolute;
-  //   width: 140px;
-  //   height: 120px;
-  //   border-radius: 50%;
-  //   background-color: #ffb901;
-  //   top: -23px;
-  //   right: -40px;
-  // }
+  &:before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 140px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: #ffb901;
+    top: -23px;
+    right: -40px;
+  }
   &:after {
     content: "";
     display: block;

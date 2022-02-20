@@ -34,4 +34,7 @@ const mainBtnPosition = css`
   left: 50%;
   bottom: 70px;
   transform: translate(-50%, -50%);
+  @media (min-width: 430px) {
+    bottom: 12vh;
+  }
 `;

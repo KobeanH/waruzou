@@ -21,6 +21,10 @@ export const AboutPerPerson = (props) => {
       margin: 0 0 16px;
       padding: 0 0 1.5vh 16px;
     }
+    @media (min-width: 430px) {
+      max-width: 375px;
+      margin: 0 auto 2vh;
+    }
     ${addedStyle}
   `;
 
