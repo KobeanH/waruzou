@@ -23,7 +23,7 @@ export const AboutPerPerson = (props) => {
     }
     @media (min-width: 430px) {
       max-width: 375px;
-      margin: 0 auto 2vh;
+      margin: 0 auto 3vh;
     }
     ${addedStyle}
   `;
