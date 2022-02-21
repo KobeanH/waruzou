@@ -5,14 +5,16 @@ import { AmountState } from "../../store/amountState";
 import { BaseIcon } from "../../atoms/icon/Baseicon";
 import { AmountIcon } from "../../atoms/icon/AmountIcon";
 import { BaseInput } from "../../atoms/input/BaseInput";
+import { useCallback } from "react";
 
 export const AmountInputWrap = () => {
   const [amount, setAmount] = useRecoilState(AmountState);
 
-  const getValueFromAmount = (e) => {
-    const value = e.target.value.replace(/\D/g, ""); //数字以外は入力できないように
+  const getValueFromAmount = useCallback((event) => {
+    if (event.target.value === "0") return;
+    const value = event.target.value.replace(/\D/g, ""); //数字以外は入力できないように
     setAmount(value);
-  };
+  }, []);
 
   return (
     <div className={amountInputWrap}>

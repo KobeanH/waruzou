@@ -6,6 +6,7 @@ import { LottoArrayState } from "../../store/lottoArrayState";
 import { BaseInput } from "../../atoms/input/BaseInput";
 import { DeleteBtn } from "../../atoms/btn/DeleteBtn";
 import { AddInputBtn } from "../../atoms/btn/AddInputBtn";
+import { useCallback } from "react";
 
 Modal.setAppElement("#root");
 
@@ -20,14 +21,23 @@ export const GameInputWrao = (props) => {
   };
 
   //金額inputの更新
-  const updateAmount = (index, value) => {
+  // const updateAmount = (index, value) => {
+  //   if (value === "0") return;
+  //   const val = value.replace(/\D/g, "");
+  //   spreadLottoArray[index] = { ...lottoArray[index], objAmount: val };
+  //   setLottoArray(spreadLottoArray);
+  // };
+
+  const updateAmount = useCallback((index, value) => {
+    if (value === "0") return;
     const val = value.replace(/\D/g, "");
     spreadLottoArray[index] = { ...lottoArray[index], objAmount: val };
     setLottoArray(spreadLottoArray);
-  };
+  }, []);
 
   //人数inputの更新
   const updatePeople = (index, value) => {
+    if (value === "0") return;
     const val = value.replace(/\D/g, "");
     spreadLottoArray[index] = { ...lottoArray[index], objNumPpl: val };
     setLottoArray(spreadLottoArray);

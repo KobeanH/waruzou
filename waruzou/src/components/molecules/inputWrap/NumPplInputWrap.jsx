@@ -5,14 +5,16 @@ import { NumPplState } from "../../store/NumPplState";
 import { BaseIcon } from "../../atoms/icon/Baseicon";
 import { NumPplIcon } from "../../atoms/icon/NumPplIcon";
 import { BaseInput } from "../../atoms/input/BaseInput";
+import { useCallback } from "react";
 
 export const NumPplInputWrap = () => {
   const [ppl, setPpl] = useRecoilState(NumPplState); //人数
 
-  const getValueFromPpl = (e) => {
-    const value = e.target.value.replace(/\D/g, ""); //数字以外は入力できないように
+  const getValueFromAmount = useCallback((event) => {
+    if (event.target.value === "0") return;
+    const value = event.target.value.replace(/\D/g, ""); //数字以外は入力できないように
     setPpl(value);
-  };
+  }, []);
 
   return (
     <div className={numPplInputWrap}>
@@ -24,7 +26,7 @@ export const NumPplInputWrap = () => {
         type="tel"
         maxLength="3"
         value={ppl}
-        onChange={getValueFromPpl}
+        onChange={getValueFromAmount}
       ></BaseInput>
     </div>
   );

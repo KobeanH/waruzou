@@ -10,6 +10,7 @@ import { NumPplState } from "../store/NumPplState";
 import { AboutAmountState } from "../store/AboutAmountState";
 import { CalculatedObjState } from "../store/calculatedObj";
 import { ShowAnnounceState } from "../store/ShowAnnounceState";
+import { useState } from "react";
 
 export const SplitMode = () => {
   const amount = useRecoilValue(AmountState);
@@ -17,6 +18,7 @@ export const SplitMode = () => {
   const [calculatedObj, setCalculatedObj] = useRecoilState(CalculatedObjState);
   const [aboutAmount, setAboutAmount] = useRecoilState(AboutAmountState);
   const [showAnnounce, setShowAnnounce] = useRecoilState(ShowAnnounceState);
+  const [showSplitResult, setShowSplitResult] = useState(false);
 
   let perPerson = amount / (numPpl * 100); //百以下の位以外を計算
   perPerson = Math.trunc(perPerson); //小数点以下切り捨て
@@ -52,6 +54,9 @@ export const SplitMode = () => {
       let lowestNumberFirst = amountArray.indexOf(lowestNumber); //一番低い値の先頭のindexを取得
       amountArray[lowestNumberFirst] += lastTwoDigits; //一番低い値の一番目に余りの下二桁を足す
 
+      //三桁単位でカンマ区切り
+      amountArray = amountArray.map((amount) => amount.toLocaleString());
+
       //重複する金額を数え、CalculatedObjに格納
       let countObj = {};
       for (let i = 0; i < amountArray.length; i++) {
@@ -66,12 +71,8 @@ export const SplitMode = () => {
       aboutAmount = aboutAmount.toLocaleString(); //三桁単位でカンマ区切り
       setAboutAmount(aboutAmount);
 
-      //三桁単位でカンマ区切り
-      for (let i = 0; i < numPpl; i++) {
-        amountArray[i] = amountArray[i].toLocaleString();
-      }
-
       setShowAnnounce(false);
+      setShowSplitResult(true);
     } else {
       alert("金額と人数を入力してください");
     }
@@ -81,7 +82,7 @@ export const SplitMode = () => {
     <>
       <AnnounceText>金額と人数を入力してください</AnnounceText>
       <InputWrapper />
-      <SplitResult aboutAmount={aboutAmount} />
+      {showSplitResult && <SplitResult aboutAmount={aboutAmount} />}
       <MainBtn mainBtnPosition={mainBtnPosition} onClick={calculate}>
         計算する
       </MainBtn>
@@ -95,7 +96,7 @@ const mainBtnPosition = css`
   bottom: 70px;
   transform: translate(-50%, -50%);
   @media (max-height: 553px) {
-    bottom: 60px;
+    bottom: 65px;
   }
   @media (min-width: 430px) {
     bottom: 12vh;
