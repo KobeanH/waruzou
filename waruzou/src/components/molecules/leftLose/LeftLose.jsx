@@ -2,7 +2,6 @@ import { css } from "@emotion/css";
 
 export const LeftLose = (props) => {
   const { lottoArray, gameEnd } = props;
-  // const gameEnd = useRecoilValue(setGameEndState);
 
   return (
     <div className={LeftLoseWrap}>

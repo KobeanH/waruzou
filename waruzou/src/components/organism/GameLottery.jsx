@@ -8,18 +8,17 @@ import { toggleLottoArrayState } from "../store/toggleLottoArrayState";
 import { countState } from "../store/countState";
 import { modalIsOpenState } from "../store/modalIsOpenState";
 import { BaseModalBtn } from "../atoms/btn/BaseModalBtn";
+import { FoodImgArray } from "../img/foodImgArray";
 
 Modal.setAppElement("#root");
 
 export const GameLottery = (props) => {
-  const { amountLists, tentativeArray } = props;
+  const { amountLists, tentativeArray, showFoodImg, setShowFoodImg } = props;
   const [toggleLottoArray, setToggleLottoArray] = useRecoilState(
     toggleLottoArrayState
   ); //クラスを付与するstate
   const [count, setCount] = useRecoilState(countState); //ゲーム終了するカウンター
   const [modalIsOpen, setIsOpen] = useRecoilState(modalIsOpenState); //モーダル管理
-  console.log(tentativeArray);
-
   const [gameEnd, setGameEnd] = useRecoilState(setGameEndState);
 
   //アイテムを選択し、開くか開かないかを決める処理
@@ -29,6 +28,14 @@ export const GameLottery = (props) => {
         index2 === index ? true : toggleLottoArray
       )
     );
+    setTimeout(() => {
+      setShowFoodImg(
+        showFoodImg.map((modal, secondIndex) =>
+          secondIndex === index ? false : modal
+        )
+      );
+    }, 150);
+    console.log(showFoodImg);
     if (amountList !== 0) {
       setCount(count + 1);
     }
@@ -57,6 +64,7 @@ export const GameLottery = (props) => {
   const handleLink = () => {
     if (openModal) return;
   };
+
   const clickHandler = (index) => (openModal(index) ? handleLink : null);
   return (
     <ul className={GameLotteryList}>
@@ -68,7 +76,9 @@ export const GameLottery = (props) => {
             toggleLottoArray[index] ? opendGameLotteryItem : GameLotteryItem
           }
         >
-          <span className={toggleLottoArray[index] ? hide : show}>？</span>
+          <span className={toggleLottoArray[index] ? hide : show}>
+            {FoodImgArray[index]}
+          </span>
           <span className={toggleLottoArray[index] ? show : hide}>
             ¥{amountList.toLocaleString()}
           </span>
@@ -88,9 +98,14 @@ export const GameLottery = (props) => {
             closeTimeoutMS={500}
             portalClassName={portalClassName}
           >
-            <span className={toggleLottoArray[index] ? showAmount : invisible}>
-              <span className={toggleLottoArray[index] ? fade : invisible}>
-                ¥{amountList.toLocaleString()}
+            <span className={toggleLottoArray[index] ? showAmount : invi}>
+              {showFoodImg[index] === false && (
+                <span className={fade}>
+                  {`¥${amountList.toLocaleString()}`}
+                </span>
+              )}
+              <span className={invisible}>
+                {showFoodImg[index] && FoodImgArray[index]}
               </span>
             </span>
             <div className={modalBtnWrap}>
@@ -106,7 +121,6 @@ export const GameLottery = (props) => {
                 選び直す
               </BaseModalBtn>
             </div>
-            {/* <ModalBtnWrap amountList={amountList} index={index}></ModalBtnWrap> */}
           </Modal>
         </li>
       ))}
@@ -197,7 +211,7 @@ const makeNthChild = (i) => {
           animation: ${ItemFade} 1s ;
           animation-delay: ${i * 0.1}s;
           animation-fill-mode: forwards;
-         }
+        }
       `;
 };
 const getNthChild = () => {
@@ -299,12 +313,12 @@ const resultItemFadeIn = keyframes`
 const showAmount = css`
   position: relative;
   display: flex;
-  margin-bottom: 36px;
   align-items: center;
   justify-content: center;
   height: 40px;
   width: 150px;
-  font-size: 24px;
+  font-size: 2.4rem;
+  margin-bottom: 36px;
   &:after {
     content: "";
     position: absolute;
@@ -322,17 +336,20 @@ const fade = css`
 const show = css`
   font-size: 1.4rem;
   word-break: break-all;
+  > img {
+    width: 28px;
+  }
 `;
 const hide = css`
   display: none;
 `;
-
 const invisible = css`
-  visibility: hidden;
   display: flex;
   align-items: center;
   height: 40px;
   vertical-align: middle;
+  font-size: 2.4rem;
+`;
+const invi = css`
   margin-bottom: 36px;
-  font-size: 24px;
 `;

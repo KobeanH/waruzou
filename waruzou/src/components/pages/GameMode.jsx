@@ -42,6 +42,8 @@ export const GameMode = () => {
   const [showHeader, setShowHeader] = useRecoilState(showHeaderState);
   const [gameEnd, setGameEnd] = useRecoilState(setGameEndState);
 
+  const [showFoodImg, setShowFoodImg] = useState(false);
+
   const spreadLottoArray = [...lottoArray];
 
   let numEmptyInput = 0;
@@ -125,16 +127,11 @@ export const GameMode = () => {
   const makeArray = () => {
     const hideArray = new Array(sixteen).fill(false);
     const modalArray = new Array(sixteen).fill(false);
+    const showFoodImg = new Array(sixteen).fill(true);
     setToggleLottoArray(hideArray);
     setIsOpen(modalArray);
+    setShowFoodImg(showFoodImg);
   };
-
-  //金額が入力されたものが全部引かれたらゲーム終了
-  // useEffect(() => {
-  //   if (tentativeArray.length == count) {
-  //     setGameEnd(true);
-  //   }
-  // }, [count]);
 
   //ゲームをリセットする
   const resetGame = () => {
@@ -179,13 +176,14 @@ export const GameMode = () => {
           </MainBtn>
         </>
       )}
-      {/* {gameEnd && <span>ゲームが終了しました</span>} */}
       {showLeftLose && (
         <div className={gameLotteryWrap}>
           <LeftLose gameEnd={gameEnd} lottoArray={lottoArray}></LeftLose>
           <GameLottery
             tentativeArray={tentativeArray}
             amountLists={amountLists}
+            showFoodImg={showFoodImg}
+            setShowFoodImg={setShowFoodImg}
           />
           <ResetGame
             resetModal={() => resetModal()}
