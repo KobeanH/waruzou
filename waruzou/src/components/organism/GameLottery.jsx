@@ -1,20 +1,19 @@
 import { memo } from "react";
-import Modal from "react-modal";
 import { css, keyframes } from "@emotion/css";
+import Modal from "react-modal";
 import { useRecoilState } from "recoil";
-
-import { setGameEndState } from "../store/setGameEndState";
 
 import { toggleLottoArrayState } from "../store/toggleLottoArrayState";
 import { countState } from "../store/countState";
 import { modalIsOpenState } from "../store/modalIsOpenState";
+import { setGameEndState } from "../store/setGameEndState";
 import { BaseModalBtn } from "../atoms/btn/BaseModalBtn";
 import { FoodImgArray } from "../img/foodImgArray";
 
 Modal.setAppElement("#root");
 
 export const GameLottery = memo((props) => {
-  const { amountLists, tentativeArray, showFoodImg, setShowFoodImg } = props;
+  const { amountLists, objAmountArray, showFoodImg, setShowFoodImg } = props;
   const [toggleLottoArray, setToggleLottoArray] = useRecoilState(
     toggleLottoArrayState
   ); //クラスを付与するstate
@@ -22,13 +21,14 @@ export const GameLottery = memo((props) => {
   const [modalIsOpen, setIsOpen] = useRecoilState(modalIsOpenState); //モーダル管理
   const [gameEnd, setGameEnd] = useRecoilState(setGameEndState);
 
-  //アイテムを選択し、開くか開かないかを決める処理
+  //クリックしたくじの金額を表示する処理
   const openAmount = (amountList, index) => {
     setToggleLottoArray(
-      toggleLottoArray.map((toggleLottoArray, index2) =>
-        index2 === index ? true : toggleLottoArray
+      toggleLottoArray.map((toggleLottoArray, secondIndex) =>
+        secondIndex === index ? true : toggleLottoArray
       )
     );
+    //フード画像が消え、金額が表示されるアニメーション
     setTimeout(() => {
       setShowFoodImg(
         showFoodImg.map((modal, secondIndex) =>
@@ -36,13 +36,13 @@ export const GameLottery = memo((props) => {
         )
       );
     }, 150);
-    console.log(showFoodImg);
+    //金額が0円以上だったらカウントを+1
     if (amountList !== 0) {
       setCount(count + 1);
     }
   };
 
-  //モーダルを開く
+  //クリックしたくじのモーダルを開く
   const openModal = (index) => {
     setIsOpen(
       modalIsOpen.map((modal, secondIndex) =>
@@ -51,40 +51,45 @@ export const GameLottery = memo((props) => {
     );
   };
 
-  //モーダルを閉じる
-  const closeModal = (amountList, index) => {
+  //クリックしたくじのモーダルを閉じる
+  const closeModal = (index) => {
     setIsOpen(
       modalIsOpen.map((modal, secondIndex) =>
         secondIndex === index ? false : modal
       )
     );
-    if (tentativeArray.length === count) {
+    //0円以外のくじが全て引かれ、モーダルを閉じた時にテキストを表示する
+    if (objAmountArray.length === count) {
       setGameEnd(true);
     }
   };
-  const handleLink = () => {
-    if (openModal) return;
-  };
 
-  const clickHandler = (index) => (openModal(index) ? handleLink : null);
   return (
-    <ul className={GameLotteryList}>
+    <ul className={gameLotteryList}>
       {amountLists.map((amountList, index) => (
         <li
           key={index}
-          onClick={() => clickHandler(index)}
+          onClick={() => (openModal(index) ? null : openModal(index))}
           className={
-            toggleLottoArray[index] ? opendGameLotteryItem : GameLotteryItem
+            toggleLottoArray[index] ? opendGameLotteryItem : gameLotteryItem
           }
         >
-          <span className={toggleLottoArray[index] ? hide : show}>
+          <span
+            className={
+              toggleLottoArray[index] ? hideStuffInModal : showStuffInModal
+            }
+          >
             {FoodImgArray[index]}
           </span>
-          <span className={toggleLottoArray[index] ? show : hide}>
+          <span
+            className={
+              toggleLottoArray[index] ? showStuffInModal : hideStuffInModal
+            }
+          >
             ¥{amountList.toLocaleString()}
           </span>
           <Modal
-            isOpen={modalIsOpen[index] ? true : false}
+            isOpen={modalIsOpen[index] === true}
             onRequestClose={() => closeModal(amountList, index)}
             overlayClassName={{
               base: "overlay-base",
@@ -99,15 +104,14 @@ export const GameLottery = memo((props) => {
             closeTimeoutMS={500}
             portalClassName={portalClassName}
           >
-            <span className={toggleLottoArray[index] ? showAmount : invi}>
-              {showFoodImg[index] === false && (
+            <span className={toggleLottoArray[index] ? isAmount : isFoodImg}>
+              {showFoodImg[index] ? (
+                FoodImgArray[index]
+              ) : (
                 <span className={fadeIn}>
                   {`¥${amountList.toLocaleString()}`}
                 </span>
               )}
-              <span className={invisible}>
-                {showFoodImg[index] && FoodImgArray[index]}
-              </span>
             </span>
             <div className={modalBtnWrap}>
               <BaseModalBtn onClick={() => openAmount(amountList, index)}>
@@ -116,7 +120,7 @@ export const GameLottery = memo((props) => {
               <BaseModalBtn
                 onClick={(e) => {
                   e.stopPropagation();
-                  closeModal(amountList, index);
+                  closeModal(index);
                 }}
               >
                 選び直す
@@ -196,7 +200,7 @@ const portalClassName = css`
     background-color: transparent;
   }
 `;
-const ItemFade = keyframes`
+const lottoFadeIn = keyframes`
 0%{
   opacity:0;
   transform: translateY(20px);
@@ -206,11 +210,10 @@ const ItemFade = keyframes`
   transform: translateY(0);
 }
 `;
-
 const makeNthChild = (i) => {
   return `
         &:nth-child(${i}) {
-          animation: ${ItemFade} 1s ;
+          animation: ${lottoFadeIn} 1s ;
           animation-delay: ${i * 0.1}s;
           animation-fill-mode: forwards;
         }
@@ -223,13 +226,13 @@ const getNthChild = () => {
   }
   return nthChild;
 };
-const GameLotteryItem = css`
+const gameLotteryItem = css`
   display: flex;
   justify-content: center;
   align-items: center;
+  box-sizing: border-box;
   width: 23%;
   padding: 6px;
-  box-sizing: border-box;
   background-color: #fff;
   border-radius: 6px;
   box-shadow: 0px 2px 4px rgba(128, 128, 128, 0.25);
@@ -247,9 +250,9 @@ const opendGameLotteryItem = css`
   display: flex;
   justify-content: center;
   align-items: center;
+  box-sizing: border-box;
   width: 23%;
   padding: 6px;
-  box-sizing: border-box;
   background-color: #fff;
   border-radius: 6px;
   box-shadow: 0px 2px 4px rgba(128, 128, 128, 0.25);
@@ -262,14 +265,18 @@ const opendGameLotteryItem = css`
   pointer-events: none;
   opacity: 0.7;
 `;
-const modalBtnWrap = css`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  gap: 16px;
+const showStuffInModal = css`
+  font-size: 1.4rem;
+  word-break: break-all;
+  > img {
+    width: 28px;
+  }
+`;
+const hideStuffInModal = css`
+  display: none;
 `;
 
-const GameLotteryList = css`
+const gameLotteryList = css`
   position: absolute;
   max-width: calc(100% - 40px);
   top: 40%;
@@ -301,18 +308,8 @@ const resultItemAnime = keyframes`
   background-color:#FFB901;
 }
 `;
-const resultItemFadeIn = keyframes`
-0%{
-  opacity:0;
-}
-50%{
-  opacity:0;
-}
-100%{
-  opacity:1;
-}
-`;
-const showAmount = css`
+
+const isAmount = css`
   position: relative;
   display: flex;
   align-items: center;
@@ -332,26 +329,28 @@ const showAmount = css`
     animation: ${resultItemAnime} 1s;
   }
 `;
+const isFoodImg = css`
+  height: 40px;
+  margin-bottom: 36px;
+`;
+const resultItemFadeIn = keyframes`
+0%{
+  opacity:0;
+}
+50%{
+  opacity:0;
+}
+100%{
+  opacity:1;
+}
+`;
 const fadeIn = css`
   animation: ${resultItemFadeIn} 1s;
 `;
-const show = css`
-  font-size: 1.4rem;
-  word-break: break-all;
-  > img {
-    width: 28px;
-  }
-`;
-const hide = css`
-  display: none;
-`;
-const invisible = css`
+
+const modalBtnWrap = css`
   display: flex;
-  align-items: center;
-  height: 40px;
-  vertical-align: middle;
-  font-size: 2.4rem;
-`;
-const invi = css`
-  margin-bottom: 36px;
+  justify-content: center;
+  gap: 16px;
+  width: 100%;
 `;

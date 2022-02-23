@@ -36,14 +36,11 @@ export const ResetGame = memo((props) => {
         closeTimeoutMS={closeTimeoutMS}
         portalClassName={portalClassName22}
       >
-        {/* <span className={block}>本当にリセットしますか？</span>
-        <BaseModalBtn onClick={resetGame}>Yes</BaseModalBtn> */}
-        <span className={showAmount}>本当にリセットしますか？</span>
+        <span className={resetText}>本当にリセットしますか？</span>
         <div className={modalBtnWrap}>
           <BaseModalBtn onClick={resetGame}>はい</BaseModalBtn>
           <BaseModalBtn onClick={hideResetModal}>いいえ</BaseModalBtn>
         </div>
-        {/* <ModalBtnWrap></ModalBtnWrap> */}
       </Modal>
     </>
   );
@@ -133,15 +130,11 @@ const mainBtnPosition = css`
   }
 `;
 
-const block = css`
-  white-space: nowrap;
-`;
-
-const showAmount = css`
+const resetText = css`
   display: flex;
-  height: 40px;
-  font-size: 1.6rem;
   align-items: center;
+  height: 40px;
   margin-bottom: 36px;
+  font-size: 1.6rem;
   white-space: nowrap;
 `;

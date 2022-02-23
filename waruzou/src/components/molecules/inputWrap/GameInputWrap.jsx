@@ -1,7 +1,7 @@
-import { memo } from "react";
+import { memo, useCallback } from "react";
+import { css } from "@emotion/css";
 import Modal from "react-modal";
 import { useRecoilState } from "recoil";
-import { css } from "@emotion/css";
 
 import { LottoArrayState } from "../../store/lottoArrayState";
 import { BaseInput } from "../../atoms/input/BaseInput";
@@ -10,54 +10,61 @@ import { AddInputBtn } from "../../atoms/btn/AddInputBtn";
 
 Modal.setAppElement("#root");
 
-export const GameInputWrao = memo((props) => {
-  const { showDelete, spreadLottoArray, onClick } = props;
+export const GameInputWrap = memo((props) => {
+  const { showDelete, spreadedLottoArray, onClick } = props;
   const [lottoArray, setLottoArray] = useRecoilState(LottoArrayState);
 
   //inputタグを削除
-  const deleteInput = (index) => {
-    spreadLottoArray.splice(index, 1);
-    setLottoArray(spreadLottoArray);
-  };
+  const deleteInput = useCallback(
+    (index) => {
+      spreadedLottoArray.splice(index, 1);
+      setLottoArray(spreadedLottoArray);
+    },
+    [spreadedLottoArray]
+  );
 
   //金額inputの更新
-  const updateAmount = (index, value) => {
-    if (value === "0") return;
-    const val = value.replace(/\D/g, "");
-    spreadLottoArray[index] = { ...lottoArray[index], objAmount: val };
-    setLottoArray(spreadLottoArray);
-  };
+  const updateAmount = useCallback(
+    (index, value) => {
+      if (value === "0") return; //最初に"0"を入力不可にする処理
+      const val = value.replace(/\D/g, ""); //数字以外入力不可にする処理
+      spreadedLottoArray[index] = { ...lottoArray[index], objAmount: val };
+      setLottoArray(spreadedLottoArray);
+    },
+    [spreadedLottoArray]
+  );
 
   //人数inputの更新
-  const updatePeople = (index, value) => {
-    if (value === "0") return;
-    const val = value.replace(/\D/g, "");
-    spreadLottoArray[index] = { ...lottoArray[index], objNumPpl: val };
-    setLottoArray(spreadLottoArray);
-  };
+  const updatePeople = useCallback(
+    (index, value) => {
+      if (value === "0") return; //最初に"0"を入力不可にする処理
+      const val = value.replace(/\D/g, ""); //数字以外入力不可にする処理
+      spreadedLottoArray[index] = { ...lottoArray[index], objNumPpl: val };
+      setLottoArray(spreadedLottoArray);
+    },
+    [spreadedLottoArray]
+  );
 
   return (
     <div className={GameInputWrapHeight}>
-      {lottoArray.map((lotto, i) => (
-        <div className={GameInputWrap} key={i}>
+      {lottoArray.map((lotto, index) => (
+        <div className={gameInputWrap} key={index}>
           <BaseInput
-            placeholder={"金額"}
+            placeholder="金額"
             value={lotto.objAmount}
-            onChange={(e) => updateAmount(i, e.target.value)}
-            type={"tel"}
+            onChange={(e) => updateAmount(index, e.target.value)}
+            type="tel"
             maxLength={8}
           />
           <BaseInput
-            placeholder={"人数"}
+            placeholder="人数"
             value={lotto.objNumPpl}
-            onChange={(e) => updatePeople(i, e.target.value)}
-            type={"tel"}
+            onChange={(e) => updatePeople(index, e.target.value)}
+            type="tel"
             maxLength={2}
-            min={1}
-            max={15}
           />
           {showDelete && (
-            <DeleteBtn onClick={() => deleteInput(i)}>削除</DeleteBtn>
+            <DeleteBtn onClick={() => deleteInput(index)}>削除</DeleteBtn>
           )}
         </div>
       ))}
@@ -80,7 +87,7 @@ const GameInputWrapHeight = css`
     height: 42vh;
   }
 `;
-const GameInputWrap = css`
+const gameInputWrap = css`
   display: flex;
   align-items: flex-end;
   gap: 6px;

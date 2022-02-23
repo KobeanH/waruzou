@@ -11,18 +11,18 @@ export const AddInputBtn = memo((props) => {
 });
 
 const addInputBtn = css`
-display: flex;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding:0;
     margin: 0 auto;
+    height: 36px;
+    width: 36px;
     border: none;
     background-color: #ffe9af;
     border-radius: 100%;
     color: #ffb901;
-    width: 36px;
     font-size: 2.5rem;
     font-weight: bold;
-    height: 36px;
-    justify-content: center;
-    align-items: center;
-    padding:0;
 }
 `;

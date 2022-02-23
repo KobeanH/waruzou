@@ -57,9 +57,7 @@ export const RouletteWrap = memo((props) => {
     </div>
   );
 });
-const rouletteText = css`
-  margin-bottom: 64px;
-`;
+
 const rouletteWrap = css`
   position: absolute;
   top: 45%;
@@ -71,4 +69,8 @@ const rouletteWrap = css`
     height: 43vh;
     margin: 0 auto 3.5vh;
   }
+`;
+
+const rouletteText = css`
+  margin-bottom: 64px;
 `;

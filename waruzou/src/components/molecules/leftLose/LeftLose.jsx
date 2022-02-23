@@ -10,8 +10,8 @@ export const LeftLose = memo((props) => {
         <p className={textAfterGame}>全てのはずれが引かれました</p>
       ) : (
         <ul className={LeftLoseList}>
-          {lottoArray.map((lotto, i) => (
-            <li className={leftLoseItem} key={i}>
+          {lottoArray.map((lotto, index) => (
+            <li className={leftLoseItem} key={index}>
               <span>¥{Number(lotto.objAmount).toLocaleString()}</span>…
               <span>{lotto.objNumPpl}</span>
             </li>
@@ -24,9 +24,9 @@ export const LeftLose = memo((props) => {
 const LeftLoseWrap = css`
   position: absolute;
   top: -110px;
+  box-sizing: border-box;
   max-width: calc(100% - 40px);
   width: 100%;
-  box-sizing: border-box;
   padding: 12px 22px;
   background: #fff;
   border-radius: 8px;
@@ -35,7 +35,6 @@ const LeftLoseWrap = css`
     padding: 13px 12px;
     margin: 0 0 30px;
   }
-
   @media (max-height: 553px) {
     max-width: 335px;
     padding: 12px;
@@ -51,9 +50,8 @@ const textAfterGame = css`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1.6rem;
   height: 10vh;
-
+  font-size: 1.6rem;
   @media (max-height: 740px) {
     height: 8vh;
   }
@@ -62,14 +60,14 @@ const textAfterGame = css`
   }
 `;
 const LeftLoseList = css`
-  padding: 0;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+  box-sizing: border-box;
+  height: 10vh;
+  padding: 0;
   margin: 0 0;
   gap: 1.5vh;
-  height: 10vh;
-  box-sizing: border-box;
   overflow: scroll;
   @media (max-height: 740px) {
     height: 8vh;
@@ -82,14 +80,14 @@ const LeftLoseList = css`
   }
 `;
 const leftLoseItem = css`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0 1px;
   width: 150px;
   list-style: none;
   color: #808080;
   font-size: 2rem;
   font-weight: bold;
   text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0 1px;
 `;

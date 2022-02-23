@@ -12,6 +12,7 @@ export const BaseModalBtn = memo((props) => {
 
 const baseModalBtn = css`
   border: none;
+  box-sizing: border-box;
   padding: 16px;
   border-radius: 6px;
   background: #ffb901;
@@ -19,6 +20,5 @@ const baseModalBtn = css`
   width: 120px;
   font-size: 1.5rem;
   font-weight: bold;
-  box-sizing: border-box;
   white-space: nowrap;
 `;

@@ -2,7 +2,7 @@ import { memo } from "react";
 import { css } from "@emotion/css";
 
 export const DeleteBtn = memo((props) => {
-  const { onClick, children } = props;
+  const { children, onClick } = props;
 
   return (
     <button className={deleteBtn} type="button" onClick={onClick}>

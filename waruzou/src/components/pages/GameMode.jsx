@@ -4,64 +4,65 @@ import Modal from "react-modal";
 import { useRecoilState } from "recoil";
 
 import { LottoArrayState } from "../store/lottoArrayState";
-import { MainBtn } from "../atoms/btn/MainBtn";
-import { GameInputWrao } from "../molecules/inputWrap/GameInputWrap";
-import { LeftLose } from "../molecules/leftLose/LeftLose";
-import { GameLottery } from "../organism/GameLottery";
-import { ResetGame } from "../organism/ResetGame";
-import { BaseIcon } from "../atoms/icon/Baseicon";
-import { NumPplIcon } from "../atoms/icon/NumPplIcon";
-import { AmountIcon } from "../atoms/icon/AmountIcon";
+import { ShowState } from "../store/ShowState";
 import { toggleLottoArrayState } from "../store/toggleLottoArrayState";
 import { countState } from "../store/countState";
 import { modalIsOpenState } from "../store/modalIsOpenState";
-import { ShowState } from "../store/ShowState";
-import { AnnounceText } from "../atoms/text/AnnounceText";
 import { ShowAnnounceState } from "../store/ShowAnnounceState";
 import { showHeaderState } from "../store/showHeaderState";
 import { setGameEndState } from "../store/setGameEndState";
+import { AnnounceText } from "../atoms/text/AnnounceText";
+import { BaseIcon } from "../atoms/icon/Baseicon";
+import { AmountIcon } from "../atoms/icon/AmountIcon";
+import { NumPplIcon } from "../atoms/icon/NumPplIcon";
+import { GameInputWrap } from "../molecules/inputWrap/GameInputWrap";
+import { MainBtn } from "../atoms/btn/MainBtn";
+import { LeftLose } from "../molecules/leftLose/LeftLose";
+import { GameLottery } from "../organism/GameLottery";
+import { ResetGame } from "../organism/ResetGame";
+import { useCallback } from "react/cjs/react.development";
 
 Modal.setAppElement("#root");
 
 export const GameMode = memo(() => {
-  const [lottoArray, setLottoArray] = useRecoilState(LottoArrayState); //人数分、金額を格納する配列
+  const [lottoArray, setLottoArray] = useRecoilState(LottoArrayState); //人数、金額のオブジェクトを格納する配列
   const [showDelete, setShowDelete] = useState(false); //削除ボタン表示切り替え
   const [amountLists, setAmountLists] = useState([]);
   const [cantStart, setCantStart] = useState(false); //ゲーム終了を表示
-  const [show, setShow] = useRecoilState(ShowState); //追加するボタン切り替え
-  const [showLeftLose, setShowLeftLose] = useState(false); //追加するボタン切り替え
-  const [showResetModal, setShowResetModal] = useState(false); //リセットモーダル
+  const [show, setShow] = useRecoilState(ShowState); //表示切り替え
+  const [showLeftLose, setShowLeftLose] = useState(false); //くじの枚数を表示
+  const [showResetModal, setShowResetModal] = useState(false); //リセットモーダルを表示
   const [toggleLottoArray, setToggleLottoArray] = useRecoilState(
     toggleLottoArrayState
   );
-  const [count, setCount] = useRecoilState(countState);
-  const [modalIsOpen, setIsOpen] = useRecoilState(modalIsOpenState);
-  const [showAnnounce, setShowAnnounce] = useRecoilState(ShowAnnounceState);
-  const [showHeader, setShowHeader] = useRecoilState(showHeaderState);
+  const [count, setCount] = useRecoilState(countState); //0円以外の金額のくじを引かれた時のカウント
+  const [modalIsOpen, setIsOpen] = useRecoilState(modalIsOpenState); //モーダルの表示切り替え
+  const [showAnnounce, setShowAnnounce] = useRecoilState(ShowAnnounceState); //アナウンステキストの表示切り替え
+  const [showHeader, setShowHeader] = useRecoilState(showHeaderState); //ヘッダーの表示切り替え
   const [gameEnd, setGameEnd] = useRecoilState(setGameEndState); //ゲーム終了を表示
-  const [showFoodImg, setShowFoodImg] = useState(false);
+  const [showFoodImg, setShowFoodImg] = useState(false); //フード画像の表示切り替え
 
   const maxNumPpl = 16;
 
-  const spreadLottoArray = [...lottoArray];
+  const spreadedLottoArray = [...lottoArray];
 
   let numEmptyInput = 0;
   //全てのinputに数値が入っていなければ+1
-  for (let i = 0; i < spreadLottoArray.length; i++) {
-    if (!(spreadLottoArray[i].objAmount && spreadLottoArray[i].objNumPpl)) {
+  for (let i = 0; i < spreadedLottoArray.length; i++) {
+    if (!(spreadedLottoArray[i].objAmount && spreadedLottoArray[i].objNumPpl)) {
       numEmptyInput += 1;
     }
   }
 
   //inputタグを生成
-  const addInput = () => {
+  const addInput = useCallback(() => {
     //全てのinputに金額と人数の数字が入ってなければアラートを出す
     if (numEmptyInput > 0) {
       alert("金額と人数を入力してください");
     } else {
       setLottoArray([...lottoArray, { objAmount: "", objNumPpl: "" }]);
     }
-  };
+  }, [lottoArray]);
 
   //inputが一つしかない時に削除ボタンを非表示
   useEffect(() => {
@@ -72,62 +73,56 @@ export const GameMode = memo(() => {
     }
   }, [lottoArray]);
 
-  //入力された金額を人数分tentativeArrayへ格納
-  const tentativeArray = [];
+  //入力された金額を人数分objAmountArrayへ格納
+  const objAmountArray = [];
   lottoArray.forEach((lotto) => {
     const objAmount = parseInt(lotto.objAmount) || 0;
     const objNumPpl = parseInt(lotto.objNumPpl) || 0;
     for (let i = 0; i < objNumPpl; i++) {
-      tentativeArray.push(objAmount);
+      objAmountArray.push(objAmount);
     }
   });
 
   //ゲームを開始する処理
-  const startGame = () => {
+  const startGame = useCallback(() => {
     //全てのinputに金額と人数の数字が入ってなければアラートを出す
     if (numEmptyInput > 0) {
       alert("金額と人数を入力してください");
       setCantStart(true);
     } else {
-      //人数inputに入力された合計が16以下の場合、16になるよう<li>タグを生成
-      if (tentativeArray.length < maxNumPpl) {
-        const numAddedZero = maxNumPpl - tentativeArray.length;
+      //人数inputに入力された合計が16以下の場合、16になるよう金額0の<li>タグを生成
+      if (objAmountArray.length < maxNumPpl) {
+        const numAddedZero = maxNumPpl - objAmountArray.length;
         for (let i = 0; i < numAddedZero; i++) {
-          tentativeArray.push(0);
+          objAmountArray.push(0);
         }
-        setAmountLists(tentativeArray);
+        setAmountLists(objAmountArray);
         setShow(false);
         setShowLeftLose(true);
         setShowAnnounce(false);
         setShowHeader(false);
-      } else if (tentativeArray.length > maxNumPpl) {
+      } else if (objAmountArray.length > maxNumPpl) {
         alert(`${maxNumPpl}人以下に設定してください`);
       } else {
-        setAmountLists(tentativeArray);
+        setAmountLists(objAmountArray);
         setShow(false);
         setShowLeftLose(true);
         setShowAnnounce(false);
         setShowHeader(false);
-      }
-      //人数が16の時モーダルが表示されるのを無効化
-      if (showResetModal) {
-        setShowResetModal(false);
       }
       setCount(0);
     }
     makeArray();
+    objAmountArray.sort(() => Math.random() - 0.5); //配列の中身をシャッフルする
+  }, [objAmountArray]);
 
-    tentativeArray.sort(() => Math.random() - 0.5); //配列の中身をシャッフルする
-  };
-
-  //クラスを付与するために16個のfalseを作成し、格納
   const makeArray = () => {
     const hideArray = new Array(maxNumPpl).fill(false);
     const modalArray = new Array(maxNumPpl).fill(false);
     const showFoodImg = new Array(maxNumPpl).fill(true);
     setToggleLottoArray(hideArray);
-    setIsOpen(modalArray);
-    setShowFoodImg(showFoodImg);
+    setIsOpen(modalArray); //各くじのモーダル表示切り替え
+    setShowFoodImg(showFoodImg); //各くじのフード画像表示切り替え
   };
 
   //ゲームをリセットする
@@ -140,15 +135,17 @@ export const GameMode = memo(() => {
     setCount(null);
     setShowAnnounce(true);
     setShowHeader(true);
+    setShowResetModal(false);
   };
 
   const resetModal = () => {
     setShowResetModal(true);
   };
+
   const hideResetModal = () => {
     setShowResetModal(false);
   };
-
+  console.log("aaa");
   return (
     <>
       <AnnounceText addStyle={announceTextPosition}>
@@ -162,12 +159,11 @@ export const GameMode = memo(() => {
           <BaseIcon numPplIconPosition={showDelete ? moveLeft : positionCenter}>
             <NumPplIcon />
           </BaseIcon>
-          <GameInputWrao
-            spreadLottoArray={spreadLottoArray}
+          <GameInputWrap
+            spreadedLottoArray={spreadedLottoArray}
             showDelete={showDelete}
             onClick={addInput}
           />
-
           <MainBtn mainBtnPosition={mainBtnPosition} onClick={startGame}>
             ゲームを開始する
           </MainBtn>
@@ -177,17 +173,17 @@ export const GameMode = memo(() => {
         <div className={gameLotteryWrap}>
           <LeftLose gameEnd={gameEnd} lottoArray={lottoArray}></LeftLose>
           <GameLottery
-            tentativeArray={tentativeArray}
+            objAmountArray={objAmountArray}
             amountLists={amountLists}
             showFoodImg={showFoodImg}
             setShowFoodImg={setShowFoodImg}
           />
           <ResetGame
-            resetModal={() => resetModal()}
+            resetModal={resetModal}
             showResetModal={showResetModal}
-            hideResetModal={() => hideResetModal()}
+            hideResetModal={hideResetModal}
             closeTimeoutMS={500}
-            resetGame={() => resetGame()}
+            resetGame={resetGame}
           />
         </div>
       )}
