@@ -1,16 +1,17 @@
+import { memo } from "react";
 import { css } from "@emotion/css";
 
 import logo from "../img/warican-logo.png";
 import { HeaderTtlText } from "../atoms/header/HeaderTtlText";
 
-export const HeaderTtl = () => {
+export const HeaderTtl = memo(() => {
   return (
     <div className={headerTtl}>
       <img className={logoImg} src={logo} alt="warican-logo" />
       <HeaderTtlText />
     </div>
   );
-};
+});
 
 const headerTtl = css`
   display: flex;

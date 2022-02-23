@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { css } from "@emotion/css";
 
 import { BlackText } from "../atoms/text/BlackText";
 import { RouletteText } from "../atoms/text/RouletteText";
 
-export const RouletteWrap = (props) => {
+export const RouletteWrap = memo((props) => {
   const { startRoulette, showRoulettePerson } = props;
   const [count, setCount] = useState(0);
 
@@ -56,7 +56,7 @@ export const RouletteWrap = (props) => {
       </RouletteText>
     </div>
   );
-};
+});
 const rouletteText = css`
   margin-bottom: 64px;
 `;

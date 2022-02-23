@@ -1,13 +1,14 @@
+import { memo } from "react";
 import { css } from "@emotion/css";
 
-export const BaseModalBtn = (props) => {
+export const BaseModalBtn = memo((props) => {
   const { children, onClick } = props;
   return (
     <button type="button" onClick={onClick} className={baseModalBtn}>
       {children}
     </button>
   );
-};
+});
 
 const baseModalBtn = css`
   border: none;

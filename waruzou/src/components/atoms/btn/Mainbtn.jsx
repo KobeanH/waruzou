@@ -1,6 +1,7 @@
+import { memo } from "react";
 import { css } from "@emotion/css";
 
-export const MainBtn = (props) => {
+export const MainBtn = memo((props) => {
   const { children, onClick, mainBtnPosition, createInputMargin } = props;
   const mainBtn = css`
     display: block;
@@ -35,4 +36,4 @@ export const MainBtn = (props) => {
       {children}
     </button>
   );
-};
+});

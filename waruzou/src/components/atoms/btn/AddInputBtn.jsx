@@ -1,13 +1,14 @@
+import { memo } from "react";
 import { css } from "@emotion/css";
 
-export const AddInputBtn = (props) => {
+export const AddInputBtn = memo((props) => {
   const { onClick } = props;
   return (
     <button onClick={onClick} type="button" className={addInputBtn}>
       ＋
     </button>
   );
-};
+});
 
 const addInputBtn = css`
 display: flex;

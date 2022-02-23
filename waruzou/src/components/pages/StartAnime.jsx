@@ -1,9 +1,9 @@
+import { useState, useEffect, memo } from "react";
 import { css } from "@emotion/css";
-import { useState, useEffect } from "react";
 
 import logo from "../img/warican-logo.png";
 
-export const StartAnime = () => {
+export const StartAnime = memo(() => {
   const [anime, setAnime] = useState(true);
   const [titleAnime, setTitleAnime] = useState(false);
   const [logoAnime, setLogoAnime] = useState(false);
@@ -49,7 +49,8 @@ export const StartAnime = () => {
       </div>
     </div>
   );
-};
+});
+
 const startAnime = css`
     position: fixed;
     top: 0;

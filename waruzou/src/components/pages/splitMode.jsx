@@ -1,3 +1,4 @@
+import { memo, useState } from "react";
 import { css } from "@emotion/css";
 import { useRecoilState, useRecoilValue } from "recoil";
 
@@ -10,9 +11,8 @@ import { NumPplState } from "../store/NumPplState";
 import { AboutAmountState } from "../store/AboutAmountState";
 import { CalculatedObjState } from "../store/calculatedObj";
 import { ShowAnnounceState } from "../store/ShowAnnounceState";
-import { useState } from "react";
 
-export const SplitMode = () => {
+export const SplitMode = memo(() => {
   const amount = useRecoilValue(AmountState);
   const numPpl = useRecoilValue(NumPplState);
   const [calculatedObj, setCalculatedObj] = useRecoilState(CalculatedObjState);
@@ -88,7 +88,7 @@ export const SplitMode = () => {
       </MainBtn>
     </>
   );
-};
+});
 
 const mainBtnPosition = css`
   position: fixed;

@@ -1,11 +1,12 @@
+import { memo } from "react";
 import { css } from "@emotion/css";
 
 import { BaseMiniTitleStyle } from "./BaseMiniTitleStyle";
 
-export const ResultSuggest = (props) => {
+export const ResultSuggest = memo((props) => {
   const { children } = props;
   return <span className={resultSuggest}>{children}</span>;
-};
+});
 
 const resultSuggest = css`
   ${BaseMiniTitleStyle}

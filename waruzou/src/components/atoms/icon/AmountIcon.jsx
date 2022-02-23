@@ -1,6 +1,7 @@
+import { memo } from "react";
 import { css } from "@emotion/css";
 
-export const AmountIcon = (props) => {
+export const AmountIcon = memo((props) => {
   const { fromGameMode } = props;
   const amountIcon = css`
     display: flex;
@@ -14,4 +15,4 @@ export const AmountIcon = (props) => {
   `;
 
   return <span className={amountIcon}>￥</span>;
-};
+});

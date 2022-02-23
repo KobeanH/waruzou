@@ -1,6 +1,7 @@
+import { memo } from "react";
 import { css } from "@emotion/css";
 
-export const BlackText = (props) => {
+export const BlackText = memo((props) => {
   const { children, addedStyle } = props;
 
   const aboutAmount = css`
@@ -29,4 +30,4 @@ export const BlackText = (props) => {
   `;
 
   return <p className={aboutAmount}>{children}</p>;
-};
+});

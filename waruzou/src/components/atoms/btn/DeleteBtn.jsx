@@ -1,6 +1,7 @@
+import { memo } from "react";
 import { css } from "@emotion/css";
 
-export const DeleteBtn = (props) => {
+export const DeleteBtn = memo((props) => {
   const { onClick, children } = props;
 
   return (
@@ -8,7 +9,7 @@ export const DeleteBtn = (props) => {
       {children}
     </button>
   );
-};
+});
 
 const deleteBtn = css`
   padding: 6px 12px;

@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, memo } from "react";
+import { css } from "@emotion/css";
 import Modal from "react-modal";
 import { useRecoilState } from "recoil";
-import { css } from "@emotion/css";
 
 import { LottoArrayState } from "../store/lottoArrayState";
 import { MainBtn } from "../atoms/btn/MainBtn";
@@ -23,14 +23,12 @@ import { setGameEndState } from "../store/setGameEndState";
 
 Modal.setAppElement("#root");
 
-export const GameMode = () => {
+export const GameMode = memo(() => {
   const [lottoArray, setLottoArray] = useRecoilState(LottoArrayState); //人数分、金額を格納する配列
   const [showDelete, setShowDelete] = useState(false); //削除ボタン表示切り替え
   const [amountLists, setAmountLists] = useState([]);
-  // const [gameEnd, setGameEnd] = useState(false); //ゲーム終了を表示
   const [cantStart, setCantStart] = useState(false); //ゲーム終了を表示
-  // const [show, setShow] = useState(true); //追加するボタン切り替え
-  const [show, setShow] = useRecoilState(ShowState);
+  const [show, setShow] = useRecoilState(ShowState); //追加するボタン切り替え
   const [showLeftLose, setShowLeftLose] = useState(false); //追加するボタン切り替え
   const [showResetModal, setShowResetModal] = useState(false); //リセットモーダル
   const [toggleLottoArray, setToggleLottoArray] = useRecoilState(
@@ -40,9 +38,10 @@ export const GameMode = () => {
   const [modalIsOpen, setIsOpen] = useRecoilState(modalIsOpenState);
   const [showAnnounce, setShowAnnounce] = useRecoilState(ShowAnnounceState);
   const [showHeader, setShowHeader] = useRecoilState(showHeaderState);
-  const [gameEnd, setGameEnd] = useRecoilState(setGameEndState);
-
+  const [gameEnd, setGameEnd] = useRecoilState(setGameEndState); //ゲーム終了を表示
   const [showFoodImg, setShowFoodImg] = useState(false);
+
+  const maxNumPpl = 16;
 
   const spreadLottoArray = [...lottoArray];
 
@@ -83,8 +82,6 @@ export const GameMode = () => {
     }
   });
 
-  const sixteen = 16;
-
   //ゲームを開始する処理
   const startGame = () => {
     //全てのinputに金額と人数の数字が入ってなければアラートを出す
@@ -93,8 +90,8 @@ export const GameMode = () => {
       setCantStart(true);
     } else {
       //人数inputに入力された合計が16以下の場合、16になるよう<li>タグを生成
-      if (tentativeArray.length < sixteen) {
-        const numAddedZero = sixteen - tentativeArray.length;
+      if (tentativeArray.length < maxNumPpl) {
+        const numAddedZero = maxNumPpl - tentativeArray.length;
         for (let i = 0; i < numAddedZero; i++) {
           tentativeArray.push(0);
         }
@@ -103,8 +100,8 @@ export const GameMode = () => {
         setShowLeftLose(true);
         setShowAnnounce(false);
         setShowHeader(false);
-      } else if (tentativeArray.length > sixteen) {
-        alert(`${sixteen}人以下に設定してください`);
+      } else if (tentativeArray.length > maxNumPpl) {
+        alert(`${maxNumPpl}人以下に設定してください`);
       } else {
         setAmountLists(tentativeArray);
         setShow(false);
@@ -125,9 +122,9 @@ export const GameMode = () => {
 
   //クラスを付与するために16個のfalseを作成し、格納
   const makeArray = () => {
-    const hideArray = new Array(sixteen).fill(false);
-    const modalArray = new Array(sixteen).fill(false);
-    const showFoodImg = new Array(sixteen).fill(true);
+    const hideArray = new Array(maxNumPpl).fill(false);
+    const modalArray = new Array(maxNumPpl).fill(false);
+    const showFoodImg = new Array(maxNumPpl).fill(true);
     setToggleLottoArray(hideArray);
     setIsOpen(modalArray);
     setShowFoodImg(showFoodImg);
@@ -155,7 +152,7 @@ export const GameMode = () => {
   return (
     <>
       <AnnounceText addStyle={announceTextPosition}>
-        金額と人数(16人以下)を{"\n"}入力してください
+        金額と人数({maxNumPpl}人以下)を{"\n"}入力してください
       </AnnounceText>
       {show && (
         <>
@@ -196,7 +193,7 @@ export const GameMode = () => {
       )}
     </>
   );
-};
+});
 
 const amountIconMargin = css`
   margin-bottom: 6px;

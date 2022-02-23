@@ -1,6 +1,7 @@
+import { memo } from "react";
 import { css } from "@emotion/css";
 
-export const NumPplIcon = (props) => {
+export const NumPplIcon = memo((props) => {
   const { fromGameMode } = props;
 
   const numPplIcon = css`
@@ -29,4 +30,4 @@ export const NumPplIcon = (props) => {
       </g>
     </svg>
   );
-};
+});

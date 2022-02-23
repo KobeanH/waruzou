@@ -1,3 +1,4 @@
+import { memo } from "react";
 import Modal from "react-modal";
 import { useRecoilState } from "recoil";
 import { css } from "@emotion/css";
@@ -9,7 +10,7 @@ import { AddInputBtn } from "../../atoms/btn/AddInputBtn";
 
 Modal.setAppElement("#root");
 
-export const GameInputWrao = (props) => {
+export const GameInputWrao = memo((props) => {
   const { showDelete, spreadLottoArray, onClick } = props;
   const [lottoArray, setLottoArray] = useRecoilState(LottoArrayState);
 
@@ -63,7 +64,7 @@ export const GameInputWrao = (props) => {
       <AddInputBtn onClick={onClick} />
     </div>
   );
-};
+});
 const GameInputWrapHeight = css`
   height: 284px;
   overflow: scroll;

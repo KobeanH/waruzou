@@ -1,11 +1,11 @@
+import { memo, useState } from "react";
 import { css } from "@emotion/css";
-import { useState } from "react";
 
 import { AnnounceText } from "../atoms/text/AnnounceText";
 import { RouletteWrap } from "../organism/RouletteWrap";
 import { MainBtn } from "../atoms/btn/MainBtn";
 
-export const RouletteMode = () => {
+export const RouletteMode = memo(() => {
   const [switchAnnounce, setSwitchAnnounce] = useState(true);
   const [showRoulettePerson, setShowRoulettePerson] = useState(false);
   const [startRoulette, setStartRoulette] = useState(false);
@@ -32,7 +32,7 @@ export const RouletteMode = () => {
       </MainBtn>
     </>
   );
-};
+});
 const mainBtnPosition = css`
   position: fixed;
   left: 50%;

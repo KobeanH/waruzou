@@ -1,3 +1,4 @@
+import { memo } from "react";
 import Modal from "react-modal";
 import { css, keyframes } from "@emotion/css";
 import { useRecoilState } from "recoil";
@@ -12,7 +13,7 @@ import { FoodImgArray } from "../img/foodImgArray";
 
 Modal.setAppElement("#root");
 
-export const GameLottery = (props) => {
+export const GameLottery = memo((props) => {
   const { amountLists, tentativeArray, showFoodImg, setShowFoodImg } = props;
   const [toggleLottoArray, setToggleLottoArray] = useRecoilState(
     toggleLottoArrayState
@@ -100,7 +101,7 @@ export const GameLottery = (props) => {
           >
             <span className={toggleLottoArray[index] ? showAmount : invi}>
               {showFoodImg[index] === false && (
-                <span className={fade}>
+                <span className={fadeIn}>
                   {`¥${amountList.toLocaleString()}`}
                 </span>
               )}
@@ -126,7 +127,8 @@ export const GameLottery = (props) => {
       ))}
     </ul>
   );
-};
+});
+
 const portalClassName = css`
   .overlay-base {
     padding: 1rem;
@@ -330,7 +332,7 @@ const showAmount = css`
     animation: ${resultItemAnime} 1s;
   }
 `;
-const fade = css`
+const fadeIn = css`
   animation: ${resultItemFadeIn} 1s;
 `;
 const show = css`

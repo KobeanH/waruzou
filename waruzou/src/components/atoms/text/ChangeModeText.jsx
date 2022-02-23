@@ -1,9 +1,10 @@
+import { memo } from "react";
 import { css } from "@emotion/css";
 
-export const ChangeModeText = (props) => {
+export const ChangeModeText = memo((props) => {
   const { modeOn, children } = props;
   return <span className={modeOn ? show : hidden}>{children}</span>;
-};
+});
 const show = css`
   display: inline-block;
   // transition: all 1s;

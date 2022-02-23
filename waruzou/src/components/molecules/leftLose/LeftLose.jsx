@@ -1,6 +1,7 @@
+import { memo } from "react";
 import { css } from "@emotion/css";
 
-export const LeftLose = (props) => {
+export const LeftLose = memo((props) => {
   const { lottoArray, gameEnd } = props;
 
   return (
@@ -19,7 +20,7 @@ export const LeftLose = (props) => {
       )}
     </div>
   );
-};
+});
 const LeftLoseWrap = css`
   position: absolute;
   top: -110px;

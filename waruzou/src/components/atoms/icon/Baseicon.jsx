@@ -1,6 +1,7 @@
+import { memo } from "react";
 import { css } from "@emotion/css";
 
-export const BaseIcon = (props) => {
+export const BaseIcon = memo((props) => {
   const { children, numPplIconPosition, amountIconMargin } = props;
 
   const baseIcon = css`
@@ -14,4 +15,4 @@ export const BaseIcon = (props) => {
   `;
 
   return <span className={baseIcon}>{children}</span>;
-};
+});

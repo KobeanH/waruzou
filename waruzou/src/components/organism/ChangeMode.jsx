@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { css } from "@emotion/css";
 import { useRecoilState } from "recoil";
@@ -8,7 +9,7 @@ import { GameIcon } from "../atoms/icon/GameIcon";
 import { RouletteIcon } from "../atoms/icon/RouletteIcon";
 import { ShowAnnounceState } from "../store/ShowAnnounceState";
 
-export const ChangeMode = () => {
+export const ChangeMode = memo(() => {
   const [showAnnounce, setShowAnnounce] = useRecoilState(ShowAnnounceState);
   const location = useLocation();
 
@@ -16,7 +17,7 @@ export const ChangeMode = () => {
   const changeMode = () => {
     setShowAnnounce(true);
   };
-  console.log(location.pathname);
+
   return (
     <div className={changeModePosition}>
       <div className={modeWrap}>
@@ -26,7 +27,7 @@ export const ChangeMode = () => {
           to="/"
         >
           <SplitIcon />
-          <ChangeModeText modeOn={location.pathname === "/" ? true : false}>
+          <ChangeModeText modeOn={location.pathname === "/"}>
             割り勘モード
           </ChangeModeText>
         </Link>
@@ -36,9 +37,7 @@ export const ChangeMode = () => {
           to="/game/"
         >
           <GameIcon />
-          <ChangeModeText
-            modeOn={location.pathname === "/game/" ? true : false}
-          >
+          <ChangeModeText modeOn={location.pathname === "/game/"}>
             ゲームモード
           </ChangeModeText>
         </Link>
@@ -48,16 +47,14 @@ export const ChangeMode = () => {
           to="/roulette/"
         >
           <RouletteIcon />
-          <ChangeModeText
-            modeOn={location.pathname === "/roulette/" ? true : false}
-          >
+          <ChangeModeText modeOn={location.pathname === "/roulette/"}>
             ルーレットモード
           </ChangeModeText>
         </Link>
       </div>
     </div>
   );
-};
+});
 const changeModePosition = css`
   position: fixed;
   bottom: 2vh;

@@ -1,9 +1,10 @@
+import { memo } from "react";
 import { css, keyframes } from "@emotion/css";
 import { useRecoilValue } from "recoil";
 
 import { CalculatedObjState } from "../../store/calculatedObj";
 
-export const ResultList = () => {
+export const ResultList = memo(() => {
   const calculatedObj = useRecoilValue(CalculatedObjState);
 
   return (
@@ -21,7 +22,7 @@ export const ResultList = () => {
       ))}
     </ul>
   );
-};
+});
 
 const resultItemAnime = keyframes`
 0%{

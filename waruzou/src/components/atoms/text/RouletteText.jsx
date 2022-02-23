@@ -1,10 +1,12 @@
+import { memo } from "react";
 import { css, keyframes } from "@emotion/css";
 
-export const RouletteText = (props) => {
+export const RouletteText = memo((props) => {
   const { children, startRoulette } = props;
 
   return <p className={startRoulette ? animeOff : animeOn}>{children}</p>;
-};
+});
+
 const rouletteTextAnime = keyframes`
 25%{
   transform: scale(1.2);

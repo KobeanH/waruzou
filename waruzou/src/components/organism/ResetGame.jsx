@@ -1,3 +1,4 @@
+import { memo } from "react";
 import Modal from "react-modal";
 import { css } from "@emotion/css";
 
@@ -6,7 +7,7 @@ import { BaseModalBtn } from "../atoms/btn/BaseModalBtn";
 
 Modal.setAppElement("#root");
 
-export const ResetGame = (props) => {
+export const ResetGame = memo((props) => {
   const {
     resetModal,
     showResetModal,
@@ -46,7 +47,8 @@ export const ResetGame = (props) => {
       </Modal>
     </>
   );
-};
+});
+
 const portalClassName22 = css`
   .overlay-base {
     padding: 1rem;

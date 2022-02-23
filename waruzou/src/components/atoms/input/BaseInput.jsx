@@ -1,6 +1,7 @@
+import { memo } from "react";
 import { css } from "@emotion/css";
 
-export const BaseInput = (props) => {
+export const BaseInput = memo((props) => {
   const { placeholder, type, onChange, maxLength, value } = props;
 
   return (
@@ -13,7 +14,7 @@ export const BaseInput = (props) => {
       value={value}
     />
   );
-};
+});
 const baseInput = css`
   width: 100%;
   padding: 1.5vh 16px;

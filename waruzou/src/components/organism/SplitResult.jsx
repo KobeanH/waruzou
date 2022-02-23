@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { css } from "@emotion/css";
 import { useRecoilValue } from "recoil";
 
@@ -6,7 +7,7 @@ import { BlackText } from "../atoms/text/BlackText";
 import { ResultSuggest } from "../atoms/title/ResultSuggest";
 import { ResultList } from "../atoms/list/ResultList";
 
-export const SplitResult = () => {
+export const SplitResult = memo(() => {
   const aboutAmount = useRecoilValue(AboutAmountState);
 
   return (
@@ -19,7 +20,7 @@ export const SplitResult = () => {
       <ResultList />
     </div>
   );
-};
+});
 
 const SplitResultWrap = css`
   height: 280px;

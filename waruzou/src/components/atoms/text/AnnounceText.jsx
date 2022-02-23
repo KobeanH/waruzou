@@ -1,9 +1,10 @@
+import { memo } from "react";
 import { css } from "@emotion/css";
 import { useRecoilValue } from "recoil";
 
 import { ShowAnnounceState } from "../../store/ShowAnnounceState";
 
-export const AnnounceText = (props) => {
+export const AnnounceText = memo((props) => {
   const { children, addStyle } = props;
   const showAnnounce = useRecoilValue(ShowAnnounceState);
 
@@ -47,4 +48,4 @@ export const AnnounceText = (props) => {
   return (
     <p className={showAnnounce ? announceText : hideAnnounceText}>{children}</p>
   );
-};
+});

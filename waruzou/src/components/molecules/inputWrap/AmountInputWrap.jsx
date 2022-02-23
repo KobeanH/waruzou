@@ -1,3 +1,4 @@
+import { memo, useCallback } from "react";
 import { css } from "@emotion/css";
 import { useRecoilState } from "recoil";
 
@@ -5,9 +6,8 @@ import { AmountState } from "../../store/amountState";
 import { BaseIcon } from "../../atoms/icon/Baseicon";
 import { AmountIcon } from "../../atoms/icon/AmountIcon";
 import { BaseInput } from "../../atoms/input/BaseInput";
-import { useCallback } from "react";
 
-export const AmountInputWrap = () => {
+export const AmountInputWrap = memo(() => {
   const [amount, setAmount] = useRecoilState(AmountState);
 
   const getValueFromAmount = useCallback((event) => {
@@ -30,7 +30,7 @@ export const AmountInputWrap = () => {
       ></BaseInput>
     </div>
   );
-};
+});
 
 const amountInputWrap = css`
   display: flex;

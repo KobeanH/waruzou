@@ -1,10 +1,11 @@
+import { memo } from "react";
 import { css } from "@emotion/css";
 import { useRecoilValue } from "recoil";
 import { showHeaderState } from "../store/showHeaderState";
 
 import { HeaderTtl } from "../molecules/HeaderTtl";
 
-export const Header = () => {
+export const Header = memo(() => {
   const showHeader = useRecoilValue(showHeaderState);
   return (
     <>
@@ -15,7 +16,8 @@ export const Header = () => {
       )}
     </>
   );
-};
+});
+
 const header = css`
   display: none;
   @media (max-height: 740px) {
