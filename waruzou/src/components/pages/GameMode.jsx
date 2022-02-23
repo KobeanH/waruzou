@@ -126,7 +126,7 @@ export const GameMode = memo(() => {
   };
 
   //ゲームをリセットする
-  const resetGame = () => {
+  const resetGame = useCallback(() => {
     setLottoArray([{ objAmount: "", objNumPpl: "" }]);
     setAmountLists([]);
     setGameEnd(false);
@@ -136,16 +136,16 @@ export const GameMode = memo(() => {
     setShowAnnounce(true);
     setShowHeader(true);
     setShowResetModal(false);
-  };
+  }, [lottoArray]);
 
-  const resetModal = () => {
+  const resetModal = useCallback(() => {
     setShowResetModal(true);
-  };
+  }, [showResetModal]);
 
-  const hideResetModal = () => {
+  const hideResetModal = useCallback(() => {
     setShowResetModal(false);
-  };
-  console.log("aaa");
+  }, [showResetModal]);
+
   return (
     <>
       <AnnounceText addStyle={announceTextPosition}>

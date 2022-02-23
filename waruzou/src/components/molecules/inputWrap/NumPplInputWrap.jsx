@@ -14,6 +14,7 @@ export const NumPplInputWrap = memo(() => {
     if (event.target.value === "0") return;
     const value = event.target.value.replace(/\D/g, ""); //数字以外は入力できないように
     setPpl(value);
+    console.log("bbb");
   }, []);
 
   return (

@@ -7,7 +7,7 @@ export const LeftLose = memo((props) => {
   return (
     <div className={LeftLoseWrap}>
       {gameEnd ? (
-        <p className={textAfterGame}>全てのはずれが引かれました</p>
+        <p className={textAfterGame}>ゲームが終了しました</p>
       ) : (
         <ul className={LeftLoseList}>
           {lottoArray.map((lotto, index) => (

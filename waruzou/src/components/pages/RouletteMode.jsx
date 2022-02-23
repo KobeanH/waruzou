@@ -4,17 +4,18 @@ import { css } from "@emotion/css";
 import { AnnounceText } from "../atoms/text/AnnounceText";
 import { RouletteWrap } from "../organism/RouletteWrap";
 import { MainBtn } from "../atoms/btn/MainBtn";
+import { useCallback } from "react/cjs/react.development";
 
 export const RouletteMode = memo(() => {
   const [switchAnnounce, setSwitchAnnounce] = useState(true);
   const [showRoulettePerson, setShowRoulettePerson] = useState(false);
   const [startRoulette, setStartRoulette] = useState(false);
 
-  const switchRoulette = () => {
+  const switchRoulette = useCallback(() => {
     setStartRoulette(!startRoulette);
     setShowRoulettePerson(true);
     setSwitchAnnounce(!switchAnnounce);
-  };
+  }, [startRoulette]);
 
   return (
     <>

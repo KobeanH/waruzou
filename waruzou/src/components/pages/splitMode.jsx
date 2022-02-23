@@ -11,6 +11,7 @@ import { NumPplState } from "../store/NumPplState";
 import { AboutAmountState } from "../store/AboutAmountState";
 import { CalculatedObjState } from "../store/calculatedObj";
 import { ShowAnnounceState } from "../store/ShowAnnounceState";
+import { useCallback } from "react/cjs/react.development";
 
 export const SplitMode = memo(() => {
   const amount = useRecoilValue(AmountState);
@@ -31,7 +32,7 @@ export const SplitMode = memo(() => {
 
   let lastTwoDigits = remainder % 100; //下二桁取得
 
-  const calculate = () => {
+  const calculate = useCallback(() => {
     //金額と人数が入力されている場合の処理
     if (amount && numPpl) {
       //割り切れる百以上の値をamountArrayに格納
@@ -76,7 +77,7 @@ export const SplitMode = memo(() => {
     } else {
       alert("金額と人数を入力してください");
     }
-  };
+  }, [amount, numPpl, calculatedObj, aboutAmount]);
 
   return (
     <>

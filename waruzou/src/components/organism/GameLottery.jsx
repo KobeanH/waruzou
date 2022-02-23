@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo, useEffect, useCallback } from "react";
 import { css, keyframes } from "@emotion/css";
 import Modal from "react-modal";
 import { useRecoilState } from "recoil";
@@ -22,47 +22,63 @@ export const GameLottery = memo((props) => {
   const [gameEnd, setGameEnd] = useRecoilState(setGameEndState);
 
   //クリックしたくじの金額を表示する処理
-  const openAmount = (amountList, index) => {
-    setToggleLottoArray(
-      toggleLottoArray.map((toggleLottoArray, secondIndex) =>
-        secondIndex === index ? true : toggleLottoArray
-      )
-    );
-    //フード画像が消え、金額が表示されるアニメーション
-    setTimeout(() => {
-      setShowFoodImg(
-        showFoodImg.map((modal, secondIndex) =>
+  const openAmount = useCallback(
+    (amountList, index) => {
+      setToggleLottoArray(
+        toggleLottoArray.map((toggleLottoArray, secondIndex) =>
+          secondIndex === index ? true : toggleLottoArray
+        )
+      );
+      //フード画像が消え、金額が表示されるアニメーション
+      setTimeout(() => {
+        setShowFoodImg(
+          showFoodImg.map((modal, secondIndex) =>
+            secondIndex === index ? false : modal
+          )
+        );
+      }, 150);
+      //金額が0円以上だったらカウントを+1
+      if (amountList !== 0) {
+        setCount(count + 1);
+      }
+    },
+    [toggleLottoArray]
+  );
+
+  //クリックしたくじのモーダルを開く
+  const openModal = useCallback(
+    (index) => {
+      setIsOpen(
+        modalIsOpen.map((modal, secondIndex) =>
+          secondIndex === index ? true : modal
+        )
+      );
+    },
+    [modalIsOpen]
+  );
+
+  //クリックしたくじのモーダルを閉じる
+  const closeModal = useCallback(
+    (index) => {
+      setIsOpen(
+        modalIsOpen.map((modal, secondIndex) =>
           secondIndex === index ? false : modal
         )
       );
-    }, 150);
-    //金額が0円以上だったらカウントを+1
-    if (amountList !== 0) {
-      setCount(count + 1);
-    }
-  };
+      //0円以外のくじが全て引かれ、モーダルを閉じた時にテキストを表示する
+      if (objAmountArray.length === count) {
+        setGameEnd(true);
+      }
+    },
+    [modalIsOpen]
+  );
 
-  //クリックしたくじのモーダルを開く
-  const openModal = (index) => {
-    setIsOpen(
-      modalIsOpen.map((modal, secondIndex) =>
-        secondIndex === index ? true : modal
-      )
-    );
-  };
-
-  //クリックしたくじのモーダルを閉じる
-  const closeModal = (index) => {
-    setIsOpen(
-      modalIsOpen.map((modal, secondIndex) =>
-        secondIndex === index ? false : modal
-      )
-    );
-    //0円以外のくじが全て引かれ、モーダルを閉じた時にテキストを表示する
+  ////0円以外のくじが全て引かれ、モーダルを閉じた時にアラートを表示する
+  useEffect(() => {
     if (objAmountArray.length === count) {
-      setGameEnd(true);
+      alert("全てのハズレが引かれました");
     }
-  };
+  }, [gameEnd]);
 
   return (
     <ul className={gameLotteryList}>
