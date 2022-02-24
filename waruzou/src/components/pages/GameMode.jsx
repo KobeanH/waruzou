@@ -1,4 +1,4 @@
-import { useState, useEffect, memo } from "react";
+import { useState, useEffect, memo, useCallback } from "react";
 import { css } from "@emotion/css";
 import Modal from "react-modal";
 import { useRecoilState } from "recoil";
@@ -20,7 +20,6 @@ import { MainBtn } from "../atoms/btn/MainBtn";
 import { LeftLose } from "../molecules/leftLose/LeftLose";
 import { GameLottery } from "../organism/GameLottery";
 import { ResetGame } from "../organism/ResetGame";
-import { useCallback } from "react/cjs/react.development";
 
 Modal.setAppElement("#root");
 

@@ -306,6 +306,9 @@ const gameLotteryList = css`
   @media (max-height: 553px) {
     max-width: 335px;
   }
+  @media (min-width: 430px) {
+    max-width: 375px;
+  }
 `;
 const resultItemAnime = keyframes`
 0%{

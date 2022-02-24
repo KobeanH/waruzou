@@ -1,10 +1,9 @@
-import { memo, useState } from "react";
+import { memo, useState, useCallback } from "react";
 import { css } from "@emotion/css";
 
 import { AnnounceText } from "../atoms/text/AnnounceText";
 import { RouletteWrap } from "../organism/RouletteWrap";
 import { MainBtn } from "../atoms/btn/MainBtn";
-import { useCallback } from "react/cjs/react.development";
 
 export const RouletteMode = memo(() => {
   const [switchAnnounce, setSwitchAnnounce] = useState(true);

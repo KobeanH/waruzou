@@ -41,7 +41,7 @@ const LeftLoseWrap = css`
     top: -80px;
   }
   @media (min-width: 430px) {
-    max-width: 414px;
+    max-width: 375px;
     top: -17vh;
   }
 `;

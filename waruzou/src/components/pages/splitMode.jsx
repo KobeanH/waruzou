@@ -1,4 +1,4 @@
-import { memo, useState } from "react";
+import { memo, useState, useCallback } from "react";
 import { css } from "@emotion/css";
 import { useRecoilState, useRecoilValue } from "recoil";
 
@@ -11,7 +11,6 @@ import { NumPplState } from "../store/NumPplState";
 import { AboutAmountState } from "../store/AboutAmountState";
 import { CalculatedObjState } from "../store/calculatedObj";
 import { ShowAnnounceState } from "../store/ShowAnnounceState";
-import { useCallback } from "react/cjs/react.development";
 
 export const SplitMode = memo(() => {
   const amount = useRecoilValue(AmountState);
