@@ -3,7 +3,7 @@ import { css } from "@emotion/css";
 
 import { AnnounceText } from "../atoms/text/AnnounceText";
 import { RouletteWrap } from "../organism/RouletteWrap";
-import { MainBtn } from "../atoms/btn/MainBtn";
+import { MainBtn } from "../atoms/btn/Mainbtn";
 
 export const RouletteMode = memo(() => {
   const [switchAnnounce, setSwitchAnnounce] = useState(true);

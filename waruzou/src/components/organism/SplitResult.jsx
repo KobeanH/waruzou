@@ -2,7 +2,7 @@ import { memo } from "react";
 import { css } from "@emotion/css";
 import { useRecoilValue } from "recoil";
 
-import { AboutAmountState } from "../store/AboutAmountState";
+import { AboutAmountState } from "../store/aboutAmountState";
 import { BlackText } from "../atoms/text/BlackText";
 import { ResultSuggest } from "../atoms/title/ResultSuggest";
 import { ResultList } from "../atoms/list/ResultList";

@@ -4,7 +4,7 @@ import Modal from "react-modal";
 import { useRecoilState } from "recoil";
 
 import { LottoArrayState } from "../store/lottoArrayState";
-import { ShowState } from "../store/ShowState";
+import { ShowState } from "../store/showState";
 import { toggleLottoArrayState } from "../store/toggleLottoArrayState";
 import { countState } from "../store/countState";
 import { modalIsOpenState } from "../store/modalIsOpenState";
@@ -16,8 +16,8 @@ import { BaseIcon } from "../atoms/icon/Baseicon";
 import { AmountIcon } from "../atoms/icon/AmountIcon";
 import { NumPplIcon } from "../atoms/icon/NumPplIcon";
 import { GameInputWrap } from "../molecules/inputWrap/GameInputWrap";
-import { MainBtn } from "../atoms/btn/MainBtn";
-import { LeftLose } from "../molecules/leftLose/LeftLose";
+import { MainBtn } from "../atoms/btn/Mainbtn";
+import { LeftLose } from "../molecules/LeftLose";
 import { GameLottery } from "../organism/GameLottery";
 import { ResetGame } from "../organism/ResetGame";
 

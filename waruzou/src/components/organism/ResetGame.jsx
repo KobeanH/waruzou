@@ -2,7 +2,7 @@ import { memo } from "react";
 import Modal from "react-modal";
 import { css } from "@emotion/css";
 
-import { MainBtn } from "../atoms/btn/MainBtn";
+import { MainBtn } from "../atoms/btn/Mainbtn";
 import { BaseModalBtn } from "../atoms/btn/BaseModalBtn";
 
 Modal.setAppElement("#root");

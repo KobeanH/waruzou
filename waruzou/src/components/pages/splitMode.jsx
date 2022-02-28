@@ -5,10 +5,10 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { AnnounceText } from "../atoms/text/AnnounceText";
 import { InputWrapper } from "../organism/InputWrapper";
 import { SplitResult } from "../organism/SplitResult";
-import { MainBtn } from "../atoms/btn/MainBtn";
+import { MainBtn } from "../atoms/btn/Mainbtn";
 import { AmountState } from "../store/amountState";
-import { NumPplState } from "../store/NumPplState";
-import { AboutAmountState } from "../store/AboutAmountState";
+import { NumPplState } from "../store/numPplState";
+import { AboutAmountState } from "../store/aboutAmountState";
 import { CalculatedObjState } from "../store/calculatedObj";
 import { ShowAnnounceState } from "../store/ShowAnnounceState";
 

@@ -2,7 +2,7 @@ import { memo, useCallback } from "react";
 import { css } from "@emotion/css";
 import { useRecoilState } from "recoil";
 
-import { NumPplState } from "../../store/NumPplState";
+import { NumPplState } from "../../store/numPplState";
 import { BaseIcon } from "../../atoms/icon/Baseicon";
 import { NumPplIcon } from "../../atoms/icon/NumPplIcon";
 import { BaseInput } from "../../atoms/input/BaseInput";
@@ -14,7 +14,6 @@ export const NumPplInputWrap = memo(() => {
     if (event.target.value === "0") return;
     const value = event.target.value.replace(/\D/g, ""); //数字以外は入力できないように
     setPpl(value);
-    console.log("bbb");
   }, []);
 
   return (

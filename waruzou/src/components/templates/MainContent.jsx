@@ -7,7 +7,7 @@ import { SplitMode } from "../pages/SplitMode";
 import { GameMode } from "../pages/GameMode";
 import { ChangeMode } from "../organism/ChangeMode";
 import { RouletteMode } from "../pages/RouletteMode";
-import { ShowState } from "../store/ShowState";
+import { ShowState } from "../store/showState";
 import { StartAnime } from "../pages/StartAnime";
 
 export const MainContent = () => {
