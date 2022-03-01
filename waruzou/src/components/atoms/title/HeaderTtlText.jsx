@@ -12,6 +12,7 @@ const headerTtlText = css`
   color: #000000;
   font-size: 2rem;
 `;
+
 const headerTtlTextEn = css`
   color: #ffb901;
   font-size: 2.2rem;

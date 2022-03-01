@@ -28,6 +28,7 @@ export const AnnounceText = memo((props) => {
     }
     ${addStyle}
   `;
+
   const hideAnnounceText = css`
     visibility: hidden;
     position: absolute;

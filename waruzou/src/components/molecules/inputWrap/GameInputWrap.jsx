@@ -72,6 +72,7 @@ export const GameInputWrap = memo((props) => {
     </div>
   );
 });
+
 const GameInputWrapHeight = css`
   height: 284px;
   overflow: scroll;
@@ -87,6 +88,7 @@ const GameInputWrapHeight = css`
     height: 42vh;
   }
 `;
+
 const gameInputWrap = css`
   display: flex;
   align-items: flex-end;

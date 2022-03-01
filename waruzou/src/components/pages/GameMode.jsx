@@ -34,7 +34,7 @@ export const GameMode = memo(() => {
   const [toggleLottoArray, setToggleLottoArray] = useRecoilState(
     toggleLottoArrayState
   );
-  const [count, setCount] = useRecoilState(countState); //0円以外の金額のくじを引かれた時のカウント
+  const [countexceptzero, setCountExceptZero] = useRecoilState(countState); //0円以外の金額のくじを引かれた時のカウント
   const [modalIsOpen, setIsOpen] = useRecoilState(modalIsOpenState); //モーダルの表示切り替え
   const [showAnnounce, setShowAnnounce] = useRecoilState(ShowAnnounceState); //アナウンステキストの表示切り替え
   const [showHeader, setShowHeader] = useRecoilState(showHeaderState); //ヘッダーの表示切り替え
@@ -109,7 +109,7 @@ export const GameMode = memo(() => {
         setShowAnnounce(false);
         setShowHeader(false);
       }
-      setCount(0);
+      setCountExceptZero(0);
     }
     makeArray();
     objAmountArray.sort(() => Math.random() - 0.5); //配列の中身をシャッフルする
@@ -131,7 +131,7 @@ export const GameMode = memo(() => {
     setGameEnd(false);
     setShow(true);
     setShowLeftLose(false);
-    setCount(null);
+    setCountExceptZero(null);
     setShowAnnounce(true);
     setShowHeader(true);
     setShowResetModal(false);

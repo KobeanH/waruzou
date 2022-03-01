@@ -2,7 +2,7 @@ import { memo } from "react";
 import { css } from "@emotion/css";
 
 import logo from "../img/warican-logo.png";
-import { HeaderTtlText } from "../atoms/header/HeaderTtlText";
+import { HeaderTtlText } from "../atoms/title/HeaderTtlText";
 
 export const HeaderTtl = memo(() => {
   return (
@@ -28,6 +28,7 @@ const headerTtl = css`
     margin-bottom: 0;
   }
 `;
+
 const logoImg = css`
   max-width: 25px;
 `;

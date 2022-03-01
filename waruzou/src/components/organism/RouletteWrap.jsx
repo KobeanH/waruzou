@@ -6,7 +6,7 @@ import { RouletteText } from "../atoms/text/RouletteText";
 
 export const RouletteWrap = memo((props) => {
   const { startRoulette, showRoulettePerson } = props;
-  const [count, setCount] = useState(0);
+  const [ countexceptzero, setCountExceptZero] = useState(0);
 
   const rouletteContents = [
     "身長が二番目に高い人",
@@ -37,7 +37,7 @@ export const RouletteWrap = memo((props) => {
   useEffect(() => {
     if (startRoulette) {
       const interval = setInterval(() => {
-        setCount((oldCount) => {
+        setCountExceptZero((oldCount) => {
           if (oldCount < rouletteContents.length - 1) return oldCount + 1;
           return 0;
         });
@@ -52,7 +52,7 @@ export const RouletteWrap = memo((props) => {
     <div className={rouletteWrap}>
       <BlackText addedStyle={rouletteText}>今回のおごりは・・・</BlackText>
       <RouletteText startRoulette={startRoulette}>
-        {showRoulettePerson && rouletteContents[count]}
+        {showRoulettePerson && rouletteContents[countexceptzero]}
       </RouletteText>
     </div>
   );

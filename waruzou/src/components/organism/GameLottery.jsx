@@ -17,9 +17,9 @@ export const GameLottery = memo((props) => {
   const [toggleLottoArray, setToggleLottoArray] = useRecoilState(
     toggleLottoArrayState
   ); //クラスを付与するstate
-  const [count, setCount] = useRecoilState(countState); //ゲーム終了するカウンター
+  const [countexceptzero, setCountExceptZero] = useRecoilState(countState); //ゲーム終了するカウンター
   const [modalIsOpen, setIsOpen] = useRecoilState(modalIsOpenState); //モーダル管理
-  const [gameEnd, setGameEnd] = useRecoilState(setGameEndState);
+  const [gameEnd, setGameEnd] = useRecoilState(setGameEndState); //ゲーム終了時の表示切り替え
 
   //クリックしたくじの金額を表示する処理
   const openAmount = useCallback(
@@ -39,7 +39,7 @@ export const GameLottery = memo((props) => {
       }, 150);
       //金額が0円以上だったらカウントを+1
       if (amountList !== 0) {
-        setCount(count + 1);
+        setCountExceptZero(countexceptzero + 1);
       }
     },
     [toggleLottoArray]
@@ -66,16 +66,16 @@ export const GameLottery = memo((props) => {
         )
       );
       //0円以外のくじが全て引かれ、モーダルを閉じた時にテキストを表示する
-      if (objAmountArray.length === count) {
+      if (objAmountArray.length === countexceptzero) {
         setGameEnd(true);
       }
     },
     [modalIsOpen]
   );
 
-  ////0円以外のくじが全て引かれ、モーダルを閉じた時にアラートを表示する
+  //0円以外のくじが全て引かれ、モーダルを閉じた時にアラートを表示する
   useEffect(() => {
-    if (objAmountArray.length === count) {
+    if (objAmountArray.length === countexceptzero) {
       alert("全てのハズレが引かれました");
     }
   }, [gameEnd]);
@@ -216,6 +216,7 @@ const portalClassName = css`
     background-color: transparent;
   }
 `;
+
 const lottoFadeIn = keyframes`
 0%{
   opacity:0;
@@ -226,7 +227,8 @@ const lottoFadeIn = keyframes`
   transform: translateY(0);
 }
 `;
-const makeNthChild = (i) => {
+
+const createNthChild = (i) => {
   return `
         &:nth-child(${i}) {
           animation: ${lottoFadeIn} 1s ;
@@ -235,13 +237,15 @@ const makeNthChild = (i) => {
         }
       `;
 };
-const getNthChild = () => {
+
+const duplicateNthChild = () => {
   let nthChild = "";
   for (let i = 1; i <= 16; i += 1) {
-    nthChild += makeNthChild(i);
+    nthChild += createNthChild(i);
   }
   return nthChild;
 };
+
 const gameLotteryItem = css`
   display: flex;
   justify-content: center;
@@ -259,7 +263,7 @@ const gameLotteryItem = css`
     padding-top: 100%;
   }
   opacity: 0;
-  ${getNthChild()}
+  ${duplicateNthChild()}
 `;
 
 const opendGameLotteryItem = css`
@@ -281,6 +285,7 @@ const opendGameLotteryItem = css`
   pointer-events: none;
   opacity: 0.7;
 `;
+
 const showStuffInModal = css`
   font-size: 1.4rem;
   word-break: break-all;
@@ -288,6 +293,7 @@ const showStuffInModal = css`
     width: 28px;
   }
 `;
+
 const hideStuffInModal = css`
   display: none;
 `;
@@ -310,6 +316,7 @@ const gameLotteryList = css`
     max-width: 375px;
   }
 `;
+
 const resultItemAnime = keyframes`
 0%{
   left:0;
@@ -348,10 +355,12 @@ const isAmount = css`
     animation: ${resultItemAnime} 1s;
   }
 `;
+
 const isFoodImg = css`
   height: 40px;
   margin-bottom: 36px;
 `;
+
 const resultItemFadeIn = keyframes`
 0%{
   opacity:0;
@@ -363,6 +372,7 @@ const resultItemFadeIn = keyframes`
   opacity:1;
 }
 `;
+
 const fadeIn = css`
   animation: ${resultItemFadeIn} 1s;
 `;

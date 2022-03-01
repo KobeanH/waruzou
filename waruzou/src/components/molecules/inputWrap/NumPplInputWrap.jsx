@@ -8,12 +8,12 @@ import { NumPplIcon } from "../../atoms/icon/NumPplIcon";
 import { BaseInput } from "../../atoms/input/BaseInput";
 
 export const NumPplInputWrap = memo(() => {
-  const [ppl, setPpl] = useRecoilState(NumPplState); //人数
+  const [numppl, setNumPpl] = useRecoilState(NumPplState); //人数
 
-  const getValueFromAmount = useCallback((event) => {
+  const getValueFromNumPpl = useCallback((event) => {
     if (event.target.value === "0") return;
     const value = event.target.value.replace(/\D/g, ""); //数字以外は入力できないように
-    setPpl(value);
+    setNumPpl(value);
   }, []);
 
   return (
@@ -25,8 +25,8 @@ export const NumPplInputWrap = memo(() => {
         placeholder="人数"
         type="tel"
         maxLength="3"
-        value={ppl}
-        onChange={getValueFromAmount}
+        value={numppl}
+        onChange={getValueFromNumPpl}
       ></BaseInput>
     </div>
   );

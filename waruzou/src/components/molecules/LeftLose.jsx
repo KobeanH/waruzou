@@ -46,10 +46,10 @@ const LeftLoseWrap = css`
   }
 `;
 const textAfterGame = css`
-  margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 0;
   height: 10vh;
   font-size: 1.6rem;
   @media (max-height: 740px) {
