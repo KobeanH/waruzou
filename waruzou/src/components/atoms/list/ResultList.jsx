@@ -24,55 +24,21 @@ export const ResultList = memo(() => {
   );
 });
 
-const resultItemAnime = keyframes`
+const baseResultItemAnime = keyframes`
 0%{
   left:0;
   right:100%;
-  background-color: #FFE08E;
+  background-color: var(--back-color);
 }
 50%{
   left:0;
   right:0;
-  background-color: #FFE08E;
+  background-color: var(--back-color);
 }
 100%{
   left:100%;
   right:0;
-  background-color: #FFE08E;
-}
-`;
-const resultItemAnime2 = keyframes`
-0%{
-  left:0;
-  right:100%;
-  background-color: #FFCE4E;
-}
-50%{
-  left:0;
-  right:0;
-  background-color: #FFCE4E;
-}
-100%{
-  left:100%;
-  right:0;
-  background-color: #FFCE4E;
-}
-`;
-const resultItemAnime3 = keyframes`
-0%{
-  left:0;
-  right:100%;
-  background-color:#FFB901;
-}
-50%{
-  left:0;
-  right:0;
-  background-color:#FFB901;
-}
-100%{
-  left:100%;
-  right:0;
-  background-color: #FFB901;
+  background-color: var(--back-color);
 }
 `;
 const resultItemFadeIn = keyframes`
@@ -91,19 +57,20 @@ const resultList = css`
   margin: 0;
   & li:nth-of-type(1) > p {
     animation: ${resultItemFadeIn} 1s;
-    will-change: ${resultItemFadeIn};
+    will-change: animation;
   }
   & li:nth-of-type(2) > p {
     animation: ${resultItemFadeIn} 1.6s;
-    will-change: ${resultItemFadeIn};
+    will-change: animation;
   }
   & li:nth-of-type(3) > p {
     animation: ${resultItemFadeIn} 2.1s;
-    will-change: ${resultItemFadeIn};
+    will-change: animation;
   }
 `;
 
 const resultItem = css`
+  $firstColor: #ffe08e;
   position: relative;
   margin-bottom: 2.8vh;
   font-size: 2.8rem;
@@ -119,15 +86,18 @@ const resultItem = css`
     z-index: 2;
   }
   &:nth-of-type(1)&:after {
-    animation: ${resultItemAnime} 1s;
+    --back-color: #ffe08e;
+    animation: ${baseResultItemAnime} 1s;
     will-change: animation;
   }
   &:nth-of-type(2)&:after {
-    animation: ${resultItemAnime2} 1s 0.3s;
+    --back-color: #ffce4e;
+    animation: ${baseResultItemAnime} 1s 0.3s;
     will-change: $animation;
   }
   &:nth-of-type(3)&:after {
-    animation: ${resultItemAnime3} 1s 0.6s;
+    --back-color: #ffb901;
+    animation: ${baseResultItemAnime} 1s 0.6s;
     will-change: $animation;
   }
   &:nth-of-type(1) {

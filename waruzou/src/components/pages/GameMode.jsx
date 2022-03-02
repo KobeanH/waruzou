@@ -27,7 +27,6 @@ export const GameMode = memo(() => {
   const [lottoArray, setLottoArray] = useRecoilState(LottoArrayState); //人数、金額のオブジェクトを格納する配列
   const [showDelete, setShowDelete] = useState(false); //削除ボタン表示切り替え
   const [amountLists, setAmountLists] = useState([]);
-  const [cantStart, setCantStart] = useState(false); //ゲーム終了を表示
   const [show, setShow] = useRecoilState(ShowState); //表示切り替え
   const [showLeftLose, setShowLeftLose] = useState(false); //くじの枚数を表示
   const [showResetModal, setShowResetModal] = useState(false); //リセットモーダルを表示
@@ -48,10 +47,11 @@ export const GameMode = memo(() => {
   let numEmptyInput = 0;
   //全てのinputに数値が入っていなければ+1
   for (let i = 0; i < spreadedLottoArray.length; i++) {
-    if (!(spreadedLottoArray[i].objAmount && spreadedLottoArray[i].objNumPpl)) {
+    if (!(spreadedLottoArray[i].objAmount) && !(spreadedLottoArray[i].objNumPpl)) {
       numEmptyInput += 1;
     }
   }
+
 
   //inputタグを生成
   const addInput = useCallback(() => {
@@ -87,7 +87,6 @@ export const GameMode = memo(() => {
     //全てのinputに金額と人数の数字が入ってなければアラートを出す
     if (numEmptyInput > 0) {
       alert("金額と人数を入力してください");
-      setCantStart(true);
     } else {
       //人数inputに入力された合計が16以下の場合、16になるよう金額0の<li>タグを生成
       if (objAmountArray.length < maxNumPpl) {
@@ -197,6 +196,7 @@ const amountIconMargin = css`
 const positionCenter = css`
   position: absolute;
   left: 50%;
+  transition: initial;
 `;
 const moveLeft = css`
   position: absolute;
@@ -209,7 +209,6 @@ const mainBtnPosition = css`
   left: 50%;
   bottom: 70px;
   transform: translate(-50%, -50%);
-  transition: initial;
   @media (min-width: 430px) {
     bottom: 12vh;
   }
