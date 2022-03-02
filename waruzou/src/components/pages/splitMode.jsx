@@ -1,6 +1,6 @@
 import { memo, useState, useCallback } from "react";
 import { css } from "@emotion/css";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 import { AnnounceText } from "../atoms/text/AnnounceText";
 import { InputWrapper } from "../organism/InputWrapper";
@@ -17,7 +17,7 @@ export const SplitMode = memo(() => {
   const numPpl = useRecoilValue(NumPplState);
   const [calculatedObj, setCalculatedObj] = useRecoilState(CalculatedObjState);
   const [aboutAmount, setAboutAmount] = useRecoilState(AboutAmountState);
-  const [showAnnounce, setShowAnnounce] = useRecoilState(ShowAnnounceState);
+  const setShowAnnounce = useSetRecoilState(ShowAnnounceState);
   const [showSplitResult, setShowSplitResult] = useState(false);
 
   let perPerson = amount / (numPpl * 100); //百以下の位以外を計算

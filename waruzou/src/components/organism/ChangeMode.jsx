@@ -1,7 +1,7 @@
 import { memo } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { css } from "@emotion/css";
-import { useRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 
 import { ChangeModeText } from "../atoms/text/ChangeModeText";
 import { SplitIcon } from "../atoms/icon/SplitIcon";
@@ -10,7 +10,7 @@ import { RouletteIcon } from "../atoms/icon/RouletteIcon";
 import { ShowAnnounceState } from "../store/ShowAnnounceState";
 
 export const ChangeMode = memo(() => {
-  const [showAnnounce, setShowAnnounce] = useRecoilState(ShowAnnounceState);
+  const setShowAnnounce = useSetRecoilState(ShowAnnounceState);
   const location = useLocation();
 
   //モード切り替え

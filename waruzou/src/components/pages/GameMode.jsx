@@ -1,7 +1,7 @@
 import { useState, useEffect, memo, useCallback } from "react";
 import { css } from "@emotion/css";
 import Modal from "react-modal";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 
 import { LottoArrayState } from "../store/lottoArrayState";
 import { ShowState } from "../store/showState";
@@ -30,13 +30,13 @@ export const GameMode = memo(() => {
   const [show, setShow] = useRecoilState(ShowState); //表示切り替え
   const [showLeftLose, setShowLeftLose] = useState(false); //くじの枚数を表示
   const [showResetModal, setShowResetModal] = useState(false); //リセットモーダルを表示
-  const [toggleLottoArray, setToggleLottoArray] = useRecoilState(
+  const  setToggleLottoArray = useSetRecoilState(
     toggleLottoArrayState
   );
-  const [countexceptzero, setCountExceptZero] = useRecoilState(countState); //0円以外の金額のくじを引かれた時のカウント
-  const [modalIsOpen, setIsOpen] = useRecoilState(modalIsOpenState); //モーダルの表示切り替え
-  const [showAnnounce, setShowAnnounce] = useRecoilState(ShowAnnounceState); //アナウンステキストの表示切り替え
-  const [showHeader, setShowHeader] = useRecoilState(showHeaderState); //ヘッダーの表示切り替え
+  const  setCountExceptZero = useSetRecoilState(countState); //0円以外の金額のくじを引かれた時のカウント
+  const  setIsOpen = useSetRecoilState(modalIsOpenState); //モーダルの表示切り替え
+  const  setShowAnnounce = useSetRecoilState(ShowAnnounceState); //アナウンステキストの表示切り替え
+  const  setShowHeader = useSetRecoilState(showHeaderState); //ヘッダーの表示切り替え
   const [gameEnd, setGameEnd] = useRecoilState(setGameEndState); //ゲーム終了を表示
   const [showFoodImg, setShowFoodImg] = useState(false); //フード画像の表示切り替え
 
@@ -47,7 +47,7 @@ export const GameMode = memo(() => {
   let numEmptyInput = 0;
   //全てのinputに数値が入っていなければ+1
   for (let i = 0; i < spreadedLottoArray.length; i++) {
-    if (!(spreadedLottoArray[i].objAmount) && !(spreadedLottoArray[i].objNumPpl)) {
+    if (!(spreadedLottoArray[i].objAmount) || !(spreadedLottoArray[i].objNumPpl)) {
       numEmptyInput += 1;
     }
   }
