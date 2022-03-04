@@ -4,6 +4,7 @@ import { css } from "@emotion/css";
 
 import { MainBtn } from "../atoms/btn/Mainbtn";
 import { BaseModalBtn } from "../atoms/btn/BaseModalBtn";
+import {Color} from "../utility/Color"
 
 Modal.setAppElement("#root");
 
@@ -54,7 +55,7 @@ const portalClassName22 = css`
     bottom: 0;
     right: 0;
     left: 0;
-    background-color: rgba(0, 0, 0, 0);
+    background-color: ${Color.subModalOverlayBG};
     opacity: 0;
     transition-property: background-color, opacity;
     transition-duration: 500ms;
@@ -66,13 +67,13 @@ const portalClassName22 = css`
   }
 
   .overlay-after {
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: ${Color.mainModalOverlayBG};
     opacity: 1;
     z-index: 11;
   }
 
   .overlay-before {
-    background-color: rgba(0, 0, 0, 0);
+    background-color: ${Color.subModalOverlayBG};
     opacity: 0;
   }
 
@@ -100,7 +101,7 @@ const portalClassName22 = css`
   .content-after {
     width: 100%;
     height: 30%;
-    background-color: #fffcf4;
+    background-color: ${Color.backGroundModal};
     border-radius: 6px;
     @media (max-height: 553px) {
       height: 35%;

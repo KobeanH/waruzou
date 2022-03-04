@@ -8,6 +8,7 @@ import { SplitIcon } from "../atoms/icon/SplitIcon";
 import { GameIcon } from "../atoms/icon/GameIcon";
 import { RouletteIcon } from "../atoms/icon/RouletteIcon";
 import { ShowAnnounceState } from "../store/ShowAnnounceState";
+import { Color } from "../utility/Color";
 
 export const ChangeMode = memo(() => {
   const setShowAnnounce = useSetRecoilState(ShowAnnounceState);
@@ -75,9 +76,9 @@ const modeWrap = css`
   max-width: 375px;
   padding: 10px 14px;
   box-sizing: border-box;
-  background-color: #fff;
+  background-color:  ${Color.backGroundWhite};
   border-radius: 12px;
-  box-shadow: 0px 2px 4px rgba(128, 128, 128, 0.25);
+  box-shadow: ${Color.mainShadow};
   & :nth-child(3) {
     gap: 6px;
   }
@@ -95,18 +96,18 @@ const modeOnn = css`
   max-width: 190px;
   width: 100%;
   padding: 12px;
-  background-color: #ffe9af;
+  background-color: ${Color.subColor};
   border-radius: 36px;
   box-shadow: 0px 1px 7px rgba(229, 234, 246, 1);
   transition: all 0.3s linear;
   overflow: hidden;
-  color: #ffb901;
+  color: ${Color.mainColor};
   font-size: 1.6rem;
   font-weight: bold;
   text-decoration: none;
   white-space: nowrap;
   > svg {
-    fill: #ffb901;
+    fill: ${Color.mainColor};
   }
   @media (max-height: 553px) {
     max-width: 180px;
@@ -128,9 +129,9 @@ const modeOff = css`
   background-color: rgba(128, 128, 128, 0.25);
   border-radius: 36px;
   box-sizing: border-box;
-  box-shadow: 0px 2px 4px rgba(128, 128, 128, 0.25);
+  box-shadow: ${Color.mainShadow};
   transition: all 0.3s linear;
-  color: #ffb901;
+  color: ${Color.mainColor};
   font-weight: bold;
   text-decoration: none;
   > svg {

@@ -1,6 +1,8 @@
 import { memo } from "react";
 import { css } from "@emotion/css";
 
+import { Color } from "../../utility/Color";
+
 export const BaseInput = memo((props) => {
   const { placeholder, type, onChange, maxLength, value } = props;
 
@@ -20,14 +22,14 @@ const baseInput = css`
   padding: 1.5vh 16px;
   border: none;
   border-radius: 8px;
-  box-shadow: 0px 2px 4px rgba(128, 128, 128, 0.25);
+  box-shadow: ${Color.mainShadow};
   font-size: 1.6rem;
   font-family: "Noto Sans JP", sans-serif;
   font-weight: bold;
-  color: #808080;
+  color: ${Color.mainFont};
   -webkit-appearance: none;
   &::placeholder {
-    color: rgba(128, 128, 128, 0.65);
+    color: ${Color.mainFont};
   }
   @media (max-height: 740px) {
     width: 100%;

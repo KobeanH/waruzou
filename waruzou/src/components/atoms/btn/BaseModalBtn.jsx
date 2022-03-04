@@ -1,5 +1,6 @@
 import { memo } from "react";
 import { css } from "@emotion/css";
+import { Color } from "../../utility/Color";
 
 export const BaseModalBtn = memo((props) => {
   const { children, onClick } = props;
@@ -15,8 +16,8 @@ const baseModalBtn = css`
   box-sizing: border-box;
   padding: 16px;
   border-radius: 6px;
-  background: #ffb901;
-  color: #fff;
+  background: ${Color.mainColor};
+  color: ${Color.fontWhite};
   width: 120px;
   font-size: 1.5rem;
   font-weight: bold;

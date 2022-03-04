@@ -6,6 +6,7 @@ import { AboutAmountState } from "../store/aboutAmountState";
 import { BlackText } from "../atoms/text/BlackText";
 import { ResultSuggest } from "../atoms/title/ResultSuggest";
 import { ResultList } from "../atoms/list/ResultList";
+import { Color } from "../utility/Color";
 
 export const SplitResult = memo(() => {
   const aboutAmount = useRecoilValue(AboutAmountState);
@@ -27,8 +28,8 @@ const SplitResultWrap = css`
   box-sizing: border-box;
   padding: 16px 32px;
   border-radius: 12px;
-  background-color: #fff;
-  box-shadow: 0px 2px 4px rgba(128, 128, 128, 0.25);
+  background-color:  ${Color.backGroundWhite};
+  box-shadow: ${Color.mainShadow};
   @media (max-height: 553px) {
     height: 260px;
   }

@@ -1,6 +1,8 @@
 import { memo } from "react";
 import { css } from "@emotion/css";
 
+import { Color } from "../../utility/Color";
+
 export const BlackText = memo((props) => {
   const { children, addedStyle } = props;
 
@@ -15,7 +17,7 @@ export const BlackText = memo((props) => {
     padding-bottom: 20px;
     border-bottom: 1px #808080 dotted;
     font-size: 2rem;
-    color: #000000;
+    color: ${Color.fontBlack};
     text-align: center;
     @media (max-height: 740px) {
       font-size: 1.6rem;

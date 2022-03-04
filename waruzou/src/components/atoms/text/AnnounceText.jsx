@@ -3,6 +3,7 @@ import { css } from "@emotion/css";
 import { useRecoilValue } from "recoil";
 
 import { ShowAnnounceState } from "../../store/ShowAnnounceState";
+import { Color } from "../../utility/Color";
 
 export const AnnounceText = memo((props) => {
   const { children, addStyle } = props;
@@ -17,7 +18,7 @@ export const AnnounceText = memo((props) => {
     margin: 0;
     width: 100%;
     font-size: 2rem;
-    color: #fff;
+    color: ${Color.fontWhite};
     text-align: center;
     white-space: pre-line;
     @media (max-height: 645px) {
@@ -39,7 +40,7 @@ export const AnnounceText = memo((props) => {
     margin: 0;
     width: 100%;
     font-size: 2rem;
-    color: #fff;
+    color: ${Color.fontWhite};
     text-align: center;
     @media (max-height: 553px) {
       top: -60px;

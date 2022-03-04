@@ -1,6 +1,8 @@
 import { memo } from "react";
 import { css } from "@emotion/css";
 
+import { Color } from "../utility/Color";
+
 export const LeftLose = memo((props) => {
   const { lottoArray, gameEnd } = props;
 
@@ -28,9 +30,9 @@ const LeftLoseWrap = css`
   max-width: calc(100% - 40px);
   width: 100%;
   padding: 12px 22px;
-  background: #fff;
+  background: ${Color.backGroundWhite};
   border-radius: 8px;
-  box-shadow: 0px 2px 4px rgba(128, 128, 128, 0.25);
+  box-shadow: ${Color.mainShadow};
   @media (max-height: 740px) {
     padding: 13px 12px;
     margin: 0 0 30px;
@@ -86,7 +88,7 @@ const leftLoseItem = css`
   gap: 0 1px;
   width: 150px;
   list-style: none;
-  color: #808080;
+  color: ${Color.fontMain};
   font-size: 2rem;
   font-weight: bold;
   text-align: center;

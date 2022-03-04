@@ -1,5 +1,6 @@
 import { memo } from "react";
 import { css } from "@emotion/css";
+import { Color } from "../../utility/Color";
 
 export const MainBtn = memo((props) => {
   const { children, onClick, mainBtnPosition, createInputMargin } = props;
@@ -8,14 +9,14 @@ export const MainBtn = memo((props) => {
     max-width: 200px;
     width: 100%;
     padding: 15px 16px;
-    background-color: #ffb901;
+    background-color: ${Color.mainColor};
     border-radius: 100px;
     border: none;
     box-shadow: 0px 4px 4px rgba(255, 197, 111, 0.25);
     font-size: 1.5rem;
     font-family: "Noto Sans JP", sans-serif;
     font-weight: bold;
-    color: #fff;
+    color: ${Color.fontWhite};
     transition: all 0.3s;
     &:hover {
       cursor: pointer;

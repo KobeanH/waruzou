@@ -1,5 +1,6 @@
 import { memo } from "react";
 import { css } from "@emotion/css";
+import { Color } from "../../utility/Color";
 
 export const DeleteBtn = memo((props) => {
   const { children, onClick } = props;
@@ -17,7 +18,7 @@ const deleteBtn = css`
   border: none;
   border-radius: 6px;
   box-shadow: 0px 2px 4px rgb(128 128 128 / 25%);
-  color: #fff;
+  color: ${Color.fontWhite};
   font-family: "Noto Sans JP", sans-serif;
   font-weight: bold;
   white-space: nowrap;

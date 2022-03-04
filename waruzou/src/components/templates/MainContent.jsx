@@ -9,6 +9,7 @@ import { ChangeMode } from "../organism/ChangeMode";
 import { RouletteMode } from "../pages/RouletteMode";
 import { ShowState } from "../store/showState";
 import { StartAnime } from "../pages/StartAnime";
+import { Color } from "../utility/Color";
 
 export const MainContent = () => {
   const [showAnime, setShowAnime] = useState(true);
@@ -47,7 +48,7 @@ const mainContent = css`
   width: 100vw;
   padding: 16px 20px;
   border-radius: 30px 30px 0 0;
-  background-color: #fff;
+  background-color: ${Color.backGroundWhite};
   box-sizing: border-box;
   &:before {
     content: "";
@@ -58,7 +59,7 @@ const mainContent = css`
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.25);
+    background-color: ${Color.backGroundGray};
   }
   @media (max-height: 553px) {
     max-height: 464px;

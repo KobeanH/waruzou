@@ -1,5 +1,7 @@
 import { css } from "@emotion/css";
 
+import { Color } from "../../utility/Color";
+
 export const HeaderTtlText = () => {
   return (
     <h2 className={headerTtlText}>
@@ -9,12 +11,12 @@ export const HeaderTtlText = () => {
 };
 
 const headerTtlText = css`
-  color: #000000;
+  color: ${Color.fontBlack};
   font-size: 2rem;
 `;
 
 const headerTtlTextEn = css`
-  color: #ffb901;
+  color: ${Color.mainColor};
   font-size: 2.2rem;
   font-family: "Noto Sans", sans-serif;
 `;

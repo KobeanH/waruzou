@@ -2,6 +2,7 @@ import { useState, useEffect, memo } from "react";
 import { css } from "@emotion/css";
 
 import logo from "../img/warican-logo.png";
+import { Color } from "../utility/Color";
 
 export const StartAnime = memo(() => {
   const [anime, setAnime] = useState(true);
@@ -58,7 +59,7 @@ const startAnime = css`
     height: 100%;
     width: 100%;
     z-index: 9000;
-    background: #FFF;
+    background:  ${Color.backGroundWhite};
     transition: 1.5s;
     &:before{
     content: "";
@@ -67,7 +68,7 @@ const startAnime = css`
     width: 140px;
     height: 120px;
     border-radius: 50%;
-    background-color: #FFB901;
+    background-color: ${Color.mainColor};
     top: -23px;
     right: -40px;
     }
@@ -78,7 +79,7 @@ const startAnime = css`
     width: 350px;
     height: 300px;
     border-radius: 50%;
-    background-color: #FFB901;
+    background-color: ${Color.mainColor};
     bottom: -113px;
     left: -120px;
     }
@@ -92,7 +93,7 @@ const endAnime = css`
   height: 100%;
   width: 100%;
   z-index: 9000;
-  background: #fff;
+  background:  ${Color.backGroundWhite};
   &:before {
     content: "";
     display: block;
@@ -100,7 +101,7 @@ const endAnime = css`
     width: 140px;
     height: 120px;
     border-radius: 50%;
-    background-color: #ffb901;
+    background-color: ${Color.mainColor};
     top: -23px;
     right: -40px;
   }
@@ -111,7 +112,7 @@ const endAnime = css`
     width: 350px;
     height: 300px;
     border-radius: 50%;
-    background-color: #ffb901;
+    background-color: ${Color.mainColor};
     bottom: -113px;
     left: -120px;
   }
@@ -138,7 +139,7 @@ const startTitle = css`
 `;
 const startTitleTextOff = css`
   font-size: 3.4rem;
-  color: #000000;
+  color: ${Color.fontBlack};
   margin: 0;
   display: flex;
   overflow: hidden;
@@ -165,7 +166,7 @@ const startTitleTextOff = css`
 `;
 const startTitleTextOn = css`
   font-size: 3.4rem;
-  color: #000000;
+  color: ${Color.fontBlack};
   margin: 0;
   display: flex;
   overflow: hidden;
@@ -193,5 +194,5 @@ const startTitleTextOn = css`
   }
 `;
 const startTitleTextEn = css`
-  color: #ffb901;
+  color: ${Color.mainColor};
 `;

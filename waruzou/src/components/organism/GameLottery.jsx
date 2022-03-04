@@ -9,6 +9,7 @@ import { modalIsOpenState } from "../store/modalIsOpenState";
 import { setGameEndState } from "../store/setGameEndState";
 import { BaseModalBtn } from "../atoms/btn/BaseModalBtn";
 import { FoodImgArray } from "../img/foodImgArray";
+import { Color } from "../utility/Color";
 
 Modal.setAppElement("#root");
 
@@ -157,7 +158,7 @@ const portalClassName = css`
     bottom: 0;
     right: 0;
     left: 0;
-    background-color: rgba(0, 0, 0, 0);
+    background-color: ${Color.subModalOverlayBG};
     opacity: 0;
     transition-property: background-color, opacity;
     transition-duration: 500ms;
@@ -169,13 +170,13 @@ const portalClassName = css`
   }
 
   .overlay-after {
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: ${Color.mainModalOverlayBG};
     opacity: 1;
     z-index: 11;
   }
 
   .overlay-before {
-    background-color: rgba(0, 0, 0, 0);
+    background-color: ${Color.subModalOverlayBG};
     opacity: 0;
   }
 
@@ -203,7 +204,7 @@ const portalClassName = css`
   .content-after {
     width: 100%;
     height: 30%;
-    background-color: #fffcf4;
+    background-color: ${Color.backGroundModal};
     border-radius: 6px;
     @media (max-height: 553px) {
       height: 35%;
@@ -253,9 +254,9 @@ const gameLotteryItem = css`
   box-sizing: border-box;
   width: 23%;
   padding: 6px;
-  background-color: #fff;
+  background-color:  ${Color.backGroundWhite};
   border-radius: 6px;
-  box-shadow: 0px 2px 4px rgba(128, 128, 128, 0.25);
+  box-shadow: ${Color.mainShadow};
   list-style: none;
   &::before {
     content: "";
@@ -273,9 +274,9 @@ const opendGameLotteryItem = css`
   box-sizing: border-box;
   width: 23%;
   padding: 6px;
-  background-color: #fff;
+  background-color:  ${Color.backGroundWhite};
   border-radius: 6px;
-  box-shadow: 0px 2px 4px rgba(128, 128, 128, 0.25);
+  box-shadow: ${Color.mainShadow};
   list-style: none;
   &::before {
     content: "";
@@ -321,17 +322,17 @@ const resultItemAnime = keyframes`
 0%{
   left:0;
   right:100%;
-  background-color:#FFB901;
+  background-color:${Color.mainColor};
 }
 50%{
   left:0;
   right:0;
-  background-color:#FFB901;
+  background-color:${Color.mainColor};
 }
 100%{
   left:100%;
   right:0;
-  background-color:#FFB901;
+  background-color:${Color.mainColor};
 }
 `;
 

@@ -1,6 +1,8 @@
 import { memo } from "react";
 import { css, keyframes } from "@emotion/css";
 
+import { Color } from "../../utility/Color";
+
 export const RouletteText = memo((props) => {
   const { children, startRoulette } = props;
 
@@ -24,7 +26,7 @@ const rouletteTextAnime = keyframes`
 const animeOn = css`
   margin-bottom: 2.5vh;
   font-size: 24px;
-  color: #ffb901;
+  color: ${Color.mainColor};
   text-align: center;
   white-space: pre-wrap;
   animation: ${rouletteTextAnime} 1.2s;
@@ -33,7 +35,7 @@ const animeOn = css`
 const animeOff = css`
   margin-bottom: 2.5vh;
   font-size: 24px;
-  color: #ffb901;
+  color: ${Color.mainColor};
   text-align: center;
   white-space: pre-wrap;
 `;

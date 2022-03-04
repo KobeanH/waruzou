@@ -1,5 +1,6 @@
 import { memo } from "react";
 import { css } from "@emotion/css";
+import { Color } from "../../utility/Color";
 
 export const AddInputBtn = memo((props) => {
   const { onClick } = props;
@@ -19,9 +20,9 @@ const addInputBtn = css`
     height: 36px;
     width: 36px;
     border: none;
-    background-color: #ffe9af;
+    background-color: ${Color.subColor};
     border-radius: 100%;
-    color: #ffb901;
+    color: ${Color.mainColor};
     font-size: 2.5rem;
     font-weight: bold;
 }

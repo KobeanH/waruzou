@@ -3,6 +3,7 @@ import { css, keyframes } from "@emotion/css";
 import { useRecoilValue } from "recoil";
 
 import { CalculatedObjState } from "../../store/calculatedObj";
+import { Color } from "../../utility/Color";
 
 export const ResultList = memo(() => {
   const calculatedObj = useRecoilValue(CalculatedObjState);
@@ -70,7 +71,6 @@ const resultList = css`
 `;
 
 const resultItem = css`
-  $firstColor: #ffe08e;
   position: relative;
   margin-bottom: 2.8vh;
   font-size: 2.8rem;
@@ -86,28 +86,28 @@ const resultItem = css`
     z-index: 2;
   }
   &:nth-of-type(1)&:after {
-    --back-color: #ffe08e;
+    --back-color: ${Color.subColor};
     animation: ${baseResultItemAnime} 1s;
     will-change: animation;
   }
   &:nth-of-type(2)&:after {
-    --back-color: #ffce4e;
+    --back-color: ${Color.secondSubColor};
     animation: ${baseResultItemAnime} 1s 0.3s;
     will-change: $animation;
   }
   &:nth-of-type(3)&:after {
-    --back-color: #ffb901;
+    --back-color: ${Color.mainColor};
     animation: ${baseResultItemAnime} 1s 0.6s;
     will-change: $animation;
   }
   &:nth-of-type(1) {
-    color: #ffe08e;
+    color: ${Color.subColor};
   }
   &:nth-of-type(2) {
-    color: #ffce4e;
+    color: ${Color.secondSubColor};
   }
   &:nth-of-type(3) {
-    color: #ffb901;
+    color: ${Color.mainColor};
     margin-bottom: 0px;
   }
   @media (max-height: 740px) {
