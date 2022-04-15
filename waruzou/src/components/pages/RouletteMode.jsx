@@ -1,44 +1,49 @@
-import { memo, useState, useCallback } from "react";
-import { css } from "@emotion/css";
-
-import { AnnounceText } from "../atoms/text/AnnounceText";
-import { RouletteWrap } from "../organism/RouletteWrap";
-import { MainBtn } from "../atoms/btn/Mainbtn";
+import {  useState, useEffect, useCallback, memo } from "react";
 
 export const RouletteMode = memo(() => {
-  const [switchAnnounce, setSwitchAnnounce] = useState(true);
-  const [showRoulettePerson, setShowRoulettePerson] = useState(false);
-  const [startRoulette, setStartRoulette] = useState(false);
+  const [start, setStart] = useState(false);
+  const [index, setIndex] = useState(0);
 
-  const switchRoulette = useCallback(() => {
-    setStartRoulette(!startRoulette);
-    setShowRoulettePerson(true);
-    setSwitchAnnounce(!switchAnnounce);
-  }, [startRoulette]);
+  const rouletteContents = [
+    "カレー",
+    "パスタ",
+    "唐揚げ",
+    "天ぷら",
+    "中華",
+    "ハンバーグ",
+    "うどん",
+    "肉じゃが"
+  ];
+
+  //ボタンの文言を変更する処理
+  const startRoulette = useCallback(() => {
+    setStart(!start);
+  }, [start]);
+
+  //ルーレットを回す処理
+  useEffect(() => {
+    if (start) {
+      const interval = setInterval(() => {
+        setIndex((oldIndex) => {
+          if (oldIndex < rouletteContents.length - 1) return oldIndex + 1;
+          return 0;
+        });
+      }, 50);//ルーレットの中身を切り替える速度
+      return () => clearInterval(interval);
+    } else if (!start) {
+      return () => clearInterval();
+    }
+  }, [start]);
 
   return (
     <>
-      <AnnounceText>
-        {switchAnnounce
-          ? "スタートを押してください"
-          : "ストップを押してください"}
-      </AnnounceText>
-      <RouletteWrap
-        startRoulette={startRoulette}
-        showRoulettePerson={showRoulettePerson}
-      />
-      <MainBtn onClick={switchRoulette} mainBtnPosition={mainBtnPosition}>
-        {startRoulette ? "ストップ" : "スタート"}
-      </MainBtn>
+      <div>
+        <p>今日のメニューは・・・</p>
+        <p>{rouletteContents[index]}</p>
+      </div>
+      <button type="button" onClick={startRoulette}>
+        {start ? "ストップ" : "スタート"}
+      </button>
     </>
   );
 });
-const mainBtnPosition = css`
-  position: fixed;
-  left: 50%;
-  bottom: 70px;
-  transform: translate(-50%, -50%);
-  @media (min-width: 430px) {
-    bottom: 12vh;
-  }
-`;
