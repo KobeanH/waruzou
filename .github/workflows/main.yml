@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Checkout code
+      - name: Checkout selected branch
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.inputs.branch || github.ref }}
@@ -32,3 +32,15 @@ jobs:
           else
             echo "Push triggered deployment - Using pushed branch: ${{ github.ref_name }}"
           fi
+      
+      - name: List repository root directory
+        run: |
+          echo "=== Repository Root Directory Contents ==="
+          ls -la
+          echo ""
+          echo "=== Current working directory ==="
+          pwd
+          echo ""
+          echo "=== Git branch information ==="
+          git branch -a
+          git log --oneline -5
