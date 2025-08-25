@@ -2,10 +2,6 @@ name: Deploy backend to ECS
 
 on:
   workflow_dispatch:
-    inputs:
-      branch:
-        description: 'デプロイするブランチを選択してください'
-        type: string
   push:
     branches: [ develop ]
 
