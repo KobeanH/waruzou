@@ -2,12 +2,12 @@ name: echo hello
 run-name: |
   ${{ 
     github.event_name == 'workflow_dispatch' && 
-    format('🚀 手動デプロイ: {0}環境 by {1} (コミット: {2})', 
+    format('手動デプロイ: {0}環境 by {1} (コミット: {2})', 
       github.ref_name == 'product' && 'prod' || 'dev',
       github.actor,
       github.sha
     ) ||
-    format('⚡ 自動デプロイ: {0}環境 by {1} ({2})', 
+    format('自動デプロイ: {0}環境 by {1} (コミット: {2})', 
       github.ref_name == 'product' && 'prod' || 'dev',
       github.actor,
       github.sha
